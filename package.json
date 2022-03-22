@@ -1,0 +1,22 @@
+{
+  "name": "novahlang",
+  "version": "1.0.0",
+  "description": "Novah website",
+  "main": "index.js",
+  "scripts": {
+    "run": "harp public _out && mv -v _out/* ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/novahlang/novahlang.github.io.git"
+  },
+  "keywords": [
+    "novah"
+  ],
+  "author": "Islon Scherer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/novahlang/novahlang.github.io/issues"
+  },
+  "homepage": "https://github.com/novahlang/novahlang.github.io#readme"
+}
