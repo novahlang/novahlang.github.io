@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title Novah language
+    link(rel="stylesheet", href="css/main.css")
+    link(rel="icon", href="img/novah.png")
+  body
+    header.novah-header
+      div.title-header
+        a(href="/")
+          object.logo(data="img/novah.svg", type="image/svg+xml", width="32", height="32")
+          | Novah
+      a.source(href="//github.com/stackoverflow/novah")
+        img(src="img/GitHub-Mark-Light-32px.png", width="16px", height="16px", alt="Github")
+        | Source
+    
+    #content
+      != partial("_menu")
+      .main
+        != yield
