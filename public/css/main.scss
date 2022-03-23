@@ -10,6 +10,11 @@ body {
   color: $white;
 }
 
+a {
+  text-decoration: none;
+  color: $white;
+}
+
 .novah-header {
   padding: 0 32px;
   height: 64px;
@@ -92,4 +97,10 @@ body {
 .code {
   border: 1px solid $light_grey;
   width: 500px;
+  background-color: $novah_logo_darker;
+  color: $novah_logo_light;
+}
+
+.microlight {
+  font-family: monospace;
 }
