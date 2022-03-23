@@ -10,11 +10,6 @@ body {
   color: $white;
 }
 
-a {
-  text-decoration: none;
-  color: $white;
-}
-
 .novah-header {
   padding: 0 32px;
   height: 64px;
@@ -34,40 +29,50 @@ a {
 }
 
 .logo {
-  padding-right: 8px;
+  margin-right: 8px;
 }
 
 .source {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: $white;
   text-decoration: none;
-  padding-left: 8px;
 }
 
 .source > img {
-  padding-right: 8px;
+  margin-right: 8px;
+}
+
+#content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#content > :last-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: 60%;
 }
 
 .main-menu {
+  flex-basis: 310px;
+  flex-grow: 1;
   height: auto;
-  width: 310px;
   border-right: 1px solid $light_grey;
-  flex-shrink: 0;
 }
 
 .menu-list {
   margin: 0;
-  padding: 20px 0 0 0;
+  padding: 1.2rem 0 0 0;
   border: 0;
   list-style-type: none;
 }
 
 .menu-list > li {
-  padding: 0 0 0 32px;
-}
+  padding-left: 2rem;
 
-.menu-list > li:hover {
-  background-color: $novah_logo_dark;
+  &:hover {
+    background-color: $novah_logo_dark;
+  }
 }
 
 .menu-list > li > a {
@@ -83,22 +88,31 @@ a {
 }
 
 .main {
-  padding: 0 5rem 0 5rem;
-  width: 100%;
-  flex-grow: 1;
+  margin: 0 4rem;
+
+  @media (min-width: 768px) {
+    margin: 0 7rem;
+  }
+}
+
+.main > ul {
+  line-height: 1.6;
+  list-style-type: square;
 }
 
 .hero {
   font-size: 2.5rem;
-  padding: 5rem 5rem 5rem 5rem;
+  margin: 4rem 0 3rem 0;
   font-style: italic;
 }
 
 .code {
+  max-width: 32rem;
   border: 1px solid $light_grey;
-  width: 500px;
   background-color: $novah_logo_darker;
-  color: $novah_logo_light;
+  color: #e2e6e9;
+  margin-bottom: 3rem;
+  padding: 1rem;
 }
 
 .microlight {
