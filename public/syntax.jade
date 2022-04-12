@@ -27,6 +27,42 @@ pre.code
     // error
     import unqualified
 
+h1 Visibility
+
+p.
+  Declarations in Novah are private by default. The `pub` keyword should be used to create public declarations.
+
+pre.code
+  code.microlight.
+    module visibility
+
+    // private declaration
+    foo : Int
+    foo = 3
+
+    // public declaration
+    pub
+    bar : Int -> String
+    bar x = toString x
+
+p.
+  The same is true for delcared types, except the `pub+` keyword can be used to also expose the constructors.
+
+pre.code
+  code.microlight.
+    module visibility
+
+    // private type
+    type Foo = Foo Int
+
+    // public type with private constructors
+    pub
+    type Bar = Bar Int
+
+    // public type with public constructors
+    pub+
+    type Baz = Baz Int
+
 h1 Entry point
 
 p.
@@ -80,13 +116,11 @@ pre.code
     // Types can be parameterized
     type Option a = Some a | None
 
-    // A public type with private constructors
-    pub
+    // Simple enumeration
     type Color = Red | Black
 
-    // A public type with public constructors
-    pub+
-    type Point = Point Int Int
+    // A recursive type
+    type LinkedList a = Nil | Cons a (LinkedList a)
 
 h1 Type aliases
 
@@ -122,6 +156,19 @@ pre.code
     strings can span multiple lines
     and don't consider any kind of escape like \n \t
     """
+
+h1 Regular expression patterns
+
+p Novah has support for literal regex patterns. Literal regexes won't escape characters like normal strings.
+
+pre.code
+  code.microlight.
+    module regexes
+
+    \#[noWarn]
+    foo () =
+      let [_, num] = Re.find #"(\d+)" "12345"
+      println (int num)
 
 h1 Conditional expressions
 
@@ -309,8 +356,13 @@ pre.code
     aMap : Map String Int
     aMap = Map.new ["a" ; 0, "b" ; 1, "c" ; 2]
 
-    pointRecord : { x : Float64, y : Float64 }
+    typealias Point = { x : Float64, y : Float64 }
+
+    pointRecord : Point
     pointRecord = {x: 1.2, y: 5.66}
+
+p See 
+  a(href="/records") records.
 
 h1 Type annotations and casts
 
@@ -354,3 +406,104 @@ pre.code
         "null"
       else
         val as String
+
+h1 Anonymous function arguments
+
+p Novah support anonymous lambdas in some specific cases using _ (underscore) as the function parameter.
+
+pre.code
+  code.microlight.
+    module anonymouslambdas
+
+    foreign import java.lang.Math
+
+    // increments the list by 1
+    plus1 : List Int -> List Int
+    plus1 list = List.map (_ + 1) list
+
+    ifs : Boolean -> Int
+    ifs = if _ then 1 else -1
+
+    ifs2 : Int -> a -> a -> a
+    ifs2 num = if num == 0 then _ else _
+
+    cases : List a -> String
+    cases = case _ of
+      [] -> "empty"
+      [_] -> "one"
+      _ -> "more"
+    
+    cases2 : Option Int -> Option Int -> Int
+    cases2 = case _, _ of
+      Some x, Some y -> x + y
+      Some x, None -> x
+      None, Some y -> y
+      None, None -> -1
+    
+    names : List { name : String } -> List String
+    names = List.map _.name
+
+    person : String -> Int -> { age : Int, name : String }
+    person = { name: _, age: _ }
+
+    exps : List Float64
+    exps = List.map Math#exp(_) [3.0, 5.0, 9.0]
+
+h1 Exceptions
+
+p.
+  Novah ditches exceptions in favor of type-safe errors using the Result type, but in order
+  to support some Java constructs, exceptions are also supported.
+
+h3 Throwing exceptions
+
+pre.code
+  code.microlight.
+    module throwing
+
+    foreign import java.lang.RuntimeException
+
+    foo : Unit -> a
+    foo () =
+      throw RuntimeException#new("oops")
+
+h3 Catching exceptions
+
+pre.code
+  code.microlight.
+    module catching
+
+    foreign import java.lang.Exception
+    foreign import java.lang.Throwable
+
+    foo : DangerClass -> Unit
+    foo object =
+      try
+        println object#dangerousMethod()
+      catch
+        :? Exception as e -> println e#getMessage()
+        :? Throwable -> println "a throwable error"
+      finally
+        println "it's over"
+
+h3 Using Result
+
+pre.code
+  code.microlight.
+    module resulterrors
+
+    foreign import java.io.File
+    foreign import java.io.IOException
+
+    createFile : String -> Result Boolean String
+    createFile name =
+      try
+        Ok File#new(name)#createNewFile()
+      catch
+        :? IOException as ioe -> Err ioe#getMessage()
+
+    foo : Unit -> Unit
+    foo () =
+      case createFile "/tmp/myFile" of
+        Ok _ -> println "worked"
+        Err err -> println err

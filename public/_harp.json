@@ -2,7 +2,10 @@
   "globals": {
     "pages": [
       {"name": "Home", "href": "/"},
-      {"name": "Syntax", "href": "/syntax"}
+      {"name": "Syntax", "href": "/syntax"},
+      {"name": "Records", "href": "/records"},
+      {"name": "Pattern matching", "href": "/pattern-matching"},
+      {"name": "Java interoperability", "href": "/interop"}
     ]
   }
 }

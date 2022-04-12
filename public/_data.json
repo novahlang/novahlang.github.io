@@ -4,5 +4,14 @@
   },
   "syntax": {
     "pageName": "Syntax"
+  },
+  "interop": {
+    "pageName": "Java interoperability"
+  },
+  "patternmatch": {
+    "pageName": "Pattern matching"
+  },
+  "records": {
+    "pageName": "Records"
   }
 }

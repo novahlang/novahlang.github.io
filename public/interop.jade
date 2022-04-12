@@ -1,0 +1,102 @@
+
+h1 Java Interoperability
+
+p It's possible to import java classes and call java methods, constructors and fields from Novah.
+
+h2 Foreign imports
+
+p.
+  Java classes in Novah cannot be used fully qualified, they have to be imported first.
+  You can rename a Java class at import time with the `as` keyword.
+
+pre.code
+  code.microlight.
+    module foreigns
+
+    foreign import java.io.File
+    foreign import java.util.HashMap as JavaMap
+
+h2 Methods
+
+p Methods, static or not, can be called using the hash (#) operator.
+
+pre.code
+  code.microlight.
+    module methods
+
+    foo : Unit -> Unit
+    foo () =
+      // a static method call
+      println (String#valueOf('a'))
+      // a non-static method call
+      println ("fox"#substring(1))
+
+h2 Constructors
+
+p Constructors are special static methods named `new`.
+
+pre.code
+  code.microlight.
+    module staticmethods
+
+    foreign import java.io.File
+
+    newFile : String -> File
+    newFile name = File#new(name)
+
+h2 Fields
+
+p.
+  Fields are accessed in the same way as methods except they use the hash-dash operator (#-).
+  Setting a field can be done with the setter operator (<-).
+
+pre.code
+  code.microlight.
+    module fields
+
+    /*
+    public static class ForeignClass {
+      public int value;
+
+      public ForeignClass(int v) {
+        this.value = v;
+      }
+    }
+    */
+    foreign import my.java.ForeignClass
+
+    // Sets the field to a new value and
+    // returns the old value
+    setValue : ForeignClass -> Int -> Int
+    setValue fclass newVal =
+      let tmp = fclass#-value
+      fclass#-value <- newVal
+      tmp
+
+    pub
+    main : Array String -> Unit
+    main _ =
+      let fclass = ForeignClass#new(3)
+      println (setValue fclass 10)
+
+h1 Caveats
+
+p.
+  Because Novah's type system doesn't understand object orientation, interoperability may require
+  type casting in order for the code to compile.
+  This is specially true with (co/contra)variant generic functions.
+
+pre.code
+  code.microlight.
+    module caveats
+
+    foreign import java.lang.CharSequence
+
+    pub
+    main : Array String -> Unit
+    main _ =
+      // does not compile
+      // expected CharSequence, got String
+      println ("fox"#contains("o"))
+      // compiles
+      println ("fox"#contains("o" as CharSequence))

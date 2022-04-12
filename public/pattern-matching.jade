@@ -1,0 +1,110 @@
+
+h1 Pattern Matching
+
+p.
+  Novah supports pattern matching using the `case ... of` syntax.
+  It also supports pattern destructuring for functions and let declarations.
+
+table
+  thead
+    tr
+      th Pattern
+      th Example
+      th Description
+  tbody
+    tr
+      td Wildcard
+      td
+        code _
+      td Always matches
+    tr
+      td Variable
+      td
+        code a, foo
+      td Always matches and binds the value to the variable
+    tr
+      td Literal
+      td
+        code 1, 4.5, "foo", 'a', true
+      td Matches the exact literal
+    tr
+      td Unit
+      td
+        code ()
+      td Matches the value to unit
+    tr
+      td Constructor
+      td
+        code Nil, Some x, None
+      td Matches the specified constructor of a type
+    tr
+      td List
+      td
+        code [], [x, _], [head :: tail], [x, y, z :: rest]
+      td Matches a list that can be empty, contain some elements and a tail
+    tr
+      td Regex
+      td
+        code #"\d", #"\w+"
+      td Matches the whole regex against the input
+    tr
+      td Record
+      td
+        code {x, y}, {name}
+      td Matches the specified fields of a record
+    tr
+      td Named pattern
+      td
+        code [x :: _] as list, {name} as person
+      td Binds the whole pattern to the given name
+    tr
+      td Type test
+      td
+        code :? String, :? File as file
+      td Matches the value to the specified runtime type
+
+h2 Pattern guards
+
+p Patterns can have guards for additional filtering.
+
+pre.code
+  code.microlight.
+    module guards
+
+    foo : Int -> Int
+    foo x = case x of
+      0 -> 0
+      n if n < 0 -> n * -1
+      n -> n
+
+h2 Multiple patterns
+
+p Case expressions can match on multiple patterns at the same time.
+
+pre.code
+  code.microlight.
+    module multipatterns
+
+    foo : Option Int -> Option Int -> Option Int
+    foo x y = case x, y of
+      Some v1, Some v2 -> Some (v1 + v2)
+      _, _ -> None
+
+h2 Destructuring
+
+p.
+  Function parameters and let declarations can be destructured directly.
+  Incomplete patterns require a `noWarn` attribute to compile.
+
+pre.code
+  code.microlight.
+    module destructuring
+
+    foo : { x : Int, y : Int } -> Unit
+    foo {x, y} = printfln "Point %d %d" [x, y]
+
+    \#[noWarn]
+    bar () =
+      let [match, group1, group2] = Re.find #"(\d), (\d)" "3, 9"
+      let sum = int group1 + int group2
+      printfln "the sum of %s is %s" [match, toString sum]

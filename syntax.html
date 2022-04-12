@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>Novah language</title><link rel="stylesheet" href="/css/main.css"><link rel="icon" href="/img/novah.png"><script src="/js/microlight.js"> </script></head><body><header class="novah-header"><div class="title-header"><a href="/"><object data="/img/novah.svg" type="image/svg+xml" width="32" height="32" class="logo"></object>Novah</a></div><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16px" height="16px" alt="Github">Source</a></header><div id="content"><div class="main-menu"><ul class="menu-list"><li><a href="/">Home</a></li><li class="selected"><a href="/syntax">Syntax</a></li></ul></div><div class="main"><h1>Module definition</h1><p>Every novah file should start with a module definition.</p><pre class="code"><code class="microlight">module my.namespace
+<!DOCTYPE html><html><head><title>Novah language</title><link rel="stylesheet" href="/css/main.css"><link rel="icon" href="/img/novah.png"><script src="/js/microlight.js"> </script></head><body><header class="novah-header"><div class="title-header"><a href="/"><object data="/img/novah.svg" type="image/svg+xml" width="32" height="32" class="logo"></object>Novah</a></div><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16px" height="16px" alt="Github">Source</a></header><div id="content"><div class="main-menu"><ul class="menu-list"><li><a href="/">Home</a></li><li class="selected"><a href="/syntax">Syntax</a></li><li><a href="/records">Records</a></li><li><a href="/pattern-matching">Pattern matching</a></li><li><a href="/interop">Java interoperability</a></li></ul></div><div class="main"><h1>Module definition</h1><p>Every novah file should start with a module definition.</p><pre class="code"><code class="microlight">module my.namespace
 
 ...
 </code></pre><h1>Imports</h1><p>Imports need to be defined after the module definition and before any other definitions.
@@ -12,6 +12,30 @@ import module2 (fun1, Type1(Ctor1, Ctor2), Type2(..))
 
 // error
 import unqualified
+</code></pre><h1>Visibility</h1><p>Declarations in Novah are private by default. The `pub` keyword should be used to create public declarations.
+</p><pre class="code"><code class="microlight">module visibility
+
+// private declaration
+foo : Int
+foo = 3
+
+// public declaration
+pub
+bar : Int -> String
+bar x = toString x
+</code></pre><p>The same is true for delcared types, except the `pub+` keyword can be used to also expose the constructors.
+</p><pre class="code"><code class="microlight">module visibility
+
+// private type
+type Foo = Foo Int
+
+// public type with private constructors
+pub
+type Bar = Bar Int
+
+// public type with public constructors
+pub+
+type Baz = Baz Int
 </code></pre><h1>Entry point</h1><p>Any namespace containing a public function called `main` with type `Array String -> Unit`
 will be compiled into a runnable jvm class.
 </p><pre class="code"><code class="microlight">module entrypoint
@@ -45,13 +69,11 @@ Both types and constructors must start with an upper case character.
 // Types can be parameterized
 type Option a = Some a | None
 
-// A public type with private constructors
-pub
+// Simple enumeration
 type Color = Red | Black
 
-// A public type with public constructors
-pub+
-type Point = Point Int Int
+// A recursive type
+type LinkedList a = Nil | Cons a (LinkedList a)
 </code></pre><h1>Type aliases</h1><p>An alias to a type can be created with the `typealias` keyword.
 Aliases are just syntatic sugar and are considered the same type as their alias by the compiler.
 `Int` is a typealias to `Int32`.
@@ -73,6 +95,12 @@ str2 = """Triple quoted
 strings can span multiple lines
 and don't consider any kind of escape like \n \t
 """
+</code></pre><h1>Regular expression patterns</h1><p>Novah has support for literal regex patterns. Literal regexes won't escape characters like normal strings.</p><pre class="code"><code class="microlight">module regexes
+
+#[noWarn]
+foo () =
+  let [_, num] = Re.find #"(\d+)" "12345"
+  println (int num)
 </code></pre><h1>Conditional expressions</h1><p>Novah has two conditional expressions: `if` and `case`. </p><pre class="code"><code class="microlight">module conditionals
 
 // Both the then and else cases must have the same type
@@ -151,9 +179,11 @@ aTuple = true ; 'z'
 aMap : Map String Int
 aMap = Map.new ["a" ; 0, "b" ; 1, "c" ; 2]
 
-pointRecord : { x : Float64, y : Float64 }
+typealias Point = { x : Float64, y : Float64 }
+
+pointRecord : Point
 pointRecord = {x: 1.2, y: 5.66}
-</code></pre><h1>Type annotations and casts</h1><p>Novah requires almost no type annotations but values can still be annotated with a type</p><pre class="code"><code class="microlight">module annotations
+</code></pre><p>See <a href="/records">records.</a></p><h1>Type annotations and casts</h1><p>Novah requires almost no type annotations but values can still be annotated with a type</p><pre class="code"><code class="microlight">module annotations
 
 foo : Unit -> Int
 foo () =
@@ -178,4 +208,79 @@ toStringNullable val =
   if val === null then
     "null"
   else
-    val as String</code></pre><div class="footer">&nbsp;</div></div></div></body></html>
+    val as String
+</code></pre><h1>Anonymous function arguments</h1><p>Novah support anonymous lambdas in some specific cases using _ (underscore) as the function parameter.</p><pre class="code"><code class="microlight">module anonymouslambdas
+
+foreign import java.lang.Math
+
+// increments the list by 1
+plus1 : List Int -> List Int
+plus1 list = List.map (_ + 1) list
+
+ifs : Boolean -> Int
+ifs = if _ then 1 else -1
+
+ifs2 : Int -> a -> a -> a
+ifs2 num = if num == 0 then _ else _
+
+cases : List a -> String
+cases = case _ of
+  [] -> "empty"
+  [_] -> "one"
+  _ -> "more"
+
+cases2 : Option Int -> Option Int -> Int
+cases2 = case _, _ of
+  Some x, Some y -> x + y
+  Some x, None -> x
+  None, Some y -> y
+  None, None -> -1
+
+names : List { name : String } -> List String
+names = List.map _.name
+
+person : String -> Int -> { age : Int, name : String }
+person = { name: _, age: _ }
+
+exps : List Float64
+exps = List.map Math#exp(_) [3.0, 5.0, 9.0]
+</code></pre><h1>Exceptions</h1><p>Novah ditches exceptions in favor of type-safe errors using the Result type, but in order
+to support some Java constructs, exceptions are also supported.
+</p><h3>Throwing exceptions</h3><pre class="code"><code class="microlight">module throwing
+
+foreign import java.lang.RuntimeException
+
+foo : Unit -> a
+foo () =
+  throw RuntimeException#new("oops")
+</code></pre><h3>Catching exceptions</h3><pre class="code"><code class="microlight">module catching
+
+foreign import java.lang.Exception
+foreign import java.lang.Throwable
+
+foo : DangerClass -> Unit
+foo object =
+  try
+    println object#dangerousMethod()
+  catch
+    :? Exception as e -> println e#getMessage()
+    :? Throwable -> println "a throwable error"
+  finally
+    println "it's over"
+</code></pre><h3>Using Result</h3><pre class="code"><code class="microlight">module resulterrors
+
+foreign import java.io.File
+foreign import java.io.IOException
+
+createFile : String -> Result Boolean String
+createFile name =
+  try
+    Ok File#new(name)#createNewFile()
+  catch
+    :? IOException as ioe -> Err ioe#getMessage()
+
+foo : Unit -> Unit
+foo () =
+  case createFile "/tmp/myFile" of
+    Ok _ -> println "worked"
+    Err err -> println err</code></pre><div class="footer">&nbsp;</div></div></div></body></html>
