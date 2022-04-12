@@ -1,0 +1,8 @@
+{
+  "globals": {
+    "pages": [
+      {"name": "Home", "href": "/"},
+      {"name": "Syntax", "href": "/syntax"}
+    ]
+  }
+}

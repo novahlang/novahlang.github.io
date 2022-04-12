@@ -1,0 +1,181 @@
+<!DOCTYPE html><html><head><title>Novah language</title><link rel="stylesheet" href="/css/main.css"><link rel="icon" href="/img/novah.png"><script src="/js/microlight.js"> </script></head><body><header class="novah-header"><div class="title-header"><a href="/"><object data="/img/novah.svg" type="image/svg+xml" width="32" height="32" class="logo"></object>Novah</a></div><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16px" height="16px" alt="Github">Source</a></header><div id="content"><div class="main-menu"><ul class="menu-list"><li><a href="/">Home</a></li><li class="selected"><a href="/syntax">Syntax</a></li></ul></div><div class="main"><h1>Module definition</h1><p>Every novah file should start with a module definition.</p><pre class="code"><code class="microlight">module my.namespace
+
+...
+</code></pre><h1>Imports</h1><p>Imports need to be defined after the module definition and before any other definitions.
+They can be qualified with the `as` keyword or given a list of names to import.
+Type constructors can be imported explicitly for a type or all at once with `(..)`.
+Raw unqualified imports are not allowed except for core namespaces.
+</p><pre class="code"><code class="microlight">module my.namespace
+
+import module1 as Mod
+import module2 (fun1, Type1(Ctor1, Ctor2), Type2(..))
+
+// error
+import unqualified
+</code></pre><h1>Entry point</h1><p>Any namespace containing a public function called `main` with type `Array String -> Unit`
+will be compiled into a runnable jvm class.
+</p><pre class="code"><code class="microlight">module entrypoint
+
+pub
+main : Array String -> Unit
+main args =
+  println ("Hello " ++ args.[0])
+</code></pre><h1>Functions</h1><p>Functions and values with their types can be easily defined.
+All values in Novah are immutable, so there are no global mutable variables.
+All top level definitions must start with a lower case character.
+</p><pre class="code"><code class="microlight">module functions
+
+// A comment
+fun1 : String -> Boolean
+fun1 str = str == "true"
+
+val1 : Int
+val1 = 9876543
+
+// Top level definitions require explicit types
+// unless they have a `noWarn` attribute
+// which can also be put at the module level
+#[noWarn]
+times10 x = x * 10
+</code></pre><h1>Algebraic data types (ADTs)</h1><p>Types can be defined with the keyword `type`.
+A type can have multiple constructors (sum type) and multiple parameters (product type).
+Both types and constructors must start with an upper case character.
+</p><pre class="code"><code class="microlight">module types
+
+// Types can be parameterized
+type Option a = Some a | None
+
+// A public type with private constructors
+pub
+type Color = Red | Black
+
+// A public type with public constructors
+pub+
+type Point = Point Int Int
+</code></pre><h1>Type aliases</h1><p>An alias to a type can be created with the `typealias` keyword.
+Aliases are just syntatic sugar and are considered the same type as their alias by the compiler.
+`Int` is a typealias to `Int32`.
+</p><pre class="code"><code class="microlight">module types2
+
+typealias MyBoolean = Boolean
+
+// Type aliases can have parameters
+typealias Maybe a = Option a
+
+// Aliases cannot be recursive
+typealias Wrong a = Option (Wrong a)
+</code></pre><h1>Strings</h1><p>Strings can be created with double quotes like in Java or with triple quotes for unescaped, multi-line strings.</p><pre class="code"><code class="microlight">#[noWarn]
+module strings
+
+str1 = "hello world\n"
+
+str2 = """Triple quoted
+strings can span multiple lines
+and don't consider any kind of escape like \n \t
+"""
+</code></pre><h1>Conditional expressions</h1><p>Novah has two conditional expressions: `if` and `case`. </p><pre class="code"><code class="microlight">module conditionals
+
+// Both the then and else cases must have the same type
+abs : Int -> Int
+abs x = if x > 0 then x else negate x
+
+// An if without an else must always return Unit
+printPositive : Int -> Unit
+printPositive x =
+  if x > 0 then
+    println x
+
+mapList : (a -> b) -> List a -> List b
+mapList f list = case list of
+  [] -> []
+  [x :: xs] -> [f x] ++ mapList f xs
+</code></pre><p>See <a href="/pattern-matching">pattern matching.</a></p><h1>While loop</h1><p>Even though Novah support while loops, a tail recursive function is the idiomatic way to represent such constructs.</p><pre class="code"><code class="microlight">module loops
+
+// Not idiomatic
+factorialIterative : Int -> Int
+factorialIterative x =
+  let fact = atom x
+  let i = atom x
+
+  while (deref i) > 1 do
+    swap (_ - 1) i
+    swap (_ * (deref i)) fact
+  deref fact
+
+// Idiomatic version
+// Novah will optimize the tail recursion to a loop
+factorialRecursive : Int -> Int
+factorialRecursive x =
+  let fact num acc = case num of
+    0 -> acc
+    1 -> acc
+    n -> fact (n - 1) (acc * n)
+  fact x 1
+</code></pre><h1>Operators</h1><p>It's possible to define new operators in Novah.</p><pre class="code"><code class="microlight">module operators
+
+(?) : Option a -> a -> a
+(?) opt default = case opt of
+  Some x -> x
+  None -> default
+
+or0 : Option Int -> Int
+or0 n = n ? 0
+</code></pre><h3>Associativity</h3><table><thead><tr><th>Operator</th><th>Associativity</th></tr></thead><tbody><tr><td><|</td><td>Right</td></tr><tr><td>$ starting operators</td><td>Right</td></tr><tr><td>: starting operators</td><td>Right</td></tr><tr><td>everything else</td><td>Left</td></tr></tbody></table><h3>Precedence</h3><table><thead><tr><th>Operator (first character)</th><th>Example</th><th>Precedence</th></tr></thead><tbody><tr><td>;</td><td>(3 ; 5)</td><td>0</td></tr><tr><td>$</td><td>-</td><td>1</td></tr><tr><td>|</td><td>true || false</td><td>2</td></tr><tr><td>&</td><td>true && false</td><td>3</td></tr><tr><td>=, !</td><td>3 == 1, list ! index</td><td>4</td></tr><tr><td>>, <</td><td>5 > 1, 3 <= 7</td><td>5</td></tr><tr><td>+, -, :, ?</td><td>1 + 1, head :: tail, option ? default</td><td>6</td></tr><tr><td>*, /, %</td><td>3 * 9, 5 / 2</td><td>7</td></tr><tr><td>^, .</td><td>[1 ... 10], 'a' .. 'z'</td><td>8</td></tr><tr><td>` (backtick operator)</td><td>(3 + 3) `shouldBe` 6</td><td>9</td></tr></tbody></table><h1>Ranges</h1><p>Ranges are just normal user-defined operators in Novah.
+There is syntactic sugar for creating ranges of lists and sets.
+</p><pre class="code"><code class="microlight">#[noWarn]
+module ranges
+
+zeroToTen = 1 .. 10
+
+digitList = [0 ... 10]
+
+charSet = #{'a' .. 'z'}
+
+oddDigits = range 1 10 2
+
+pub
+main : Array String -> Unit
+main _ =
+  forEachRange oddDigits println
+</code></pre><h1>Collections</h1><p>Novah comes with literal support for commonly used data structures like lists, sets, maps, tuples and (row-polymorphic) records.</p><pre class="code"><code class="microlight">module collections
+
+aList : List Int
+aList = [1, 2, 3, 4, 5]
+
+aSet : Set Char
+aSet = #{'a', 'b', 'c'}
+
+aTuple : Tuple Boolean Char
+aTuple = true ; 'z'
+
+aMap : Map String Int
+aMap = Map.new ["a" ; 0, "b" ; 1, "c" ; 2]
+
+pointRecord : { x : Float64, y : Float64 }
+pointRecord = {x: 1.2, y: 5.66}
+</code></pre><h1>Type annotations and casts</h1><p>Novah requires almost no type annotations but values can still be annotated with a type</p><pre class="code"><code class="microlight">module annotations
+
+foo : Unit -> Int
+foo () =
+  // annotate a value
+  let pi = Math.pi : Float64
+  // compilation error: types don't match
+  let piInt = Math.pi : Int
+  // annotate a parameter
+  let fun (x : Int) = x + 1
+</code></pre><p>Top level values are required to be annotated for documentation purpose unless a #[noWarn] attribute is present.</p><pre class="code"><code class="microlight">module annotations
+
+// compilation error: no type annotation
+foo () = 1
+
+// OK
+#[noWarn]
+bar () = 1
+</code></pre><p>Types can also be cast to some other types with the `as` keyword. Casts should only be used for Java interoperability as they can cause runtime errors.</p><pre class="code"><code class="microlight">module casts
+
+toStringNullable : Nullable String -> String
+toStringNullable val =
+  if val === null then
+    "null"
+  else
+    val as String</code></pre><div class="footer">&nbsp;</div></div></div></body></html>

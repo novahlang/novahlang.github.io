@@ -1,5 +1,7 @@
 
 .main-menu
   ul.menu-list
-    li
-      a(href="/") Home
+    for page in pages
+      li(class=page.name === pageName ? "selected" : "")
+        a(href="#{page.href}") #{page.name}
+    
