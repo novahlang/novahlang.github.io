@@ -3,9 +3,11 @@
     "pages": [
       {"name": "Home", "href": "/"},
       {"name": "Syntax", "href": "/syntax"},
+      {"name": "Types", "href": "/types"},
       {"name": "Records", "href": "/records"},
       {"name": "Pattern matching", "href": "/pattern-matching"},
-      {"name": "Java interoperability", "href": "/interop"}
+      {"name": "Java interoperability", "href": "/interop"},
+      {"name": "Computation expressions", "href": "/computations"}
     ]
   }
 }

@@ -21,6 +21,22 @@ pre.code
     city : { address : { city : String } | a } -> String
     city = _.address.city
 
+h3 String fields
+
+p.
+  Novah requires every field to be a valid identifier but it's possible to use any string
+  as a field.
+
+pre.code
+  code.microlight.
+    module records
+
+    stringFields : { "Password" : String, "User Name" : String }
+    stringFields = { "User Name": "foo", "Password": "***"}
+
+    utfFields : { "∀" : String, "∉" : Boolean, "😉" : String }
+    utfFields = {"😉": "wink", "∉": true, "∀": "forall"}
+
 h3 Adding new fields
 
 pre.code

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>Novah language</title><link rel="stylesheet" href="/css/main.css"><link rel="icon" href="/img/novah.png"><script src="/js/microlight.js"> </script></head><body><header class="novah-header"><div class="title-header"><a href="/"><object data="/img/novah.svg" type="image/svg+xml" width="32" height="32" class="logo"></object>Novah</a></div><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16px" height="16px" alt="Github">Source</a></header><div id="content"><div class="main-menu"><ul class="menu-list"><li><a href="/">Home</a></li><li><a href="/syntax">Syntax</a></li><li class="selected"><a href="/records">Records</a></li><li><a href="/pattern-matching">Pattern matching</a></li><li><a href="/interop">Java interoperability</a></li></ul></div><div class="main"><h1>Records</h1><p>Records and row polymorphism are the core of Novah data structures.
+<!DOCTYPE html><html><head><title>Novah language</title><meta charset="UTF-8"><link rel="stylesheet" href="/css/main.css"><link rel="icon" href="/img/novah.png"><script src="/js/microlight.js"> </script></head><body><header class="novah-header"><div class="title-header"><a href="/"><object data="/img/novah.svg" type="image/svg+xml" width="32" height="32" class="logo"></object>Novah</a></div><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16px" height="16px" alt="Github">Source</a></header><div id="content"><div class="main-menu"><ul class="menu-list"><li><a href="/">Home</a></li><li><a href="/syntax">Syntax</a></li><li><a href="/types">Types</a></li><li class="selected"><a href="/records">Records</a></li><li><a href="/pattern-matching">Pattern matching</a></li><li><a href="/interop">Java interoperability</a></li><li><a href="/computations">Computation expressions</a></li></ul></div><div class="main"><h1>Records</h1><p>Records and row polymorphism are the core of Novah data structures.
 Records are immutable and persistent, so functions that change records will always return a new version.
 Novah records support duplicated fields, but you can only retrieve the last value of a field.
 </p><h3>Accessing fields</h3><p>Fields can be accessed using dot syntax.</p><pre class="code"><code class="microlight">module records
@@ -9,6 +9,15 @@ name person = person.name
 // nested record access
 city : { address : { city : String } | a } -> String
 city = _.address.city
+</code></pre><h3>String fields</h3><p>Novah requires every field to be a valid identifier but it's possible to use any string
+as a field.
+</p><pre class="code"><code class="microlight">module records
+
+stringFields : { "Password" : String, "User Name" : String }
+stringFields = { "User Name": "foo", "Password": "***"}
+
+utfFields : { "∀" : String, "∉" : Boolean, "😉" : String }
+utfFields = {"😉": "wink", "∉": true, "∀": "forall"}
 </code></pre><h3>Adding new fields</h3><pre class="code"><code class="microlight">module records
 
 addData :

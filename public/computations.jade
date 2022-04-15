@@ -1,0 +1,139 @@
+
+h1 Computation expressions
+
+p.
+  Computation expressions streamlines some types of repetitive code.
+  Similar to monads in Haskell or computation expressions in F#.
+
+pre.code
+  code.microlight.
+    module compexp
+
+    import novah.computation
+
+    // without computation expressions
+    uglyFindUser : String -> Result User String
+    uglyFindUser name =
+      case fetchUser name of
+        Ok user ->
+          case fetchAddress user of
+            Ok address -> Ok { address | user }
+            Err err -> Err err
+        Err err -> Err err
+
+    // using computation expressions
+    prettyFindUser : String -> Result User String
+    prettyFindUser name = do.result
+      let! user = fetchUser name
+      let! address = fetchAddress user
+      return { address | user }
+    
+    // all permutations of x and y where x and y are not equals
+    uglyPairs : List (Tuple Int Int)
+    uglyPairs =
+      [1 .. 10] |> List.flatMap \x ->
+        [1 .. 10] |> List.mapSome \y ->
+          if x != y then
+            Some (x ; y)
+          else
+            None
+
+    // same but with computation expressions
+    prettyPairs : List (Tuple Int Int)
+    prettyPairs = do.list
+      for x in [1 .. 10] do
+        for y in [1 .. 10] do
+          if x != y then yield x ; y
+
+h3 Defining your own
+
+p.
+  Computation expressions are just a syntactic sugar for direct function calls.
+  Defining your own is pretty simple and only requires that you choose which functions to support.
+
+table
+  thead
+    tr
+      th Function name
+      th Typical type
+      th Description
+  tbody
+    tr
+      td bind
+      td
+        code m a -> (a -> m b) -> m b
+      td Defines the let bang (let!) construct
+    tr
+      td for
+      td
+        code m a -> (a -> m b) -> m b
+      td.
+        Defines the for construct which works the same as bind.<br/>
+        Only one of for or bind should be implemented.
+    tr
+      td return
+      td
+        code a -> m a
+      td Defines the return construct
+    tr
+      td yield
+      td
+        code a -> m a
+      td.
+        Defines the yield construct which works the same as return.<br/>
+        Only one of return or yield should be implemented.
+    tr
+      td zero
+      td
+        code m a
+      td `zero` will be used for `if`s without an else and expressions that do not `return` or `yield`
+    tr
+      td combine
+      td
+        code m a -> m a -> m a
+      td `combine` will be used to join line-separated expressions
+    
+
+pre.code
+  code.microlight.
+    module compexp
+
+    // define a computation expression for lists
+    pub
+    list :
+      { "for" : List a -> (a -> List b) -> List b
+      , "yield" : a -> List a
+      , combine : List a -> List a -> List a
+      , zero : List a
+      }
+    list =
+      { "for": flip List.flatMap
+      , "yield": \x -> [x]
+      , combine: \(l1 : List a) l2 -> l1 ++ l2
+      , zero: []
+      }
+    
+    // define a computation expression for lists
+    pub
+    option :
+      { bind : Option a -> (a -> Option b) -> Option b
+      , "return" : a -> Option a
+      , combine : Option a -> Option a -> Option a
+      , zero : Option a
+      }
+    option =
+      { bind: flip Option.flatMap
+      , "return": Some
+      , combine: optCombine
+      , zero: None
+      }
+    
+    optCombine : Option a -> Option a -> Option a
+    optCombine x y = case x of
+      Some _ -> x
+      None -> y
+    
+    // using the computation expression
+    squares : List Int
+    squares = do.list
+      for x in [1 .. 10] do yield x * x
