@@ -7,7 +7,8 @@
       {"name": "Records", "href": "/records"},
       {"name": "Pattern matching", "href": "/pattern-matching"},
       {"name": "Java interoperability", "href": "/interop"},
-      {"name": "Computation expressions", "href": "/computations"}
+      {"name": "Computation expressions", "href": "/computations"},
+      {"name": "Instance arguments", "href": "/instance"}
     ]
   }
 }

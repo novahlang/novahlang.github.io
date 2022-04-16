@@ -8,7 +8,7 @@
   "interop": {
     "pageName": "Java interoperability"
   },
-  "patternmatch": {
+  "pattern-matching": {
     "pageName": "Pattern matching"
   },
   "records": {
@@ -19,5 +19,8 @@
   },
   "computations": {
     "pageName": "Computation expressions"
+  },
+  "instance": {
+    "pageName": "Instance arguments"
   }
 }

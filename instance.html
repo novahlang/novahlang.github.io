@@ -1,0 +1,51 @@
+<!DOCTYPE html><html><head><title>Novah language</title><meta charset="UTF-8"><link rel="stylesheet" href="/css/main.css"><link rel="icon" href="/img/novah.png"><script src="/js/microlight.js"> </script></head><body><header class="novah-header"><div class="title-header"><a href="/"><object data="/img/novah.svg" type="image/svg+xml" width="32" height="32" class="logo"></object>Novah</a></div><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16px" height="16px" alt="Github">Source</a></header><div id="content"><div class="main-menu"><ul class="menu-list"><li><a href="/">Home</a></li><li><a href="/syntax">Syntax</a></li><li><a href="/types">Types</a></li><li><a href="/records">Records</a></li><li><a href="/pattern-matching">Pattern matching</a></li><li><a href="/interop">Java interoperability</a></li><li><a href="/computations">Computation expressions</a></li><li class="selected"><a href="/instance">Instance arguments</a></li></ul></div><div class="main"><h1>Instance arguments</h1><p>Parametric polymorphism (generics) can help you create functions that take or return any type.
+But sometimes this is too broad and you want functions that only work for a set of types.
+For this you need ad hoc polymorphism.
+</p><p>Imagine you need a function + that sums two numbers. This function should work for numeric types only.
+There's no way to implement such a function using generics alone.
+Instance arguments to the rescue!
+Instance arguments allow you to create something similiar to type classes and their instances.
+</p><pre class="code"><code class="microlight">module instanceargs
+
+// define your type class
+pub
+type Plus a = Plus { plus : a -> a -> a }
+
+// the actual function
+(+) : {{ Plus a }} -> a -> a -> a
+(+) {{Plus {plus}}} x y = plus x y
+
+// instances can be created in any module
+// and will always be searched if they are in the current context
+pub instance
+plusInt : Plus Int
+plusInt = Plus { plus: \x y -> Java.sumInt(x, y) }
+
+// using it
+theSum = 3 + 4
+</code></pre><p>Any type can be used as an instance argument as long as it's a named type.
+You can use the double bracket syntax to annotate a function parameter as an instance argument.
+These arguments can be explicitily passed to a function using double bracket syntax.
+</p><pre class="code"><code class="microlight">module instanceargs
+
+// creating a function that take an instance argument
+showAndPrint : {{ Show a }} -> a -> Unit
+showAndPrint {{Show showFun}} x = println (showFun x)
+
+pub
+main : Array String -> Unit
+main _ =
+  // the compiler will search for the instance
+  showAndPrint 4
+  // explicitily passing the argument
+  showAndPrint {{showChar}} 'a'
+</code></pre><p>The Novah compiler can automatically infer the type of an instance argument if it's unambiguous.
+</p><pre class="code"><code class="microlight">module instanceargs
+
+foo : Unit -> Unit
+foo () =
+  // doesn't compile: cannot find Plus instance for x, y
+  let sum2 x y = x + y
+  // automatically infer the instance type
+  let sum {{_}} x y = x + y
+  println (sum 5.6 9.0)</code></pre><div class="footer">&nbsp;</div></div></div></body></html>

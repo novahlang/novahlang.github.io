@@ -1,0 +1,70 @@
+
+h1 Instance arguments
+
+p.
+  Parametric polymorphism (generics) can help you create functions that take or return any type.
+  But sometimes this is too broad and you want functions that only work for a set of types.
+  For this you need ad hoc polymorphism.
+
+p.
+  Imagine you need a function + that sums two numbers. This function should work for numeric types only.
+  There's no way to implement such a function using generics alone.
+  Instance arguments to the rescue!
+  Instance arguments allow you to create something similiar to type classes and their instances.
+
+pre.code
+  code.microlight.
+    module instanceargs
+
+    // define your type class
+    pub
+    type Plus a = Plus { plus : a -> a -> a }
+
+    // the actual function
+    (+) : {{ Plus a }} -> a -> a -> a
+    (+) {{Plus {plus}}} x y = plus x y
+
+    // instances can be created in any module
+    // and will always be searched if they are in the current context
+    pub instance
+    plusInt : Plus Int
+    plusInt = Plus { plus: \x y -> Java.sumInt(x, y) }
+
+    // using it
+    theSum = 3 + 4
+
+p.
+  Any type can be used as an instance argument as long as it's a named type.
+  You can use the double bracket syntax to annotate a function parameter as an instance argument.
+  These arguments can be explicitily passed to a function using double bracket syntax.
+
+pre.code
+  code.microlight.
+    module instanceargs
+
+    // creating a function that take an instance argument
+    showAndPrint : {{ Show a }} -> a -> Unit
+    showAndPrint {{Show showFun}} x = println (showFun x)
+
+    pub
+    main : Array String -> Unit
+    main _ =
+      // the compiler will search for the instance
+      showAndPrint 4
+      // explicitily passing the argument
+      showAndPrint {{showChar}} 'a'
+
+p.
+  The Novah compiler can automatically infer the type of an instance argument if it's unambiguous.
+
+pre.code
+  code.microlight.
+    module instanceargs
+
+    foo : Unit -> Unit
+    foo () =
+      // doesn't compile: cannot find Plus instance for x, y
+      let sum2 x y = x + y
+      // automatically infer the instance type
+      let sum {{_}} x y = x + y
+      println (sum 5.6 9.0)
