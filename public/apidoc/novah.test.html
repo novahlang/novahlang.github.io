@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novah apidocs</title>
+    <meta charset="UTF-8">
+    <style>
+        a {
+            color: #111;
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        hr {
+            margin-top: 40px;
+        }
+
+        h2 {
+            padding-top: 40px;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .menu {
+            min-width: 15%;
+            padding-right: 10px;
+            border-right: 1px solid #aaa;
+        }
+
+        .docs {
+            padding-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Novah Documentation</h1>
+    <div class="content">
+        <div class="menu"><h3>Modules</h3><p><a href="novah.core.html">novah.core</a></p><p><a href="novah.result.html">novah.result</a></p><p><a href="novah.number.html">novah.number</a></p><p><a href="novah.random.html">novah.random</a></p><p><a href="novah.java.html">novah.java</a></p><p><a href="novah.math.html">novah.math</a></p><p><a href="novah.meta.html">novah.meta</a></p><p><a href="novah.linkedList.html">novah.linkedList</a></p><p><a href="novah.option.html">novah.option</a></p><p><a href="novah.stream.html">novah.stream</a></p><p><a href="novah.list.html">novah.list</a></p><p><a href="novah.map.html">novah.map</a></p><p><a href="novah.set.html">novah.set</a></p><p><a href="novah.regex.html">novah.regex</a></p><p><a href="novah.string.html">novah.string</a></p><p><a href="novah.io.html">novah.io</a></p><p><a href="novah.test.html">novah.test</a></p><p><a href="novah.async.html">novah.async</a></p><p><a href="novah.computation.html">novah.computation</a></p><p><a href="novah.array.html">novah.array</a></p></div>
+        <div class="docs"><h2>novah.test</h2><p>A lightweight test library.
+Tests can be either automatically registered
+with the <code>test</code> and <code>testWith</code> function
+and ran with <code>runAllTests</code> or <code>runTestsFor</code>
+or manually created with the <code>Test</code>, <code>Tests</code> and <code>Setup</code> constructors
+and ran with <code>runTests</code>.</p>
+<h2>Types</h2><hr><h4>Suite</h4><pre>visibility: public+</pre><pre>constructors: Test, Tests, Setup</pre><div><p>Represents one or more tests to be run.</p>
+</div><hr><h4>TestResult</h4><pre>visibility: public+</pre><pre>constructors: Success, Failure, Error</pre><div><p>All possible results for a test suite.</p>
+</div><h2>Declarations</h2><hr><h4>Test</h4><pre>visibility: public</pre><pre>type: String -> (Unit -> Unit) -> Suite</pre><hr><h4>Tests</h4><pre>visibility: public</pre><pre>type: String -> List (Unit -> Unit) -> Suite</pre><hr><h4>Setup</h4><pre>visibility: public</pre><pre>type: { after : Unit -> Unit, before : Unit -> Unit, suite : Suite } -> Suite</pre><hr><h4>Success</h4><pre>visibility: public</pre><pre>type: TestResult</pre><hr><h4>Failure</h4><pre>visibility: public</pre><pre>type: TestResult</pre><hr><h4>Error</h4><pre>visibility: public</pre><pre>type: TestResult</pre><hr><h4>allRegisteredtests</h4><pre>visibility: private</pre><pre>type: List Suite</pre><hr><h4>test</h4><pre>visibility: public</pre><pre>type: String -> (Unit -> Unit) -> Unit</pre><div><p>Register a test function.</p>
+</div><hr><h4>testWith</h4><pre>visibility: public</pre><pre>type: (Unit -> Unit) -> (Unit -> Unit) -> String -> (Unit -> Unit) -> Unit</pre><div><p>Register a test function with a before and after hook.</p>
+</div><hr><h4>withTable</h4><pre>visibility: public</pre><pre>type: List { | r } -> ({ | r } -> Unit) -> Unit</pre><div><p>Executes the function for every entry in the table.
+Ex:</p>
+<pre><code class="language-novah">withTable
+  [ { animal: &quot;Cat&quot;, sound: &quot;meow&quot; }
+  , { animal: &quot;Dog&quot;, sound: &quot;woof&quot; }
+  , { animal: &quot;Duck&quot;, sound: &quot;quack&quot; }
+  ]
+  \{animal, sound} -&gt; makeSound animal `shouldBe` sound
+</code></pre>
+</div><hr><h4>runTests</h4><pre>visibility: public</pre><pre>type: List Suite -> TestResult</pre><div><p>Run the specified tests.</p>
+</div><hr><h4>runAllTests</h4><pre>visibility: public</pre><pre>type: Unit -> TestResult</pre><div><p>Run all registered tests.
+Tests need to be located in a root <code>test</code> package.</p>
+</div><hr><h4>runTestsFor</h4><pre>visibility: public</pre><pre>type: String -> TestResult</pre><div><p>Run all registered tests.
+Modules containing tests will be searched
+in the given root package.</p>
+</div><hr><h4>shouldBe</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> a -> a -> Unit</pre><div><p>Fails the test if x is not equals y.</p>
+</div><hr><h4>shouldNotBe</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> a -> a -> Unit</pre><div><p>Fails the test if x is equals y.</p>
+</div><hr><h4>recordShouldBe</h4><pre>visibility: public</pre><pre>type: { | r } -> { | r } -> Unit</pre><div><p>Fails the test if the record r1 is not equals r2.</p>
+</div><hr><h4>recordShouldNotBe</h4><pre>visibility: public</pre><pre>type: { | r } -> { | r } -> Unit</pre><div><p>Fails the test if the record r1 is equals r2.</p>
+</div><hr><h4>shouldBeIn</h4><pre>visibility: public</pre><pre>type: {{ Contained a b }} -> a -> b -> Unit</pre><div><p>Fails the test if the element is not inside the container.</p>
+</div><hr><h4>shouldNotBeIn</h4><pre>visibility: public</pre><pre>type: {{ Contained a b }} -> a -> b -> Unit</pre><div><p>Fails the test if the element is inside the container.</p>
+</div><hr><h4>shouldAllBeIn</h4><pre>visibility: public</pre><pre>type: {{ Contained a b }} -> List a -> b -> Unit</pre><div><p>Fails the test if some element of the list is not inside the container.</p>
+</div><hr><h4>shouldBeSome</h4><pre>visibility: public</pre><pre>type: Option a -> Unit</pre><div><p>Fails the test if this option is empty.</p>
+</div><hr><h4>shouldBeNone</h4><pre>visibility: public</pre><pre>type: Option a -> Unit</pre><div><p>Fails the test if this option is not empty.</p>
+</div><hr><h4>shouldBeEmpty</h4><pre>visibility: public</pre><pre>type: List a -> Unit</pre><div><p>Fails the test if this list is not empty.</p>
+</div><hr><h4>shouldNotBeEmpty</h4><pre>visibility: public</pre><pre>type: List a -> Unit</pre><div><p>Fails the test if this list is empty.</p>
+</div><hr><h4>check</h4><pre>visibility: private</pre><pre>type: String -> (Unit -> Unit) -> List Int32</pre>
+    </div>
+</body>
+</html>

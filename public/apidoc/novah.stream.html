@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novah apidocs</title>
+    <meta charset="UTF-8">
+    <style>
+        a {
+            color: #111;
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        hr {
+            margin-top: 40px;
+        }
+
+        h2 {
+            padding-top: 40px;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .menu {
+            min-width: 15%;
+            padding-right: 10px;
+            border-right: 1px solid #aaa;
+        }
+
+        .docs {
+            padding-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Novah Documentation</h1>
+    <div class="content">
+        <div class="menu"><h3>Modules</h3><p><a href="novah.core.html">novah.core</a></p><p><a href="novah.result.html">novah.result</a></p><p><a href="novah.number.html">novah.number</a></p><p><a href="novah.random.html">novah.random</a></p><p><a href="novah.java.html">novah.java</a></p><p><a href="novah.math.html">novah.math</a></p><p><a href="novah.meta.html">novah.meta</a></p><p><a href="novah.linkedList.html">novah.linkedList</a></p><p><a href="novah.option.html">novah.option</a></p><p><a href="novah.stream.html">novah.stream</a></p><p><a href="novah.list.html">novah.list</a></p><p><a href="novah.map.html">novah.map</a></p><p><a href="novah.set.html">novah.set</a></p><p><a href="novah.regex.html">novah.regex</a></p><p><a href="novah.string.html">novah.string</a></p><p><a href="novah.io.html">novah.io</a></p><p><a href="novah.test.html">novah.test</a></p><p><a href="novah.async.html">novah.async</a></p><p><a href="novah.computation.html">novah.computation</a></p><p><a href="novah.array.html">novah.array</a></p></div>
+        <div class="docs"><h2>novah.stream</h2><p>Functions to work with Java streams.</p>
+<h2>Types</h2><h2>Declarations</h2><hr><h4>empty</h4><pre>visibility: public</pre><pre>type: Unit -> Stream a</pre><div><p>Creates a new empty stream.</p>
+</div><hr><h4>from</h4><pre>visibility: public</pre><pre>type: a -> Stream a</pre><div><p>Creates a stream with a single element.</p>
+</div><hr><h4>forEach</h4><pre>visibility: public</pre><pre>type: Stream a -> (a -> b) -> Unit</pre><div><p>Runs function f for every element of this Stream, ignoring the result.
+Runtime: O(n)</p>
+</div><hr><h4>toArray</h4><pre>visibility: public</pre><pre>type: Stream a -> Array Object</pre><div><p>Collects this Stream into an Array.</p>
+</div><hr><h4>size</h4><pre>visibility: public</pre><pre>type: Stream a -> Int64</pre><div><p>Returns the size of this stream.</p>
+</div><hr><h4>filter</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> Stream a -> Stream a</pre><div><p>Returns a stream of the elements that match the given predicate.</p>
+</div><hr><h4>map</h4><pre>visibility: public</pre><pre>type: (a -> b) -> Stream a -> Stream b</pre><div><p>Maps function f over all elements of this Stream returning a Stream.
+Runtime: O(n)</p>
+</div><hr><h4>flatMap</h4><pre>visibility: public</pre><pre>type: (a -> Stream b) -> Stream a -> Stream b</pre><div><p>Like <code>map</code> but it will flatten the resulting stream.</p>
+</div><hr><h4>limit</h4><pre>visibility: public</pre><pre>type: Int64 -> Stream a -> Stream a</pre><div><p>Returns a new stream with a limited number of elements.</p>
+</div><hr><h4>skip</h4><pre>visibility: public</pre><pre>type: Int64 -> Stream a -> Stream a</pre><div><p>Returns a stream with the first n elements skipped.</p>
+</div><hr><h4>takeWhile</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> Stream a -> Stream a</pre><div><p>Takes elements from this stream while the predicates holds.</p>
+</div><hr><h4>dropWhile</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> Stream a -> Stream a</pre><div><p>Drops elements from this stream while the predicates holds.</p>
+</div><hr><h4>reduce</h4><pre>visibility: public</pre><pre>type: (a -> a -> a) -> Stream a -> Option a</pre><div><p>Reduces this stream to a single value according to the reducing function.</p>
+</div><hr><h4>reduceInit</h4><pre>visibility: public</pre><pre>type: (a -> a -> a) -> a -> Stream a -> a</pre><div><p>Reduces this stream to a single value according to the reducing function.</p>
+</div>
+    </div>
+</body>
+</html>

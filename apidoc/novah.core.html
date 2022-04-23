@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novah apidocs</title>
+    <meta charset="UTF-8">
+    <style>
+        a {
+            color: #111;
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        hr {
+            margin-top: 40px;
+        }
+
+        h2 {
+            padding-top: 40px;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .menu {
+            min-width: 15%;
+            padding-right: 10px;
+            border-right: 1px solid #aaa;
+        }
+
+        .docs {
+            padding-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Novah Documentation</h1>
+    <div class="content">
+        <div class="menu"><h3>Modules</h3><p><a href="novah.core.html">novah.core</a></p><p><a href="novah.result.html">novah.result</a></p><p><a href="novah.number.html">novah.number</a></p><p><a href="novah.random.html">novah.random</a></p><p><a href="novah.java.html">novah.java</a></p><p><a href="novah.math.html">novah.math</a></p><p><a href="novah.meta.html">novah.meta</a></p><p><a href="novah.linkedList.html">novah.linkedList</a></p><p><a href="novah.option.html">novah.option</a></p><p><a href="novah.stream.html">novah.stream</a></p><p><a href="novah.list.html">novah.list</a></p><p><a href="novah.map.html">novah.map</a></p><p><a href="novah.set.html">novah.set</a></p><p><a href="novah.regex.html">novah.regex</a></p><p><a href="novah.string.html">novah.string</a></p><p><a href="novah.io.html">novah.io</a></p><p><a href="novah.test.html">novah.test</a></p><p><a href="novah.async.html">novah.async</a></p><p><a href="novah.computation.html">novah.computation</a></p><p><a href="novah.array.html">novah.array</a></p></div>
+        <div class="docs"><h2>novah.core</h2><p>The core functions of the language.
+Imported automatically in every module.</p>
+<h2>Types</h2><hr><h4>Option</h4><pre>visibility: public+</pre><pre>constructors: Some, None</pre><div><p>Represents the possibility of a missing value.</p>
+</div><hr><h4>Result</h4><pre>visibility: public+</pre><pre>constructors: Ok, Err</pre><div><p>Represents a computation that can fail.
+Should be used to represent errors instead of exceptions.</p>
+</div><hr><h4>Atom</h4><pre>visibility: public</pre><pre>constructors: Atom</pre><div><p>Atoms are a shared, uncoordinated, synchronous reference to an immutable value.</p>
+</div><hr><h4>Ordering</h4><pre>visibility: public+</pre><pre>constructors: GT, LT, EQ</pre><div><p>The ordering type represents the outcome
+of comparing 2 values:</p>
+<p>GT -&gt; bigger than
+EQ -&gt; equals
+LT -&gt; less than</p>
+</div><hr><h4>Tuple</h4><pre>visibility: public+</pre><pre>constructors: Tuple</pre><div><p>A Tuple containing two values.</p>
+</div><hr><h4>Sized</h4><pre>visibility: public+</pre><pre>constructors: Sized</pre><div><p>The type of things that have size.</p>
+</div><hr><h4>Concat</h4><pre>visibility: public+</pre><pre>constructors: Concat</pre><div><p>The type of things that can be concatenated.</p>
+</div><hr><h4>Plus</h4><pre>visibility: public+</pre><pre>constructors: Plus</pre><div><p>The type of things that can be added together
+using the + operator.</p>
+</div><hr><h4>Minus</h4><pre>visibility: public+</pre><pre>constructors: Minus</pre><div><p>The type of things that can be subtracted
+using the - operator.</p>
+</div><hr><h4>Mult</h4><pre>visibility: public+</pre><pre>constructors: Mult</pre><div><p>The type of things that can be multiplied together
+using the * operator.</p>
+</div><hr><h4>Divide</h4><pre>visibility: public+</pre><pre>constructors: Divide</pre><div><p>The type of things that can be divided
+using the / operator.</p>
+</div><hr><h4>Show</h4><pre>visibility: public+</pre><pre>constructors: Show</pre><div><p>The type of things that have a String representation.</p>
+</div><hr><h4>Equals</h4><pre>visibility: public+</pre><pre>constructors: Equals</pre><div><p>The type of things that support equality comparison.</p>
+</div><hr><h4>Contained</h4><pre>visibility: public+</pre><pre>constructors: Contained</pre><div><p>The type of things that can contain other values.
+The first type variable is the type of the contained value,
+the second is the type of the container itself.
+Ex.: Contained a (List a)</p>
+</div><hr><h4>Ord</h4><pre>visibility: public+</pre><pre>constructors: Ord</pre><div><p>The type of things that can be ordered.</p>
+</div><hr><h4>NumberOps</h4><pre>visibility: public+</pre><pre>constructors: NumberOps</pre><div><p>A type for some miscelaneous number operations.</p>
+</div><hr><h4>ToNumber</h4><pre>visibility: public+</pre><pre>constructors: ToNumber</pre><div><p>Types that can be converted to numbers.
+Many of these conversions are unsafe like
+int64 -&gt; int, String -&gt; int, etc.
+Booleans are converted to 1 for true and 0 for false.</p>
+</div><hr><h4>BitOperator</h4><pre>visibility: public+</pre><pre>constructors: BitOperator</pre><div><p>Represents a type that supports bitwise operations.</p>
+</div><hr><h4>Ranged</h4><pre>visibility: public+</pre><pre>constructors: Ranged</pre><div><p>Types that can range over some values.</p>
+</div><hr><h4>RangedStep</h4><pre>visibility: public+</pre><pre>constructors: RangedStep</pre><div><p>Types that can range over some values with a step.</p>
+</div><h2>Declarations</h2><hr><h4>Some</h4><pre>visibility: public</pre><pre>type: t171 -> Option t171</pre><hr><h4>None</h4><pre>visibility: public</pre><pre>type: Option t171</pre><hr><h4>Ok</h4><pre>visibility: public</pre><pre>type: t172 -> Result t172 t173</pre><hr><h4>Err</h4><pre>visibility: public</pre><pre>type: t173 -> Result t172 t173</pre><hr><h4>Atom</h4><pre>visibility: private</pre><pre>type: AtomicReference t174 -> Atom t174</pre><hr><h4>GT</h4><pre>visibility: public</pre><pre>type: Ordering</pre><hr><h4>LT</h4><pre>visibility: public</pre><pre>type: Ordering</pre><hr><h4>EQ</h4><pre>visibility: public</pre><pre>type: Ordering</pre><hr><h4>Tuple</h4><pre>visibility: public</pre><pre>type: t175 -> t176 -> Tuple t175 t176</pre><hr><h4>Sized</h4><pre>visibility: public</pre><pre>type: (t177 -> Int32) -> Sized t177</pre><hr><h4>Concat</h4><pre>visibility: public</pre><pre>type: (t178 -> t178 -> t178) -> Concat t178</pre><hr><h4>Plus</h4><pre>visibility: public</pre><pre>type: { identity : t179, plus : t179 -> t179 -> t179 } -> Plus t179</pre><hr><h4>Minus</h4><pre>visibility: public</pre><pre>type: (t180 -> t180 -> t180) -> Minus t180</pre><hr><h4>Mult</h4><pre>visibility: public</pre><pre>type: { identity : t181, mult : t181 -> t181 -> t181 } -> Mult t181</pre><hr><h4>Divide</h4><pre>visibility: public</pre><pre>type: (t182 -> t182 -> t182) -> Divide t182</pre><hr><h4>Show</h4><pre>visibility: public</pre><pre>type: (t183 -> String) -> Show t183</pre><hr><h4>Equals</h4><pre>visibility: public</pre><pre>type: (t184 -> t184 -> Boolean) -> Equals t184</pre><hr><h4>Contained</h4><pre>visibility: public</pre><pre>type: Equals t185 -> (t185 -> t186 -> Boolean) -> Contained t185 t186</pre><hr><h4>Ord</h4><pre>visibility: public</pre><pre>type: Equals t187 -> { compare : t187 -> t187 -> Ordering } -> Ord t187</pre><hr><h4>NumberOps</h4><pre>visibility: public</pre><pre>type: { abs : t188 -> t188, even : t188 -> Boolean, max : t188 -> t188 -> t188, min : t188 -> t188 -> t188, remainder : t188 -> t188 -> t188 } -> NumberOps t188</pre><hr><h4>ToNumber</h4><pre>visibility: public</pre><pre>type: { float32 : t189 -> Float32, float64 : t189 -> Float64, int : t189 -> Int32, int64 : t189 -> Int64 } -> ToNumber t189</pre><hr><h4>BitOperator</h4><pre>visibility: public</pre><pre>type: { and : t190 -> t190 -> t190, not : t190 -> t190, or : t190 -> t190 -> t190, shiftLeft : t190 -> t190 -> t190, shiftRight : t190 -> t190 -> t190, unsignedShiftRight : t190 -> t190 -> t190, xor : t190 -> t190 -> t190 } -> BitOperator t190</pre><hr><h4>Ranged</h4><pre>visibility: public</pre><pre>type: { range : t191 -> t191 -> Range t191, rangeOpen : t191 -> t191 -> Range t191 } -> Ranged t191</pre><hr><h4>RangedStep</h4><pre>visibility: public</pre><pre>type: { range : t192 -> t192 -> t192 -> Range t192, rangeOpen : t192 -> t192 -> t192 -> Range t192 } -> RangedStep t192</pre><hr><h4>unsafeCast</h4><pre>visibility: public</pre><pre>type: a -> b</pre><div><p>Coerce parameter x from type a to b.
+This is extremely unsafe and should be used only
+when sure both types are compatible, otherwise
+a runtime exception will be thrown.</p>
+</div><hr><h4>not</h4><pre>visibility: public</pre><pre>type: Boolean -> Boolean</pre><div><p>Negates a boolean value.</p>
+</div><hr><h4>xor</h4><pre>visibility: public</pre><pre>type: Boolean -> Boolean -> Boolean</pre><div><p>Returns the exclusive disjunction of p and q.</p>
+</div><hr><h4>identity</h4><pre>visibility: public</pre><pre>type: a -> a</pre><div><p>Returns its argument unmodified.</p>
+</div><hr><h4>flip</h4><pre>visibility: public</pre><pre>type: (a -> b -> c) -> b -> a -> c</pre><div><p>Flips the arguments of a 2-arguments function.</p>
+</div><hr><h4>const</h4><pre>visibility: public</pre><pre>type: a -> b -> a</pre><div><p>Takes two parameters and returns the first, ignoring the second.</p>
+</div><hr><h4>|></h4><pre>visibility: public</pre><pre>type: a -> (a -> b) -> b</pre><div><p>The railway operator.
+Applies function f to x.
+Used to minimize parentheses and have a
+more intuitive order of execution:</p>
+<p><code>1 .. 100 |&gt; List.reverse |&gt; List.map (_ * 10)</code>
+instead of
+<code>List.map (_ * 10) (List.reverse (1 .. 100))</code></p>
+</div><hr><h4><|</h4><pre>visibility: public</pre><pre>type: (a -> b) -> a -> b</pre><div><p>The reverse of the <code>|&gt;</code> (railway operator).
+Applies function f to x.
+Used to minimize parentheses:</p>
+<p><code>List.map (_ * 10) &lt;| List.reverse &lt;| 1 .. 100</code>
+instead of
+<code>List.map (_ * 10) (List.sort (1 .. 100))</code></p>
+</div><hr><h4>>></h4><pre>visibility: public</pre><pre>type: (a -> b) -> (b -> c) -> a -> c</pre><div><p>Forward function composition operator: <code>(f &gt;&gt; g) x = g (f x)</code></p>
+</div><hr><h4><<</h4><pre>visibility: public</pre><pre>type: (b -> c) -> (a -> b) -> a -> c</pre><div><p>Backward function composition operator: <code>(f &lt;&lt; g) x = f (g x)</code></p>
+</div><hr><h4>===</h4><pre>visibility: public</pre><pre>type: a -> a -> Boolean</pre><div><p>Returns true if the 2 references point to the same object.
+This is the same as Java's ==</p>
+</div><hr><h4>!==</h4><pre>visibility: public</pre><pre>type: a -> a -> Boolean</pre><div><p>Returns true if the 2 objects <em>do not</em> point to the same object.
+This is the same as Java's !=</p>
+</div><hr><h4>&&</h4><pre>visibility: public</pre><pre>type: Boolean -> Boolean -> Boolean</pre><div><p>Logical <code>and</code> operator.
+Returns true if both conditions are true.
+This operator will short circuit if fully applied.</p>
+</div><hr><h4>||</h4><pre>visibility: public</pre><pre>type: Boolean -> Boolean -> Boolean</pre><div><p>Logical <code>or</code> operator.
+Returns true if at least one of the conditions is true.
+This operator will short circuit if fully applied.</p>
+</div><hr><h4>println</h4><pre>visibility: public</pre><pre>type: a -> Unit</pre><div><p>Prints x to stdout and appends a new line.</p>
+</div><hr><h4>print</h4><pre>visibility: public</pre><pre>type: a -> Unit</pre><div><p>Prints x to the stdout.</p>
+</div><hr><h4>toString</h4><pre>visibility: public</pre><pre>type: a -> String</pre><div><p>Converts a value to String using the
+native Java toString method.</p>
+</div><hr><h4>todo</h4><pre>visibility: public</pre><pre>type: String -> a</pre><div><p>Throws an exception stating that this code is still undergoing implementation.
+Should be used a placeholder for future code.</p>
+</div><hr><h4>!</h4><pre>visibility: public</pre><pre>type: List a -> Int32 -> a</pre><div><p>Returns some value at index for this list if it exists.
+<em>Unsafe</em>: Will throw an exception if the index is out of bounds.
+This function is similar to the index operator <code>list.[i]</code> but
+it does not work on negative indexes.</p>
+</div><hr><h4>setAt</h4><pre>visibility: public</pre><pre>type: Int32 -> a -> List a -> List a</pre><div><p>Sets the value of this list at the specified index to x.
+<em>Unsafe</em>: Will throw a <code>java.lang.IndexOutOfBoundsException</code> if the index doesn't exist.
+Runtime: ~O(1)</p>
+</div><hr><h4>updateAt</h4><pre>visibility: public</pre><pre>type: Int32 -> (a -> a) -> List a -> List a</pre><div><p>Updates the value of this list at the specified index by applying function f to the old value.
+<em>Unsafe</em>: Will throw a <code>java.lang.IndexOutOfBoundsException</code> if the index doesn't exist.
+Runtime: ~O(1)</p>
+</div><hr><h4>addFirst</h4><pre>visibility: public</pre><pre>type: a -> List a -> List a</pre><div><p>Appends x to the beginning of this list.
+Runtime: ~O(1)</p>
+</div><hr><h4>addLast</h4><pre>visibility: public</pre><pre>type: a -> List a -> List a</pre><div><p>Appends x to the end of this list.
+Runtime: ~O(1)</p>
+</div><hr><h4>removeFirst</h4><pre>visibility: public</pre><pre>type: List a -> List a</pre><div><p>Removes the first element of this list.
+Runtime: ~O(1)</p>
+</div><hr><h4>removeLast</h4><pre>visibility: public</pre><pre>type: List a -> List a</pre><div><p>Removes the last element of this list.
+Runtime: ~O(1)</p>
+</div><hr><h4>aget</h4><pre>visibility: public</pre><pre>type: Int32 -> Array a -> a</pre><div><p>Gets the element of the array at the specified index.
+<em>Unsafe</em>: Will thrown a <code>java.lang.IndexOutOfBoundsException</code> if the index doesn't exist.
+Runtime: O(1)</p>
+</div><hr><h4>aset</h4><pre>visibility: public</pre><pre>type: Int32 -> a -> Array a -> Unit</pre><div><p>Sets the element of the array at the specified index.
+<em>Unsafe</em>: Will thrown a <code>java.lang.IndexOutOfBoundsException</code> if the index doesn't exist.
+Runtime: O(1)</p>
+</div><hr><h4>aupdate</h4><pre>visibility: public</pre><pre>type: Int32 -> (a -> a) -> Array a -> Unit</pre><div><p>Updates the element of the array at the specified index by applying this function
+to the old value.
+<em>Unsafe</em>: Will thrown a <code>java.lang.IndexOutOfBoundsException</code> if the index doesn't exist.
+Runtime: O(1)</p>
+</div><hr><h4>arrayOf</h4><pre>visibility: public</pre><pre>type: Class a -> Int32 -> Array a</pre><div><p>Creates an array of the specified class and size.</p>
+</div><hr><h4>format</h4><pre>visibility: public</pre><pre>type: String -> List a -> String</pre><div><p>Returns a formatted string using the specified format string and arguments.
+See <code>java.util.Formatter</code> for format explanation.</p>
+</div><hr><h4>printfln</h4><pre>visibility: public</pre><pre>type: String -> List a -> Unit</pre><div><p>Prints the formated string to stdout.</p>
+</div><hr><h4>nullable</h4><pre>visibility: public</pre><pre>type: a -> Nullable a</pre><div><p>Coerces a value to a nullable.
+Should only be used for Java interoperability
+when a foreign imported value can be null
+or a method can return null.
+<code>let possibleNullResult = obj#foreignFunction(x, y, z) |&gt; nullable</code></p>
+</div><hr><h4>?:</h4><pre>visibility: public</pre><pre>type: Option a -> a -> a</pre><div><p>Returns the value contained in this option
+or the default value.</p>
+</div><hr><h4>unwrapOption</h4><pre>visibility: public</pre><pre>type: Option a -> a</pre><div><p>Extracts the value out of this option.
+<em>Unsafe</em>: Will thrown an exception if the option is empty.
+The <code>!!</code> syntactic sugar can be used instead,
+but this function still needs to be in scope.</p>
+</div><hr><h4>?</h4><pre>visibility: public</pre><pre>type: Option a -> (a -> Option b) -> Option b</pre><div><p>Threads optional values together stopping as soon as
+the option is empty.
+This is a flipped version of <code>Option.flatMap</code>.
+Ex.:</p>
+<pre><code class="language-novah">List.nth 1 [[1, 2], [3, 4]] ? List.nth 5 ?: 0
+</code></pre>
+</div><hr><h4>??</h4><pre>visibility: public</pre><pre>type: Option a -> (a -> b) -> Option b</pre><div><p>Maps the function inside the option if it's not empty.
+This is a flipped version of <code>Option.map</code>.
+Ex.:</p>
+<pre><code class="language-novah">Some [1, 2, 3] ?? List.size
+</code></pre>
+</div><hr><h4>atom</h4><pre>visibility: public</pre><pre>type: a -> Atom a</pre><div><p>Creates a new Atom to hold x.
+Should <em>not</em> be used to hold a mutable value.</p>
+</div><hr><h4>deref</h4><pre>visibility: public</pre><pre>type: Atom a -> a</pre><div><p>Returns the value inside this Atom.</p>
+</div><hr><h4>reset</h4><pre>visibility: public</pre><pre>type: a -> Atom a -> a</pre><div><p>Resets the value of this Atom to x, discarding the old value.
+Returns x.</p>
+</div><hr><h4>swap</h4><pre>visibility: public</pre><pre>type: (a -> a) -> Atom a -> a</pre><div><p>Swaps the value of this atom by applying a function to the old value.
+The function <em>should be free of side effects</em> as it may be executed
+multiple times.</p>
+</div><hr><h4>compareAndSet</h4><pre>visibility: public</pre><pre>type: a -> a -> Atom a -> Boolean</pre><div><p>Low-level function that receives the old value, the new value and attempts
+to set the atom to new if old matches.
+Returns true if it succeeded.
+Always prefer <code>swap</code> over <code>compareAndSet</code>.</p>
+</div><hr><h4>^</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64 -> Float64</pre><div><p>Returns x raised to the power of y.
+Follows the same special cases as <code>java.lang.Math.pow</code>.</p>
+</div><hr><h4>fst</h4><pre>visibility: public</pre><pre>type: Tuple a b -> a</pre><div><p>Returns the first element of this tuple.
+Runtime: O(1)</p>
+</div><hr><h4>snd</h4><pre>visibility: public</pre><pre>type: Tuple a b -> b</pre><div><p>Returns the second element of this tuple.
+Runtime: O(1)</p>
+</div><hr><h4>len</h4><pre>visibility: public</pre><pre>type: {{ Sized a }} -> a -> Int32</pre><div><p>Returns the length of this sized value.</p>
+</div><hr><h4>sizedString</h4><pre>visibility: public</pre><pre>type: Sized String</pre><hr><h4>sizedList</h4><pre>visibility: public</pre><pre>type: Sized (List a)</pre><hr><h4>sizedSet</h4><pre>visibility: public</pre><pre>type: Sized (Set a)</pre><hr><h4>sizedMap</h4><pre>visibility: public</pre><pre>type: Sized (Map k v)</pre><hr><h4>sizedArray</h4><pre>visibility: public</pre><pre>type: Sized (Array a)</pre><hr><h4>sizedByteArray</h4><pre>visibility: public</pre><pre>type: Sized ByteArray</pre><hr><h4>sizedInt16Array</h4><pre>visibility: public</pre><pre>type: Sized Int16Array</pre><hr><h4>sizedInt32Array</h4><pre>visibility: public</pre><pre>type: Sized Int32Array</pre><hr><h4>sizedInt64Array</h4><pre>visibility: public</pre><pre>type: Sized Int64Array</pre><hr><h4>sizedFloat32Array</h4><pre>visibility: public</pre><pre>type: Sized Float32Array</pre><hr><h4>sizedFloat64Array</h4><pre>visibility: public</pre><pre>type: Sized Float64Array</pre><hr><h4>sizedBooleanArray</h4><pre>visibility: public</pre><pre>type: Sized BooleanArray</pre><hr><h4>sizedCharArray</h4><pre>visibility: public</pre><pre>type: Sized CharArray</pre><hr><h4>++</h4><pre>visibility: public</pre><pre>type: {{ Concat a }} -> a -> a -> a</pre><div><p>Concatenate 2 concatenable values together.</p>
+</div><hr><h4>concatString</h4><pre>visibility: public</pre><pre>type: Concat String</pre><hr><h4>concatList</h4><pre>visibility: public</pre><pre>type: Concat (List a)</pre><hr><h4>concatSet</h4><pre>visibility: public</pre><pre>type: Concat (Set a)</pre><hr><h4>concatOption_</h4><pre>visibility: private</pre><pre>type: Concat a -> Option a -> Option a -> Option a</pre><hr><h4>concatOption</h4><pre>visibility: public</pre><pre>type: {{ Concat a }} -> Concat (Option a)</pre><hr><h4>concatTup</h4><pre>visibility: private</pre><pre>type: Concat a -> Concat b -> Tuple a b -> Tuple a b -> Tuple a b</pre><hr><h4>concatTuple</h4><pre>visibility: public</pre><pre>type: {{ Concat a }} -> {{ Concat b }} -> Concat (Tuple a b)</pre><hr><h4>+</h4><pre>visibility: public</pre><pre>type: {{ Plus a }} -> a -> a -> a</pre><div><p>Adds x and y.</p>
+</div><hr><h4>plusInt32</h4><pre>visibility: public</pre><pre>type: Plus Int32</pre><hr><h4>plusInt64</h4><pre>visibility: public</pre><pre>type: Plus Int64</pre><hr><h4>plusFloat32</h4><pre>visibility: public</pre><pre>type: Plus Float32</pre><hr><h4>plusFloat64</h4><pre>visibility: public</pre><pre>type: Plus Float64</pre><hr><h4>plusTup</h4><pre>visibility: private</pre><pre>type: Plus a -> Plus b -> Tuple a b -> Tuple a b -> Tuple a b</pre><hr><h4>plusTuple</h4><pre>visibility: public</pre><pre>type: {{ Plus a }} -> {{ Plus b }} -> Plus (Tuple a b)</pre><hr><h4>-</h4><pre>visibility: public</pre><pre>type: {{ Minus a }} -> a -> a -> a</pre><div><p>Subtracts x and y.</p>
+</div><hr><h4>minusInt32</h4><pre>visibility: public</pre><pre>type: Minus Int32</pre><hr><h4>minusInt64</h4><pre>visibility: public</pre><pre>type: Minus Int64</pre><hr><h4>minusFloat32</h4><pre>visibility: public</pre><pre>type: Minus Float32</pre><hr><h4>minusFloat64</h4><pre>visibility: public</pre><pre>type: Minus Float64</pre><hr><h4>minusTup</h4><pre>visibility: private</pre><pre>type: Minus a -> Minus b -> Tuple a b -> Tuple a b -> Tuple a b</pre><hr><h4>minusTuple</h4><pre>visibility: public</pre><pre>type: {{ Minus a }} -> {{ Minus b }} -> Minus (Tuple a b)</pre><hr><h4>*</h4><pre>visibility: public</pre><pre>type: {{ Mult a }} -> a -> a -> a</pre><div><p>Multiplies x and y.</p>
+</div><hr><h4>multInt32</h4><pre>visibility: public</pre><pre>type: Mult Int32</pre><hr><h4>multInt64</h4><pre>visibility: public</pre><pre>type: Mult Int64</pre><hr><h4>multFloat32</h4><pre>visibility: public</pre><pre>type: Mult Float32</pre><hr><h4>multFloat64</h4><pre>visibility: public</pre><pre>type: Mult Float64</pre><hr><h4>multTup</h4><pre>visibility: private</pre><pre>type: Mult a -> Mult b -> Tuple a b -> Tuple a b -> Tuple a b</pre><hr><h4>multTuple</h4><pre>visibility: public</pre><pre>type: {{ Mult a }} -> {{ Mult b }} -> Mult (Tuple a b)</pre><hr><h4>/</h4><pre>visibility: public</pre><pre>type: {{ Divide a }} -> a -> a -> a</pre><div><p>Divides x by y.</p>
+</div><hr><h4>divideInt32</h4><pre>visibility: public</pre><pre>type: Divide Int32</pre><hr><h4>divideInt64</h4><pre>visibility: public</pre><pre>type: Divide Int64</pre><hr><h4>divideFloat32</h4><pre>visibility: public</pre><pre>type: Divide Float32</pre><hr><h4>divideFloat64</h4><pre>visibility: public</pre><pre>type: Divide Float64</pre><hr><h4>divideTup</h4><pre>visibility: private</pre><pre>type: Divide a -> Divide b -> Tuple a b -> Tuple a b -> Tuple a b</pre><hr><h4>divideTuple</h4><pre>visibility: public</pre><pre>type: {{ Divide a }} -> {{ Divide b }} -> Divide (Tuple a b)</pre><hr><h4>show</h4><pre>visibility: public</pre><pre>type: {{ Show a }} -> a -> String</pre><div><p>Converts this value to a String.</p>
+</div><hr><h4>printlnShow</h4><pre>visibility: public</pre><pre>type: {{ Show a }} -> a -> Unit</pre><div><p>Prints x to stdout and appends a new line.
+Transforms the argument to a String using <code>show</code> first.</p>
+</div><hr><h4>printShow</h4><pre>visibility: public</pre><pre>type: {{ Show a }} -> a -> Unit</pre><div><p>Prints x to stdout.
+Transforms the argument to a String using <code>show</code> first.</p>
+</div><hr><h4>showString</h4><pre>visibility: public</pre><pre>type: Show String</pre><hr><h4>showByte</h4><pre>visibility: public</pre><pre>type: Show Byte</pre><hr><h4>showInt16</h4><pre>visibility: public</pre><pre>type: Show Int16</pre><hr><h4>showInt32</h4><pre>visibility: public</pre><pre>type: Show Int32</pre><hr><h4>showInt64</h4><pre>visibility: public</pre><pre>type: Show Int64</pre><hr><h4>showFloat32</h4><pre>visibility: public</pre><pre>type: Show Float32</pre><hr><h4>showFloat64</h4><pre>visibility: public</pre><pre>type: Show Float64</pre><hr><h4>showChar</h4><pre>visibility: public</pre><pre>type: Show Char</pre><hr><h4>showBoolean</h4><pre>visibility: public</pre><pre>type: Show Boolean</pre><hr><h4>showObject</h4><pre>visibility: public</pre><pre>type: Show Object</pre><hr><h4>showOpt</h4><pre>visibility: private</pre><pre>type: Show a -> Option a -> String</pre><hr><h4>showOption</h4><pre>visibility: public</pre><pre>type: {{ Show a }} -> Show (Option a)</pre><hr><h4>showList</h4><pre>visibility: public</pre><pre>type: {{ Show a }} -> Show (List a)</pre><hr><h4>showSet</h4><pre>visibility: public</pre><pre>type: {{ Show a }} -> Show (Set a)</pre><hr><h4>showArray</h4><pre>visibility: public</pre><pre>type: {{ Show a }} -> Show (Array a)</pre><hr><h4>showNull</h4><pre>visibility: private</pre><pre>type: Show a -> Nullable a -> String</pre><hr><h4>showNullable</h4><pre>visibility: public</pre><pre>type: {{ Show a }} -> Show (Nullable a)</pre><hr><h4>showOrdering</h4><pre>visibility: public</pre><pre>type: Show Ordering</pre><hr><h4>showRes</h4><pre>visibility: private</pre><pre>type: Show ok -> Show err -> Result ok err -> String</pre><hr><h4>showResult</h4><pre>visibility: public</pre><pre>type: {{ Show ok }} -> {{ Show err }} -> Show (Result ok err)</pre><hr><h4>showAtom</h4><pre>visibility: public</pre><pre>type: {{ Show a }} -> Show (Atom a)</pre><hr><h4>showTup</h4><pre>visibility: private</pre><pre>type: Show a -> Show b -> Tuple a b -> String</pre><hr><h4>showTuple</h4><pre>visibility: public</pre><pre>type: {{ Show a }} -> {{ Show b }} -> Show (Tuple a b)</pre><hr><h4>showRange</h4><pre>visibility: public</pre><pre>type: {{ Show a }} -> Show (Range a)</pre><hr><h4>==</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> a -> a -> Boolean</pre><div><p>Returns true if the two values are equal.</p>
+</div><hr><h4>!=</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> a -> a -> Boolean</pre><div><p>Returns true if the two values are <em>not</em> equal.</p>
+</div><hr><h4>eqByte</h4><pre>visibility: public</pre><pre>type: Equals Byte</pre><hr><h4>eqInt16</h4><pre>visibility: public</pre><pre>type: Equals Int16</pre><hr><h4>eqInt32</h4><pre>visibility: public</pre><pre>type: Equals Int32</pre><hr><h4>eqInt64</h4><pre>visibility: public</pre><pre>type: Equals Int64</pre><hr><h4>eqFloat32</h4><pre>visibility: public</pre><pre>type: Equals Float32</pre><hr><h4>eqFloat64</h4><pre>visibility: public</pre><pre>type: Equals Float64</pre><hr><h4>eqChar</h4><pre>visibility: public</pre><pre>type: Equals Char</pre><hr><h4>equalsBoolean</h4><pre>visibility: private</pre><pre>type: Boolean -> Boolean -> Boolean</pre><hr><h4>eqBoolean</h4><pre>visibility: public</pre><pre>type: Equals Boolean</pre><hr><h4>eqString</h4><pre>visibility: public</pre><pre>type: Equals String</pre><hr><h4>eqList</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> Equals (List a)</pre><hr><h4>eqSet</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> Equals (Set a)</pre><hr><h4>eqArray</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> Equals (Array a)</pre><hr><h4>equalsOption</h4><pre>visibility: private</pre><pre>type: Equals a -> Option a -> Option a -> Boolean</pre><hr><h4>eqOption</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> Equals (Option a)</pre><hr><h4>equalsNullable</h4><pre>visibility: private</pre><pre>type: Equals a -> Nullable a -> Nullable a -> Boolean</pre><hr><h4>eqNullable</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> Equals (Nullable a)</pre><hr><h4>eqObject</h4><pre>visibility: public</pre><pre>type: Equals Object</pre><hr><h4>equalsOrdering</h4><pre>visibility: private</pre><pre>type: Ordering -> Ordering -> Boolean</pre><hr><h4>eqOrdering</h4><pre>visibility: public</pre><pre>type: Equals Ordering</pre><hr><h4>equalsResult</h4><pre>visibility: private</pre><pre>type: Equals ok -> Equals err -> Result ok err -> Result ok err -> Boolean</pre><hr><h4>eqResult</h4><pre>visibility: public</pre><pre>type: {{ Equals ok }} -> {{ Equals err }} -> Equals (Result ok err)</pre><hr><h4>equalsAtom</h4><pre>visibility: private</pre><pre>type: Equals a -> Atom a -> Atom a -> Boolean</pre><hr><h4>eqAtom</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> Equals (Atom a)</pre><hr><h4>equalsTuple</h4><pre>visibility: private</pre><pre>type: Equals a -> Equals b -> Tuple a b -> Tuple a b -> Boolean</pre><hr><h4>eqTuple</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> {{ Equals b }} -> Equals (Tuple a b)</pre><hr><h4>equalsRange</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> Equals (Range a)</pre><hr><h4>recordEquals</h4><pre>visibility: public</pre><pre>type: { | r } -> { | r } -> Boolean</pre><div><p>Compare if the two records are equals
+according to Java's equality.</p>
+</div><hr><h4>isIn</h4><pre>visibility: public</pre><pre>type: {{ Contained a fa }} -> a -> fa -> Boolean</pre><div><p>Returns true if x is inside the container.</p>
+</div><hr><h4>notIn</h4><pre>visibility: public</pre><pre>type: {{ Contained a fa }} -> a -> fa -> Boolean</pre><div><p>Returns true if x is <em>not</em> inside the container.</p>
+</div><hr><h4>containedSet</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> Contained a (Set a)</pre><hr><h4>containedList</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> Contained a (List a)</pre><hr><h4>containedOption</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> Contained a (Option a)</pre><hr><h4>containedResult</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> Contained a (Result a a)</pre><hr><h4>containedRange</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> Contained a (Range a)</pre><hr><h4>compare</h4><pre>visibility: public</pre><pre>type: {{ Ord a }} -> a -> a -> Ordering</pre><div><p>Returns the result of comparing two Ord instances.</p>
+</div><hr><h4>></h4><pre>visibility: public</pre><pre>type: {{ Ord a }} -> a -> a -> Boolean</pre><div><p>Returns true if x is greater than y.</p>
+</div><hr><h4><</h4><pre>visibility: public</pre><pre>type: {{ Ord a }} -> a -> a -> Boolean</pre><div><p>Returns true if x is smaller than y.</p>
+</div><hr><h4>>=</h4><pre>visibility: public</pre><pre>type: {{ Ord a }} -> a -> a -> Boolean</pre><div><p>Returns true if x is greater than or equal y.</p>
+</div><hr><h4>containedString</h4><pre>visibility: public</pre><pre>type: Contained String String</pre><hr><h4>containedCharString</h4><pre>visibility: public</pre><pre>type: Contained Char String</pre><hr><h4><=</h4><pre>visibility: public</pre><pre>type: {{ Ord a }} -> a -> a -> Boolean</pre><div><p>Returns true if x is smaller than or equal y.</p>
+</div><hr><h4>ordInt32</h4><pre>visibility: public</pre><pre>type: Ord Int32</pre><hr><h4>ordInt64</h4><pre>visibility: public</pre><pre>type: Ord Int64</pre><hr><h4>ordFloat64</h4><pre>visibility: public</pre><pre>type: Ord Float64</pre><hr><h4>ordByte</h4><pre>visibility: public</pre><pre>type: Ord Byte</pre><hr><h4>ordInt16</h4><pre>visibility: public</pre><pre>type: Ord Int16</pre><hr><h4>ordFloat32</h4><pre>visibility: public</pre><pre>type: Ord Float32</pre><hr><h4>ordChar</h4><pre>visibility: public</pre><pre>type: Ord Char</pre><hr><h4>compareBoolean</h4><pre>visibility: private</pre><pre>type: Boolean -> Boolean -> Ordering</pre><hr><h4>ordBoolean</h4><pre>visibility: public</pre><pre>type: Ord Boolean</pre><hr><h4>ordString</h4><pre>visibility: public</pre><pre>type: Ord String</pre><hr><h4>compareOption</h4><pre>visibility: private</pre><pre>type: Ord a -> Option a -> Option a -> Ordering</pre><hr><h4>ordOption</h4><pre>visibility: public</pre><pre>type: {{ Ord a }} -> Ord (Option a)</pre><div><p>Compares two options if their values are comparable.
+None values are always smaller then Some.</p>
+</div><hr><h4>%</h4><pre>visibility: public</pre><pre>type: {{ NumberOps a }} -> a -> a -> a</pre><div><p>Returns the remainder of dividing x by y.</p>
+</div><hr><h4>numberOpsInt32</h4><pre>visibility: public</pre><pre>type: NumberOps Int32</pre><hr><h4>numberOpsInt64</h4><pre>visibility: public</pre><pre>type: NumberOps Int64</pre><hr><h4>numberOpsFloat32</h4><pre>visibility: public</pre><pre>type: NumberOps Float32</pre><hr><h4>numberOpsFloat64</h4><pre>visibility: public</pre><pre>type: NumberOps Float64</pre><hr><h4>int</h4><pre>visibility: public</pre><pre>type: {{ ToNumber a }} -> a -> Int32</pre><div><p>Converts this value to a 32-bit integer.</p>
+</div><hr><h4>int64</h4><pre>visibility: public</pre><pre>type: {{ ToNumber a }} -> a -> Int64</pre><div><p>Converts this value to a 64-bit integer.</p>
+</div><hr><h4>float32</h4><pre>visibility: public</pre><pre>type: {{ ToNumber a }} -> a -> Float32</pre><div><p>Converts this value to a 32-bit float.</p>
+</div><hr><h4>float64</h4><pre>visibility: public</pre><pre>type: {{ ToNumber a }} -> a -> Float64</pre><div><p>Converts this value to a 64-bit float.</p>
+</div><hr><h4>toNumberInt32</h4><pre>visibility: public</pre><pre>type: ToNumber Int32</pre><hr><h4>toNumberInt64</h4><pre>visibility: public</pre><pre>type: ToNumber Int64</pre><hr><h4>toNumberFloat32</h4><pre>visibility: public</pre><pre>type: ToNumber Float32</pre><hr><h4>toNumberFloat64</h4><pre>visibility: public</pre><pre>type: ToNumber Float64</pre><hr><h4>toNumberChar</h4><pre>visibility: public</pre><pre>type: ToNumber Char</pre><hr><h4>toNumberString</h4><pre>visibility: public</pre><pre>type: ToNumber String</pre><hr><h4>toNumberBoolean</h4><pre>visibility: public</pre><pre>type: ToNumber Boolean</pre><hr><h4>bitAnd</h4><pre>visibility: public</pre><pre>type: {{ BitOperator a }} -> a -> a -> a</pre><div><p>Returns the biwise and between x and y.
+Equivalent to Java's <code>&amp;</code>.</p>
+</div><hr><h4>bitOr</h4><pre>visibility: public</pre><pre>type: {{ BitOperator a }} -> a -> a -> a</pre><div><p>Returns the biwise or between x and y.
+Equivalent to Java's <code>|</code>.</p>
+</div><hr><h4>bitXor</h4><pre>visibility: public</pre><pre>type: {{ BitOperator a }} -> a -> a -> a</pre><div><p>Returns the biwise xor between x and y.
+Equivalent to Java's <code>^</code>.</p>
+</div><hr><h4>bitNot</h4><pre>visibility: public</pre><pre>type: {{ BitOperator a }} -> a -> a</pre><div><p>Returns the bit complement of x.
+Equivalent to Java's <code>~</code>.</p>
+</div><hr><h4>bitShiftLeft</h4><pre>visibility: public</pre><pre>type: {{ BitOperator a }} -> a -> a -> a</pre><div><p>Shifts <code>x</code> bitwise to the left by <code>amount</code>.
+Equivalent to Java's <code>&lt;&lt;</code>.</p>
+</div><hr><h4>bitShiftRight</h4><pre>visibility: public</pre><pre>type: {{ BitOperator a }} -> a -> a -> a</pre><div><p>Shifts <code>x</code> bitwise to the right by <code>amount</code>.
+Equivalent to Java's <code>&gt;&gt;</code>.</p>
+</div><hr><h4>bitUnsignedShiftRight</h4><pre>visibility: public</pre><pre>type: {{ BitOperator a }} -> a -> a -> a</pre><div><p>Shifts <code>x</code> bitwise to the right by <code>amount</code> (unsigned).
+Equivalent to Java's <code>&gt;&gt;&gt;</code>.</p>
+</div><hr><h4>bitOperatorByte</h4><pre>visibility: public</pre><pre>type: BitOperator Byte</pre><hr><h4>bitOperatorInt16</h4><pre>visibility: public</pre><pre>type: BitOperator Int16</pre><hr><h4>bitOperatorInt32</h4><pre>visibility: public</pre><pre>type: BitOperator Int32</pre><hr><h4>bitOperatorInt64</h4><pre>visibility: public</pre><pre>type: BitOperator Int64</pre><hr><h4>..</h4><pre>visibility: public</pre><pre>type: {{ Ranged a }} -> a -> a -> Range a</pre><div><p>Returns a range from begin (inclusive) to end (inclusive).
+If start &gt; end the range will go down instead of up.
+Runtime: O(1)</p>
+</div><hr><h4>...</h4><pre>visibility: public</pre><pre>type: {{ Ranged a }} -> a -> a -> Range a</pre><div><p>Returns a range from begin (inclusive) to end (exclusive).
+If start &gt; end the range will go down instead of up.
+Runtime: O(1)</p>
+</div><hr><h4>range</h4><pre>visibility: public</pre><pre>type: {{ RangedStep a }} -> a -> a -> a -> Range a</pre><div><p>Returns a range between begin (inclusive) and end (inclusive) going step by step.
+Runtime: O(1)</p>
+</div><hr><h4>rangeOpen</h4><pre>visibility: public</pre><pre>type: {{ RangedStep a }} -> a -> a -> a -> Range a</pre><div><p>Returns a range between begin (inclusive) and end (exclusive) going step by step.
+Runtime: O(1)</p>
+</div><hr><h4>forEachRange</h4><pre>visibility: public</pre><pre>type: Range a -> (a -> Unit) -> Unit</pre><div><p>Executes the function for every value in this range.</p>
+</div><hr><h4>rangeToList</h4><pre>visibility: public</pre><pre>type: Range a -> List a</pre><div><p>Returns a list with all the elements of this range.</p>
+</div><hr><h4>rangeToSet</h4><pre>visibility: public</pre><pre>type: Range a -> Set a</pre><div><p>Returns a set with all the elements of this range.</p>
+</div><hr><h4>rangeStart</h4><pre>visibility: public</pre><pre>type: Range a -> a</pre><div><p>The starting value of this range.</p>
+</div><hr><h4>rangeEnd</h4><pre>visibility: public</pre><pre>type: Range a -> a</pre><div><p>The ending value of this range.</p>
+</div><hr><h4>rangedInt32</h4><pre>visibility: public</pre><pre>type: Ranged Int32</pre><hr><h4>rangedInt64</h4><pre>visibility: public</pre><pre>type: Ranged Int64</pre><hr><h4>rangedFloat32</h4><pre>visibility: public</pre><pre>type: Ranged Float32</pre><hr><h4>rangedFloat64</h4><pre>visibility: public</pre><pre>type: Ranged Float64</pre><hr><h4>rangedChar</h4><pre>visibility: public</pre><pre>type: Ranged Char</pre><hr><h4>rangedStepInt32</h4><pre>visibility: public</pre><pre>type: RangedStep Int32</pre><hr><h4>rangedStepInt64</h4><pre>visibility: public</pre><pre>type: RangedStep Int64</pre><hr><h4>rangedStepChar</h4><pre>visibility: public</pre><pre>type: RangedStep Char</pre>
+    </div>
+</body>
+</html>

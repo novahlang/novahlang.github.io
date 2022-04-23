@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novah apidocs</title>
+    <meta charset="UTF-8">
+    <style>
+        a {
+            color: #111;
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        hr {
+            margin-top: 40px;
+        }
+
+        h2 {
+            padding-top: 40px;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .menu {
+            min-width: 15%;
+            padding-right: 10px;
+            border-right: 1px solid #aaa;
+        }
+
+        .docs {
+            padding-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Novah Documentation</h1>
+    <div class="content">
+        <div class="menu"><h3>Modules</h3><p><a href="novah.core.html">novah.core</a></p><p><a href="novah.result.html">novah.result</a></p><p><a href="novah.number.html">novah.number</a></p><p><a href="novah.random.html">novah.random</a></p><p><a href="novah.java.html">novah.java</a></p><p><a href="novah.math.html">novah.math</a></p><p><a href="novah.meta.html">novah.meta</a></p><p><a href="novah.linkedList.html">novah.linkedList</a></p><p><a href="novah.option.html">novah.option</a></p><p><a href="novah.stream.html">novah.stream</a></p><p><a href="novah.list.html">novah.list</a></p><p><a href="novah.map.html">novah.map</a></p><p><a href="novah.set.html">novah.set</a></p><p><a href="novah.regex.html">novah.regex</a></p><p><a href="novah.string.html">novah.string</a></p><p><a href="novah.io.html">novah.io</a></p><p><a href="novah.test.html">novah.test</a></p><p><a href="novah.async.html">novah.async</a></p><p><a href="novah.computation.html">novah.computation</a></p><p><a href="novah.array.html">novah.array</a></p></div>
+        <div class="docs"><h2>novah.regex</h2><p>Functions to work with regular expressions.</p>
+<h2>Types</h2><h2>Declarations</h2><hr><h4>new</h4><pre>visibility: public</pre><pre>type: String -> Pattern</pre><div><p>Compiles this string into a regular expression.</p>
+</div><hr><h4>withFlags</h4><pre>visibility: public</pre><pre>type: String -> Int32 -> Pattern</pre><div><p>Compiles this string and flags into a regular expression.</p>
+</div><hr><h4>matcher</h4><pre>visibility: public</pre><pre>type: Pattern -> String -> Matcher</pre><div><p>Returns a matcher for the given regex and string.</p>
+</div><hr><h4>resultToGroups</h4><pre>visibility: private</pre><pre>type: MatchResult -> List String</pre><hr><h4>groups</h4><pre>visibility: public</pre><pre>type: Matcher -> List String</pre><div><p>Returns a list of all matched groups for
+the most recent match on this matcher.
+The first element represents the whole match.</p>
+</div><hr><h4>find</h4><pre>visibility: public</pre><pre>type: Pattern -> String -> List String</pre><div><p>Returns the first match of this regex for the given string.
+Returns an empty list if there was no match.</p>
+</div><hr><h4>findAll</h4><pre>visibility: public</pre><pre>type: Pattern -> String -> List (List String)</pre><div><p>Returns all the matches of this regex for the given string.
+Returns an empty list if there was no match.</p>
+</div><hr><h4>canFind</h4><pre>visibility: public</pre><pre>type: Pattern -> String -> Boolean</pre><div><p>Returns true if there is at least one match of this pattern
+in the given string.</p>
+</div><hr><h4>matches</h4><pre>visibility: public</pre><pre>type: Pattern -> String -> Boolean</pre><div><p>Returns true if this regex matches the whole input string.</p>
+</div><hr><h4>split</h4><pre>visibility: public</pre><pre>type: Pattern -> String -> List String</pre><div><p>Splits this string around matches of this pattern.</p>
+</div><hr><h4>replaceFirst</h4><pre>visibility: public</pre><pre>type: Pattern -> String -> String -> String</pre><div><p>Replaces the first occurrence of this regex with the
+given replacement.</p>
+</div><hr><h4>replaceAll</h4><pre>visibility: public</pre><pre>type: Pattern -> String -> String -> String</pre><div><p>Replaces all occurrences of this regex with the
+given replacement.</p>
+</div><hr><h4>replaceFirstWith</h4><pre>visibility: public</pre><pre>type: Pattern -> (List String -> String) -> String -> String</pre><div><p>Replaces the first occurrence of this regex with the
+application of the given function to the match result.</p>
+</div><hr><h4>replaceAllWith</h4><pre>visibility: public</pre><pre>type: Pattern -> (List String -> String) -> String -> String</pre><div><p>Replaces all occurrences of this regex with the
+application of the given function to the match result.</p>
+</div>
+    </div>
+</body>
+</html>

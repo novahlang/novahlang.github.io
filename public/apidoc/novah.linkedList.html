@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novah apidocs</title>
+    <meta charset="UTF-8">
+    <style>
+        a {
+            color: #111;
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        hr {
+            margin-top: 40px;
+        }
+
+        h2 {
+            padding-top: 40px;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .menu {
+            min-width: 15%;
+            padding-right: 10px;
+            border-right: 1px solid #aaa;
+        }
+
+        .docs {
+            padding-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Novah Documentation</h1>
+    <div class="content">
+        <div class="menu"><h3>Modules</h3><p><a href="novah.core.html">novah.core</a></p><p><a href="novah.result.html">novah.result</a></p><p><a href="novah.number.html">novah.number</a></p><p><a href="novah.random.html">novah.random</a></p><p><a href="novah.java.html">novah.java</a></p><p><a href="novah.math.html">novah.math</a></p><p><a href="novah.meta.html">novah.meta</a></p><p><a href="novah.linkedList.html">novah.linkedList</a></p><p><a href="novah.option.html">novah.option</a></p><p><a href="novah.stream.html">novah.stream</a></p><p><a href="novah.list.html">novah.list</a></p><p><a href="novah.map.html">novah.map</a></p><p><a href="novah.set.html">novah.set</a></p><p><a href="novah.regex.html">novah.regex</a></p><p><a href="novah.string.html">novah.string</a></p><p><a href="novah.io.html">novah.io</a></p><p><a href="novah.test.html">novah.test</a></p><p><a href="novah.async.html">novah.async</a></p><p><a href="novah.computation.html">novah.computation</a></p><p><a href="novah.array.html">novah.array</a></p></div>
+        <div class="docs"><h2>novah.linkedList</h2><p>This module defines an immutable linked list.
+A List should almost always be prefered as lists make for good linked lists.</p>
+<h2>Types</h2><hr><h4>LinkedList</h4><pre>visibility: public+</pre><pre>constructors: Nil, Cons</pre><div><p>An immutable linked list.
+A List should almost always be prefered over this type as lists make for good linked lists.
+Most linked list operations are O(n) like <code>size</code>.</p>
+</div><h2>Declarations</h2><hr><h4>Nil</h4><pre>visibility: public</pre><pre>type: LinkedList t38</pre><hr><h4>Cons</h4><pre>visibility: public</pre><pre>type: t38 -> LinkedList t38 -> LinkedList t38</pre><hr><h4>::</h4><pre>visibility: public</pre><pre>type: a -> LinkedList a -> LinkedList a</pre><div><p>Appends the element as the new head of the linked list.
+An alias to <code>Cons</code>.</p>
+</div><hr><h4>head</h4><pre>visibility: public</pre><pre>type: LinkedList a -> Option a</pre><div><p>Returns the head of this linked list if it's not empty.
+Runtime: O(1)</p>
+</div><hr><h4>tail</h4><pre>visibility: public</pre><pre>type: LinkedList a -> Option (LinkedList a)</pre><div><p>Returns the tail of this linked list if it's not empty.
+Runtime: O(1)</p>
+</div><hr><h4>singleton</h4><pre>visibility: public</pre><pre>type: a -> LinkedList a</pre><div><p>Produces a linked list with a single element.
+Runtime: O(1)</p>
+</div><hr><h4>take</h4><pre>visibility: public</pre><pre>type: Int32 -> LinkedList a -> LinkedList a</pre><div><p>Takes the first n elements of this linked list and returns it.
+Runtime: O(n)</p>
+</div><hr><h4>drop</h4><pre>visibility: public</pre><pre>type: Int32 -> LinkedList a -> LinkedList a</pre><div><p>Drops the first n elements of this linked list and returns it.
+Runtime: O(n)</p>
+</div><hr><h4>nth</h4><pre>visibility: public</pre><pre>type: Int32 -> LinkedList a -> Option a</pre><div><p>Returns some value at index for this linked list if it exists or none.
+Runtime: O(n)</p>
+</div><hr><h4>takeWhile</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> LinkedList a -> LinkedList a</pre><div><p>Keeps taking elements of this linked list while the predicate holds.
+Runtime: O(n)</p>
+</div><hr><h4>dropWhile</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> LinkedList a -> LinkedList a</pre><div><p>Keeps removing elements from this linked list while the predicate holds.
+Runtime: O(n)</p>
+</div><hr><h4>isEmpty</h4><pre>visibility: public</pre><pre>type: LinkedList a -> Boolean</pre><div><p>Returns true if this linked list is empty.
+Runtime: O(1)</p>
+</div><hr><h4>isNotEmpty</h4><pre>visibility: public</pre><pre>type: LinkedList a -> Boolean</pre><div><p>Returns true if this linked list is not empty.
+Runtime: O(1)</p>
+</div><hr><h4>containedLinkedList</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> Contained a (LinkedList a)</pre><div><p>Returns true if the element is inside this linked list.
+Runtime: O(n)</p>
+</div><hr><h4>map</h4><pre>visibility: public</pre><pre>type: (a -> b) -> LinkedList a -> LinkedList b</pre><div><p>Maps function f over all elements of this linked list
+returning a linked list of the same size.
+Runtime: O(n)</p>
+</div><hr><h4>forEach</h4><pre>visibility: public</pre><pre>type: LinkedList a -> (a -> b) -> Unit</pre><div><p>Runs function f for every element of this linked list, ignoring the result.
+Runtime: O(n)</p>
+</div><hr><h4>filter</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> LinkedList a -> LinkedList a</pre><div><p>Returns a linked list of the elements that match the given predicate.
+Runtime: O(n)</p>
+</div><hr><h4>find</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> LinkedList a -> Option a</pre><div><p>Returns the first occurrence of elem in this linked list for which the predicate returns true.
+Runtime: O(n)</p>
+</div><hr><h4>flatMap</h4><pre>visibility: public</pre><pre>type: (a -> LinkedList b) -> LinkedList a -> LinkedList b</pre><div><p>Like <code>map</code> but it will flatten the resulting linked list.
+Runtime: O(n)</p>
+</div><hr><h4>size</h4><pre>visibility: public</pre><pre>type: LinkedList a -> Int32</pre><div><p>Returns the size of this linked list.
+Runtime: O(n)</p>
+</div><hr><h4>showLinkedList_</h4><pre>visibility: private</pre><pre>type: Show a -> LinkedList a -> String</pre><hr><h4>showLinkedList</h4><pre>visibility: public</pre><pre>type: {{ Show a }} -> Show (LinkedList a)</pre><hr><h4>eqLinkedList_</h4><pre>visibility: private</pre><pre>type: Equals a -> LinkedList a -> LinkedList a -> Boolean</pre><hr><h4>eqLinkedList</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> Equals (LinkedList a)</pre><hr><h4>concatLinkedList_</h4><pre>visibility: private</pre><pre>type: LinkedList a -> LinkedList a -> LinkedList a</pre><hr><h4>concatLinkedList</h4><pre>visibility: public</pre><pre>type: Concat (LinkedList a)</pre><hr><h4>reverse</h4><pre>visibility: public</pre><pre>type: LinkedList a -> LinkedList a</pre><div><p>Returns a reversed version of this linked list.
+Runtime: O(n)</p>
+</div><hr><h4>foldl</h4><pre>visibility: public</pre><pre>type: (b -> a -> b) -> b -> LinkedList a -> b</pre><div><p>Reduces this linked list to a single value according to the reducing function.
+Goes from the left to the right.
+Runtime: O(n)</p>
+</div><hr><h4>foldr</h4><pre>visibility: public</pre><pre>type: (a -> b -> b) -> b -> LinkedList a -> b</pre><div><p>Reduces this linked list to a single value according to the reducing function.
+Goes from the right to the left.
+Runtime: O(n)</p>
+</div><hr><h4>flatten</h4><pre>visibility: public</pre><pre>type: LinkedList (LinkedList a) -> LinkedList a</pre><div><p>Flattens a linked list of linked lists into a single linked list by concatenating them together.
+Runtime: O(n)</p>
+</div><hr><h4>reduce</h4><pre>visibility: public</pre><pre>type: (a -> a -> a) -> LinkedList a -> Option a</pre><div><p>A specialized version of <code>foldl</code> where the first element of the linked list is used as initial value.
+Returns none if the linked list is empty
+Runtime: O(n)</p>
+</div><hr><h4>rangeTo</h4><pre>visibility: public</pre><pre>type: Int32 -> Int32 -> LinkedList Int32</pre><div><p>Returns a linked list in the range from begin (inclusive) to end (exclusive).
+Runtime: O(n)</p>
+</div><hr><h4>fromList</h4><pre>visibility: public</pre><pre>type: List a -> LinkedList a</pre><div><p>Creates a linked list with the same elements as the given list.
+Runtime: O(n)</p>
+</div><hr><h4>sortBy</h4><pre>visibility: public</pre><pre>type: (a -> a -> Ordering) -> LinkedList a -> LinkedList a</pre><div><p>Sorts this linked list according to the comparing function.
+Runtime: O(n log(n))</p>
+</div><hr><h4>sort</h4><pre>visibility: public</pre><pre>type: {{ Ord a }} -> LinkedList a -> LinkedList a</pre><div><p>Sorts this linked list according to the element's Ord instance.
+Runtime: O(n log(n))</p>
+</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novah apidocs</title>
+    <meta charset="UTF-8">
+    <style>
+        a {
+            color: #111;
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        hr {
+            margin-top: 40px;
+        }
+
+        h2 {
+            padding-top: 40px;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .menu {
+            min-width: 15%;
+            padding-right: 10px;
+            border-right: 1px solid #aaa;
+        }
+
+        .docs {
+            padding-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Novah Documentation</h1>
+    <div class="content">
+        <div class="menu"><h3>Modules</h3><p><a href="novah.core.html">novah.core</a></p><p><a href="novah.result.html">novah.result</a></p><p><a href="novah.number.html">novah.number</a></p><p><a href="novah.random.html">novah.random</a></p><p><a href="novah.java.html">novah.java</a></p><p><a href="novah.math.html">novah.math</a></p><p><a href="novah.meta.html">novah.meta</a></p><p><a href="novah.linkedList.html">novah.linkedList</a></p><p><a href="novah.option.html">novah.option</a></p><p><a href="novah.stream.html">novah.stream</a></p><p><a href="novah.list.html">novah.list</a></p><p><a href="novah.map.html">novah.map</a></p><p><a href="novah.set.html">novah.set</a></p><p><a href="novah.regex.html">novah.regex</a></p><p><a href="novah.string.html">novah.string</a></p><p><a href="novah.io.html">novah.io</a></p><p><a href="novah.test.html">novah.test</a></p><p><a href="novah.async.html">novah.async</a></p><p><a href="novah.computation.html">novah.computation</a></p><p><a href="novah.array.html">novah.array</a></p></div>
+        <div class="docs"><h2>novah.java</h2><p>Functions for Java interoperability.</p>
+<h2>Types</h2><h2>Declarations</h2><hr><h4>class</h4><pre>visibility: public</pre><pre>type: a -> Class a</pre><div><p>Returns the Java class of this object.</p>
+</div><hr><h4>hashCode</h4><pre>visibility: public</pre><pre>type: a -> Int32</pre><div><p>Returns the hash code for this value using
+the native Java <code>hashCode</code> method of x.</p>
+</div><hr><h4>equals</h4><pre>visibility: public</pre><pre>type: a -> a -> Boolean</pre><div><p>Returns true if x is equals y using
+the native Java <code>equals</code> method of x.</p>
+</div><hr><h4>isInstance</h4><pre>visibility: public</pre><pre>type: a -> Class b -> Boolean</pre><div><p>Returns true if the given object is an instance of the class.</p>
+</div><hr><h4>assignableFrom</h4><pre>visibility: public</pre><pre>type: Class a -> Class b -> Boolean</pre><div><p>Returns true if clazz1 is a superclass or superinterface of class2.</p>
+</div><hr><h4>assert</h4><pre>visibility: public</pre><pre>type: Boolean -> String -> Unit</pre><div><p>Throws an assertion error if the condition is false.</p>
+</div><hr><h4>error</h4><pre>visibility: public</pre><pre>type: String -> a</pre><div><p>Throws an error with the given message that should not be caught</p>
+</div><hr><h4>forEach</h4><pre>visibility: public</pre><pre>type: Iterator a -> (a -> Unit) -> Unit</pre><div><p>Executes the function for each value in this iterator.
+Runtime: O(n)</p>
+</div><hr><h4>exit</h4><pre>visibility: public</pre><pre>type: Int32 -> Unit</pre><div><p>Terminates the currently running JVM with the given status.
+A status different from 0 indicates abnormal termination.</p>
+</div><hr><h4>toComparator</h4><pre>visibility: public</pre><pre>type: (a -> a -> Ordering) -> Comparator a</pre><div><p>Returns a <code>java.util.Comparator</code> based on this ordering function.</p>
+</div><hr><h4>consumer</h4><pre>visibility: public</pre><pre>type: (a -> Unit) -> Consumer a</pre><div><p>Creates a <code>java.util.function.Consumer</code> out of this function.</p>
+</div><hr><h4>runnable</h4><pre>visibility: public</pre><pre>type: (Unit -> Unit) -> Runnable</pre><div><p>Creates a <code>java.lang.Runnable</code> out of this function, ignoring the result.</p>
+</div><hr><h4>callable</h4><pre>visibility: public</pre><pre>type: (Unit -> a) -> Callable a</pre><div><p>Creates a <code>java.util.concurrent.Callable</code> out of this function.</p>
+</div><hr><h4>supplier</h4><pre>visibility: public</pre><pre>type: (Unit -> a) -> Supplier a</pre><div><p>Creates a <code>java.util.function.Supplier</code> out of this function.</p>
+</div><hr><h4>predicate</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> Predicate a</pre><div><p>Creates a <code>java.util.function.Predicate</code> out of this function.</p>
+</div><hr><h4>bipredicate</h4><pre>visibility: public</pre><pre>type: (a -> b -> Boolean) -> BiPredicate a b</pre><div><p>Creates a <code>java.util.function.BiPredicate</code> out of this function.</p>
+</div><hr><h4>toLongFunction</h4><pre>visibility: public</pre><pre>type: (a -> Int64) -> ToLongFunction a</pre><div><p>Creates a <code>java.util.function.ToLongFunction</code> out of this function.</p>
+</div><hr><h4>toIntFunction</h4><pre>visibility: public</pre><pre>type: (a -> Int32) -> ToIntFunction a</pre><div><p>Creates a <code>java.util.function.ToIntFunction</code> out of this function.</p>
+</div><hr><h4>intFunction</h4><pre>visibility: public</pre><pre>type: (Int32 -> a) -> IntFunction a</pre><div><p>Creates a <code>java.util.function.IntFunction</code> out of this function.</p>
+</div><hr><h4>binaryOperator</h4><pre>visibility: public</pre><pre>type: (a -> a -> a) -> BinaryOperator a</pre><div><p>Creates a <code>java.util.function.BinaryOperator</code> out of this function.</p>
+</div><hr><h4>unaryOperator</h4><pre>visibility: public</pre><pre>type: (a -> a) -> UnaryOperator a</pre><div><p>Creates a <code>java.util.function.UnaryOperator</code> out of this function.</p>
+</div><hr><h4>biFunction</h4><pre>visibility: public</pre><pre>type: (a -> b -> c) -> BiFunction a b c</pre><div><p>Creates a <code>java.util.function.BiFunction</code> out of this function.</p>
+</div>
+    </div>
+</body>
+</html>

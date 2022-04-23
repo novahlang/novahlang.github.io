@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novah apidocs</title>
+    <meta charset="UTF-8">
+    <style>
+        a {
+            color: #111;
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        hr {
+            margin-top: 40px;
+        }
+
+        h2 {
+            padding-top: 40px;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .menu {
+            min-width: 15%;
+            padding-right: 10px;
+            border-right: 1px solid #aaa;
+        }
+
+        .docs {
+            padding-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Novah Documentation</h1>
+    <div class="content">
+        <div class="menu"><h3>Modules</h3><p><a href="novah.core.html">novah.core</a></p><p><a href="novah.result.html">novah.result</a></p><p><a href="novah.number.html">novah.number</a></p><p><a href="novah.random.html">novah.random</a></p><p><a href="novah.java.html">novah.java</a></p><p><a href="novah.math.html">novah.math</a></p><p><a href="novah.meta.html">novah.meta</a></p><p><a href="novah.linkedList.html">novah.linkedList</a></p><p><a href="novah.option.html">novah.option</a></p><p><a href="novah.stream.html">novah.stream</a></p><p><a href="novah.list.html">novah.list</a></p><p><a href="novah.map.html">novah.map</a></p><p><a href="novah.set.html">novah.set</a></p><p><a href="novah.regex.html">novah.regex</a></p><p><a href="novah.string.html">novah.string</a></p><p><a href="novah.io.html">novah.io</a></p><p><a href="novah.test.html">novah.test</a></p><p><a href="novah.async.html">novah.async</a></p><p><a href="novah.computation.html">novah.computation</a></p><p><a href="novah.array.html">novah.array</a></p></div>
+        <div class="docs"><h2>novah.async</h2><p>Functions for working with asynchronous computations
+using <code>java.util.concurrent.CompletableFuture</code>.</p>
+<h2>Types</h2><h2>Declarations</h2><hr><h4>get</h4><pre>visibility: public</pre><pre>type: CompletableFuture a -> a</pre><div><p>Blocks the future until it returns a result.</p>
+</div><hr><h4>getOr</h4><pre>visibility: public</pre><pre>type: CompletableFuture a -> a -> a</pre><div><p>Returns the value inside the future if it's completed,
+or return the default value.</p>
+</div><hr><h4>wait</h4><pre>visibility: public</pre><pre>type: CompletableFuture a -> Int64 -> TimeUnit -> Option a</pre><div><p>Blocks the future until it returns a result.
+If no result is returned until the timeout is reached, returns None.</p>
+</div><hr><h4>complete</h4><pre>visibility: public</pre><pre>type: CompletableFuture a -> a -> Boolean</pre><div><p>If this future is not yet completed, complete it with value.
+Returns true if the future transitioned to a completed state.</p>
+</div><hr><h4>isDone</h4><pre>visibility: public</pre><pre>type: CompletableFuture a -> Boolean</pre><div><p>Returns true if this future is completed in any form.</p>
+</div><hr><h4>isCancelled</h4><pre>visibility: public</pre><pre>type: CompletableFuture a -> Boolean</pre><div><p>Returns true if this future is cancelled.</p>
+</div><hr><h4>new</h4><pre>visibility: public</pre><pre>type: (Unit -> a) -> CompletableFuture a</pre><div><p>Creates a future that will run this function asynchronously.</p>
+</div><hr><h4>newWith</h4><pre>visibility: public</pre><pre>type: Executor -> (Unit -> a) -> CompletableFuture a</pre><div><p>Creates a future that will run this function asynchronously.
+The function will run in the given executor.</p>
+</div><hr><h4>sleep</h4><pre>visibility: public</pre><pre>type: Int64 -> TimeUnit -> CompletableFuture Unit</pre><div><p>Creates a future that will do nothing for the given time.</p>
+</div><hr><h4>map</h4><pre>visibility: public</pre><pre>type: (a -> b) -> CompletableFuture a -> CompletableFuture b</pre><div><p>Maps the given function asynchronously taking the result of this future as argument.</p>
+</div><hr><h4>flatMap</h4><pre>visibility: public</pre><pre>type: (a -> CompletableFuture b) -> CompletableFuture a -> CompletableFuture b</pre><div><p>Maps the given function asynchronously taking the result of this future as argument.
+Flattens the result to a single future.</p>
+</div><hr><h4>combine</h4><pre>visibility: public</pre><pre>type: (a -> b -> c) -> CompletableFuture a -> CompletableFuture b -> CompletableFuture c</pre><div><p>Runs the given function asynchronously with the result of both futures, returning a new future.
+The two futures will run independently.</p>
+</div><hr><h4>all</h4><pre>visibility: public</pre><pre>type: List (CompletableFuture a) -> CompletableFuture Unit</pre><div><p>Creates a single future that will be completed when all the given futures are completed.</p>
+</div><hr><h4>any</h4><pre>visibility: public</pre><pre>type: List (CompletableFuture a) -> CompletableFuture a</pre><div><p>Creates a single future that will be completed when any the given futures are completed.</p>
+</div><hr><h4>exceptionally</h4><pre>visibility: public</pre><pre>type: (Throwable -> a) -> CompletableFuture a -> CompletableFuture a</pre><div><p>Handles the exception in this future so it doesn't propagate down the chain.
+The function will only be called in case of an exception.</p>
+</div><hr><h4>handle</h4><pre>visibility: public</pre><pre>type: (Result a Throwable -> b) -> CompletableFuture a -> CompletableFuture b</pre><div><p>Adds a handler to this future.
+This function is similar to <code>map</code> but it handles exceptions as well.</p>
+</div>
+    </div>
+</body>
+</html>

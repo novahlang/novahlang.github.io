@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novah apidocs</title>
+    <meta charset="UTF-8">
+    <style>
+        a {
+            color: #111;
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        hr {
+            margin-top: 40px;
+        }
+
+        h2 {
+            padding-top: 40px;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .menu {
+            min-width: 15%;
+            padding-right: 10px;
+            border-right: 1px solid #aaa;
+        }
+
+        .docs {
+            padding-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Novah Documentation</h1>
+    <div class="content">
+        <div class="menu"><h3>Modules</h3><p><a href="novah.core.html">novah.core</a></p><p><a href="novah.result.html">novah.result</a></p><p><a href="novah.number.html">novah.number</a></p><p><a href="novah.random.html">novah.random</a></p><p><a href="novah.java.html">novah.java</a></p><p><a href="novah.math.html">novah.math</a></p><p><a href="novah.meta.html">novah.meta</a></p><p><a href="novah.linkedList.html">novah.linkedList</a></p><p><a href="novah.option.html">novah.option</a></p><p><a href="novah.stream.html">novah.stream</a></p><p><a href="novah.list.html">novah.list</a></p><p><a href="novah.map.html">novah.map</a></p><p><a href="novah.set.html">novah.set</a></p><p><a href="novah.regex.html">novah.regex</a></p><p><a href="novah.string.html">novah.string</a></p><p><a href="novah.io.html">novah.io</a></p><p><a href="novah.test.html">novah.test</a></p><p><a href="novah.async.html">novah.async</a></p><p><a href="novah.computation.html">novah.computation</a></p><p><a href="novah.array.html">novah.array</a></p></div>
+        <div class="docs"><h2>novah.math</h2><p>Common mathematical functions and constants.</p>
+<h2>Types</h2><h2>Declarations</h2><hr><h4>e</h4><pre>visibility: public</pre><pre>type: Float64</pre><div><p>The base of natural logarithms.</p>
+</div><hr><h4>pi</h4><pre>visibility: public</pre><pre>type: Float64</pre><div><p>The ratio of the circumference of a circle to its diameter.</p>
+</div><hr><h4>min</h4><pre>visibility: public</pre><pre>type: {{ NumberOps a }} -> a -> a -> a</pre><div><p>Returns the smaller of two numbers.</p>
+</div><hr><h4>max</h4><pre>visibility: public</pre><pre>type: {{ NumberOps a }} -> a -> a -> a</pre><div><p>Returns the bigger of two numbers.</p>
+</div><hr><h4>abs</h4><pre>visibility: public</pre><pre>type: {{ NumberOps a }} -> a -> a</pre><div><p>Returns the absolute value of the input.</p>
+</div><hr><h4>isOdd</h4><pre>visibility: public</pre><pre>type: {{ NumberOps a }} -> a -> Boolean</pre><div><p>Returns true if this number is odd.</p>
+</div><hr><h4>isEven</h4><pre>visibility: public</pre><pre>type: {{ NumberOps a }} -> a -> Boolean</pre><div><p>Returns true if this number is even.</p>
+</div><hr><h4>clamp</h4><pre>visibility: public</pre><pre>type: {{ NumberOps a }} -> a -> a -> a -> a</pre><div><p>Returns n clamped between min and max.</p>
+</div><hr><h4>sin</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64</pre><div><p>Returns the trigonometric sine of an angle (in radians).</p>
+</div><hr><h4>cos</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64</pre><div><p>Returns the trigonometric cosine of an angle (in radians).</p>
+</div><hr><h4>tan</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64</pre><div><p>Returns the trigonometric tangent of an angle (in radians).</p>
+</div><hr><h4>asin</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64</pre><div><p>Returns the arc sine of a value; the returned angle is in the range -pi/2 through pi/2.</p>
+</div><hr><h4>acos</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64</pre><div><p>Returns the arc cosine of a value; the returned angle is in the range 0.0 through pi.</p>
+</div><hr><h4>atan</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64</pre><div><p>Returns the arc tangent of a value; the returned angle is in the range -pi/2 through pi/2.</p>
+</div><hr><h4>toRadians</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64</pre><div><p>Converts an angle in degrees to its approximation in radians.</p>
+</div><hr><h4>toDegrees</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64</pre><div><p>Converts an angle in radians to its approximation in degrees.</p>
+</div><hr><h4>exp</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64</pre><div><p>Returns Euler's number e raised to the power of x.</p>
+</div><hr><h4>log</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64</pre><div><p>Returns the natural logarithm (base e) of x.</p>
+</div><hr><h4>log10</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64</pre><div><p>Returns the base 10 logarithm of x.</p>
+</div><hr><h4>sqrt</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64</pre><div><p>Returns the square root of x.</p>
+</div><hr><h4>cbrt</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64</pre><div><p>Returns the cube root of x.</p>
+</div><hr><h4>ceil</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64</pre><div><p>Returns the smallest Float64 number that is greater than x and equals to an integer (round up).</p>
+</div><hr><h4>floor</h4><pre>visibility: public</pre><pre>type: Float64 -> Float64</pre><div><p>Returns the greatest Float64 number that is less than or equal x and equals to an integer (round down).</p>
+</div><hr><h4>round</h4><pre>visibility: public</pre><pre>type: Float32 -> Int32</pre><div><p>Returns the Int32 closest to x.</p>
+</div><hr><h4>round64</h4><pre>visibility: public</pre><pre>type: Float64 -> Int64</pre><div><p>Returns the Int64 closest to x.</p>
+</div>
+    </div>
+</body>
+</html>

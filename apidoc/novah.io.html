@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novah apidocs</title>
+    <meta charset="UTF-8">
+    <style>
+        a {
+            color: #111;
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        hr {
+            margin-top: 40px;
+        }
+
+        h2 {
+            padding-top: 40px;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .menu {
+            min-width: 15%;
+            padding-right: 10px;
+            border-right: 1px solid #aaa;
+        }
+
+        .docs {
+            padding-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Novah Documentation</h1>
+    <div class="content">
+        <div class="menu"><h3>Modules</h3><p><a href="novah.core.html">novah.core</a></p><p><a href="novah.result.html">novah.result</a></p><p><a href="novah.number.html">novah.number</a></p><p><a href="novah.random.html">novah.random</a></p><p><a href="novah.java.html">novah.java</a></p><p><a href="novah.math.html">novah.math</a></p><p><a href="novah.meta.html">novah.meta</a></p><p><a href="novah.linkedList.html">novah.linkedList</a></p><p><a href="novah.option.html">novah.option</a></p><p><a href="novah.stream.html">novah.stream</a></p><p><a href="novah.list.html">novah.list</a></p><p><a href="novah.map.html">novah.map</a></p><p><a href="novah.set.html">novah.set</a></p><p><a href="novah.regex.html">novah.regex</a></p><p><a href="novah.string.html">novah.string</a></p><p><a href="novah.io.html">novah.io</a></p><p><a href="novah.test.html">novah.test</a></p><p><a href="novah.async.html">novah.async</a></p><p><a href="novah.computation.html">novah.computation</a></p><p><a href="novah.array.html">novah.array</a></p></div>
+        <div class="docs"><h2>novah.io</h2><p>function for working with IO</p>
+<h2>Types</h2><hr><h4>FileOpenOption</h4><pre>visibility: public+</pre><pre>constructors: Read, Write, Append, TruncateExisting, Create, CreateNew, DeleteOnClose, Sparse, Sync, Dsync</pre><div><p>Possible file open options.
+Look at <code>java.nio.file.StandardOpenOption</code> for more information.</p>
+</div><h2>Declarations</h2><hr><h4>Read</h4><pre>visibility: public</pre><pre>type: FileOpenOption</pre><hr><h4>Write</h4><pre>visibility: public</pre><pre>type: FileOpenOption</pre><hr><h4>Append</h4><pre>visibility: public</pre><pre>type: FileOpenOption</pre><hr><h4>TruncateExisting</h4><pre>visibility: public</pre><pre>type: FileOpenOption</pre><hr><h4>Create</h4><pre>visibility: public</pre><pre>type: FileOpenOption</pre><hr><h4>CreateNew</h4><pre>visibility: public</pre><pre>type: FileOpenOption</pre><hr><h4>DeleteOnClose</h4><pre>visibility: public</pre><pre>type: FileOpenOption</pre><hr><h4>Sparse</h4><pre>visibility: public</pre><pre>type: FileOpenOption</pre><hr><h4>Sync</h4><pre>visibility: public</pre><pre>type: FileOpenOption</pre><hr><h4>Dsync</h4><pre>visibility: public</pre><pre>type: FileOpenOption</pre><hr><h4>utf8</h4><pre>visibility: public</pre><pre>type: Charset</pre><div><p>The UTF-8 charset.</p>
+</div><hr><h4>newFile</h4><pre>visibility: public</pre><pre>type: String -> File</pre><div><p>Creates a new file from the specified path.</p>
+</div><hr><h4>child</h4><pre>visibility: public</pre><pre>type: File -> String -> File</pre><div><p>Returns a file which represents a child of the given directory.</p>
+</div><hr><h4>pathOf</h4><pre>visibility: public</pre><pre>type: String -> List String -> Path</pre><div><p>Returns a path by joining the first path with
+the list of paths using the platform separator.</p>
+</div><hr><h4>fileToPath</h4><pre>visibility: public</pre><pre>type: File -> Path</pre><div><p>Returns the path of this file.</p>
+</div><hr><h4>fopToOp</h4><pre>visibility: private</pre><pre>type: FileOpenOption -> StandardOpenOption</pre><hr><h4>readTextFromPath</h4><pre>visibility: public</pre><pre>type: Path -> String</pre><div><p>Reads the contents of the file using the UTF-8 charset.</p>
+</div><hr><h4>readTextWithCharset</h4><pre>visibility: public</pre><pre>type: Path -> Charset -> String</pre><div><p>Reads the contents of the file using the given charset.</p>
+</div><hr><h4>readText</h4><pre>visibility: public</pre><pre>type: File -> String</pre><div><p>Reads the contents of this file using the UTF-8 charset.</p>
+</div><hr><h4>writeTextToPath</h4><pre>visibility: public</pre><pre>type: Path -> String -> Charset -> List FileOpenOption -> Path</pre><div><p>Writes the given string to the specified path using the given charset.
+Returns the path.</p>
+</div><hr><h4>writeText</h4><pre>visibility: public</pre><pre>type: File -> String -> Path</pre><div><p>Writes the given string to the specified file using the UTF-8 charset.
+Returns the path.</p>
+</div><hr><h4>appendText</h4><pre>visibility: public</pre><pre>type: File -> String -> Path</pre><div><p>Appends the given string to the specified file using the UTF-8 charset.
+Returns the path.</p>
+</div>
+    </div>
+</body>
+</html>

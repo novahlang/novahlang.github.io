@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novah apidocs</title>
+    <meta charset="UTF-8">
+    <style>
+        a {
+            color: #111;
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        hr {
+            margin-top: 40px;
+        }
+
+        h2 {
+            padding-top: 40px;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .menu {
+            min-width: 15%;
+            padding-right: 10px;
+            border-right: 1px solid #aaa;
+        }
+
+        .docs {
+            padding-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Novah Documentation</h1>
+    <div class="content">
+        <div class="menu"><h3>Modules</h3><p><a href="novah.core.html">novah.core</a></p><p><a href="novah.result.html">novah.result</a></p><p><a href="novah.number.html">novah.number</a></p><p><a href="novah.random.html">novah.random</a></p><p><a href="novah.java.html">novah.java</a></p><p><a href="novah.math.html">novah.math</a></p><p><a href="novah.meta.html">novah.meta</a></p><p><a href="novah.linkedList.html">novah.linkedList</a></p><p><a href="novah.option.html">novah.option</a></p><p><a href="novah.stream.html">novah.stream</a></p><p><a href="novah.list.html">novah.list</a></p><p><a href="novah.map.html">novah.map</a></p><p><a href="novah.set.html">novah.set</a></p><p><a href="novah.regex.html">novah.regex</a></p><p><a href="novah.string.html">novah.string</a></p><p><a href="novah.io.html">novah.io</a></p><p><a href="novah.test.html">novah.test</a></p><p><a href="novah.async.html">novah.async</a></p><p><a href="novah.computation.html">novah.computation</a></p><p><a href="novah.array.html">novah.array</a></p></div>
+        <div class="docs"><h2>novah.option</h2><p>Functions to work with optional values.</p>
+<h2>Types</h2><h2>Declarations</h2><hr><h4>map</h4><pre>visibility: public</pre><pre>type: (a -> b) -> Option a -> Option b</pre><div><p>Maps the function over this option if it has a value.
+Runtime: O(1)</p>
+</div><hr><h4>flatMap</h4><pre>visibility: public</pre><pre>type: (a -> Option b) -> Option a -> Option b</pre><div><p>Maps the function over this option if it has a value,
+but don't wrap the result in another option.
+Runtime: O(1)</p>
+</div><hr><h4>maybe</h4><pre>visibility: public</pre><pre>type: b -> (a -> b) -> Option a -> b</pre><div><p>Takes a default value, a function and an option
+and returns the result of the function applied to this option's value
+or the default value if the option is empty.</p>
+</div><hr><h4>isSome</h4><pre>visibility: public</pre><pre>type: Option a -> Boolean</pre><div><p>Returns true if this option contains a value.</p>
+</div><hr><h4>isNone</h4><pre>visibility: public</pre><pre>type: Option a -> Boolean</pre><div><p>Returns true if this option <em>doesn't</em> contain a value.</p>
+</div><hr><h4>unwrap</h4><pre>visibility: public</pre><pre>type: Option a -> a</pre><div><p>Extracts the value out of this option.
+<em>Unsafe</em>: Will thrown an exception if the option is empty.
+An alias for <code>unwrapOptions</code> and the <code>!!</code> syntactic sugar.</p>
+</div><hr><h4>toOption</h4><pre>visibility: public</pre><pre>type: Nullable a -> Option a</pre><div><p>Transforms this nullable value into an option.
+<code>null</code> is represented as <code>None</code>.</p>
+</div><hr><h4>toNullable</h4><pre>visibility: public</pre><pre>type: Option a -> Nullable a</pre><div><p>Transforms this option into an nullable value.
+This function should only be used to interact with Java methods.</p>
+</div><hr><h4>caseNull</h4><pre>visibility: public</pre><pre>type: b -> (a -> b) -> Nullable a -> b</pre><div><p>Receives a default value, a function <code>f</code> and a possible null value.
+If the value is null returns the default value, otherwise returns
+f applied to the value.</p>
+</div><hr><h4>fromOptional</h4><pre>visibility: public</pre><pre>type: Optional a -> Option a</pre><div><p>Transforms a <code>java.util.Optional</code> into an option.</p>
+</div><hr><h4>toOptional</h4><pre>visibility: public</pre><pre>type: Option a -> Optional a</pre><div><p>Transforms an option into a <code>java.util.Optional</code>.</p>
+</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novah apidocs</title>
+    <meta charset="UTF-8">
+    <style>
+        a {
+            color: #111;
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        hr {
+            margin-top: 40px;
+        }
+
+        h2 {
+            padding-top: 40px;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .menu {
+            min-width: 15%;
+            padding-right: 10px;
+            border-right: 1px solid #aaa;
+        }
+
+        .docs {
+            padding-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Novah Documentation</h1>
+    <div class="content">
+        <div class="menu"><h3>Modules</h3><p><a href="novah.core.html">novah.core</a></p><p><a href="novah.result.html">novah.result</a></p><p><a href="novah.number.html">novah.number</a></p><p><a href="novah.random.html">novah.random</a></p><p><a href="novah.java.html">novah.java</a></p><p><a href="novah.math.html">novah.math</a></p><p><a href="novah.meta.html">novah.meta</a></p><p><a href="novah.linkedList.html">novah.linkedList</a></p><p><a href="novah.option.html">novah.option</a></p><p><a href="novah.stream.html">novah.stream</a></p><p><a href="novah.list.html">novah.list</a></p><p><a href="novah.map.html">novah.map</a></p><p><a href="novah.set.html">novah.set</a></p><p><a href="novah.regex.html">novah.regex</a></p><p><a href="novah.string.html">novah.string</a></p><p><a href="novah.io.html">novah.io</a></p><p><a href="novah.test.html">novah.test</a></p><p><a href="novah.async.html">novah.async</a></p><p><a href="novah.computation.html">novah.computation</a></p><p><a href="novah.array.html">novah.array</a></p></div>
+        <div class="docs"><h2>novah.meta</h2><p>Functions for reflecting on metadata.</p>
+<h2>Types</h2><h2>Declarations</h2><hr><h4>metaForModule</h4><pre>visibility: public</pre><pre>type: String -> Map String Object</pre><div><p>Returns the metadata attached to this module
+or an empty map if none.</p>
+</div><hr><h4>metaFor</h4><pre>visibility: public</pre><pre>type: String -> String -> Map String Object</pre><div><p>Returns the metadata attached the given declaration
+and module or an empty map if none.</p>
+</div><hr><h4>modulesForTag</h4><pre>visibility: public</pre><pre>type: String -> Set String</pre><div><p>Returns all modules where the tag is defined
+in at least one declaration.</p>
+</div><hr><h4>declarationsForTag</h4><pre>visibility: public</pre><pre>type: String -> List Field</pre><div><p>Returns all declarations where the tag is defined.</p>
+</div><hr><h4>declarationsInModuleForTag</h4><pre>visibility: public</pre><pre>type: String -> String -> List Field</pre><div><p>Returns all declarations in the given module where the tag is defined.</p>
+</div>
+    </div>
+</body>
+</html>

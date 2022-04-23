@@ -22,5 +22,8 @@
   },
   "instance": {
     "pageName": "Instance arguments"
+  },
+  "apidoc": {
+    "pageName": "API docs"
   }
 }

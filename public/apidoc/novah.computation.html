@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novah apidocs</title>
+    <meta charset="UTF-8">
+    <style>
+        a {
+            color: #111;
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        hr {
+            margin-top: 40px;
+        }
+
+        h2 {
+            padding-top: 40px;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .menu {
+            min-width: 15%;
+            padding-right: 10px;
+            border-right: 1px solid #aaa;
+        }
+
+        .docs {
+            padding-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Novah Documentation</h1>
+    <div class="content">
+        <div class="menu"><h3>Modules</h3><p><a href="novah.core.html">novah.core</a></p><p><a href="novah.result.html">novah.result</a></p><p><a href="novah.number.html">novah.number</a></p><p><a href="novah.random.html">novah.random</a></p><p><a href="novah.java.html">novah.java</a></p><p><a href="novah.math.html">novah.math</a></p><p><a href="novah.meta.html">novah.meta</a></p><p><a href="novah.linkedList.html">novah.linkedList</a></p><p><a href="novah.option.html">novah.option</a></p><p><a href="novah.stream.html">novah.stream</a></p><p><a href="novah.list.html">novah.list</a></p><p><a href="novah.map.html">novah.map</a></p><p><a href="novah.set.html">novah.set</a></p><p><a href="novah.regex.html">novah.regex</a></p><p><a href="novah.string.html">novah.string</a></p><p><a href="novah.io.html">novah.io</a></p><p><a href="novah.test.html">novah.test</a></p><p><a href="novah.async.html">novah.async</a></p><p><a href="novah.computation.html">novah.computation</a></p><p><a href="novah.array.html">novah.array</a></p></div>
+        <div class="docs"><h2>novah.computation</h2><p>This module defines computation expressions
+for some types like List and Option.</p>
+<h2>Types</h2><h2>Declarations</h2><hr><h4>list</h4><pre>visibility: public</pre><pre>type: { combine : List a -> List a -> List a, for : List a -> (a -> List b) -> List b, yield : a -> List a, zero : List a }</pre><div><p>The builder for list computation expressions.
+Allows to use <code>do.list</code> syntax for list comprehensions.</p>
+</div><hr><h4>set</h4><pre>visibility: public</pre><pre>type: { combine : Set a -> Set a -> Set a, for : Set a -> (a -> Set b) -> Set b, yield : a -> Set a, zero : Set a }</pre><div><p>The builder for set computation expressions.
+Allows to use <code>do.set</code> syntax for set comprehensions.</p>
+</div><hr><h4>linkedList</h4><pre>visibility: public</pre><pre>type: { combine : LinkedList a -> LinkedList a -> LinkedList a, for : LinkedList a -> (a -> LinkedList b) -> LinkedList b, yield : a -> LinkedList a, zero : LinkedList a }</pre><div><p>The builder for linked list computation expressions.
+Allows to use <code>do.linkedList</code> syntax for linked list comprehensions.</p>
+</div><hr><h4>optCombine</h4><pre>visibility: private</pre><pre>type: Option a -> Option a -> Option a</pre><hr><h4>option</h4><pre>visibility: public</pre><pre>type: { bind : Option a -> (a -> Option b) -> Option b, combine : Option a -> Option a -> Option a, return : a -> Option a, zero : Option a }</pre><div><p>The builder for optional computation expressions.
+Allows to use <code>do.option</code> syntax for option workflows.</p>
+</div><hr><h4>resultBind</h4><pre>visibility: private</pre><pre>type: Result a err -> (a -> Result b err) -> Result b err</pre><hr><h4>resultCombine</h4><pre>visibility: private</pre><pre>type: Result ok err -> Result ok err -> Result ok err</pre><hr><h4>result</h4><pre>visibility: public</pre><pre>type: { bind : Result a e -> (a -> Result b e) -> Result b e, combine : Result a e -> Result a e -> Result a e, return : a -> Result a e }</pre><div><p>The builder for success/error computation expressions.
+Allows to use <code>do.result</code> syntax for failable workflows.</p>
+</div>
+    </div>
+</body>
+</html>

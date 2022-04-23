@@ -4,7 +4,7 @@
   "description": "Novah website",
   "main": "index.js",
   "scripts": {
-    "gen": "harp public _out && rm -rf css js img && mv -fv _out/* ."
+    "gen": "harp public _out && rm -rf css js img apidoc && mv -fv _out/* ."
   },
   "repository": {
     "type": "git",

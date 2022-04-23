@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novah apidocs</title>
+    <meta charset="UTF-8">
+    <style>
+        a {
+            color: #111;
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        hr {
+            margin-top: 40px;
+        }
+
+        h2 {
+            padding-top: 40px;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .menu {
+            min-width: 15%;
+            padding-right: 10px;
+            border-right: 1px solid #aaa;
+        }
+
+        .docs {
+            padding-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Novah Documentation</h1>
+    <div class="content">
+        <div class="menu"><h3>Modules</h3><p><a href="novah.core.html">novah.core</a></p><p><a href="novah.result.html">novah.result</a></p><p><a href="novah.number.html">novah.number</a></p><p><a href="novah.random.html">novah.random</a></p><p><a href="novah.java.html">novah.java</a></p><p><a href="novah.math.html">novah.math</a></p><p><a href="novah.meta.html">novah.meta</a></p><p><a href="novah.linkedList.html">novah.linkedList</a></p><p><a href="novah.option.html">novah.option</a></p><p><a href="novah.stream.html">novah.stream</a></p><p><a href="novah.list.html">novah.list</a></p><p><a href="novah.map.html">novah.map</a></p><p><a href="novah.set.html">novah.set</a></p><p><a href="novah.regex.html">novah.regex</a></p><p><a href="novah.string.html">novah.string</a></p><p><a href="novah.io.html">novah.io</a></p><p><a href="novah.test.html">novah.test</a></p><p><a href="novah.async.html">novah.async</a></p><p><a href="novah.computation.html">novah.computation</a></p><p><a href="novah.array.html">novah.array</a></p></div>
+        <div class="docs"><h2>novah.result</h2><p>Functions to work with values that may fail.
+Result should always be prefered over throwing exceptions.</p>
+<h2>Types</h2><h2>Declarations</h2><hr><h4>map</h4><pre>visibility: public</pre><pre>type: (a -> b) -> Result a err -> Result b err</pre><div><p>Maps a function over this result if it is ok.
+Runtime: O(1)</p>
+</div><hr><h4>mapErr</h4><pre>visibility: public</pre><pre>type: (a -> b) -> Result ok a -> Result ok b</pre><div><p>Maps a function over this result if it is an error.
+Runtime: O(1)</p>
+</div><hr><h4>unwrap</h4><pre>visibility: public</pre><pre>type: Result a b -> a</pre><div><p>Extracts the value out of this result.
+<em>Unsafe</em>: Will thrown an exception if the result is an error.</p>
+</div><hr><h4>isOk</h4><pre>visibility: public</pre><pre>type: Result a b -> Boolean</pre><div><p>Returns true if this result is ok.</p>
+</div><hr><h4>isErr</h4><pre>visibility: public</pre><pre>type: Result a b -> Boolean</pre><div><p>Returns true if this result is an error.</p>
+</div><hr><h4>ok</h4><pre>visibility: public</pre><pre>type: Result a b -> Option a</pre><div><p>Transforms this result into an option discarding the error.</p>
+</div><hr><h4>err</h4><pre>visibility: public</pre><pre>type: Result a b -> Option b</pre><div><p>Transforms this result into an option discarding the success.</p>
+</div><hr><h4>handle</h4><pre>visibility: public</pre><pre>type: (a -> c) -> (b -> c) -> Result a b -> c</pre><div><p>Handles this result by either applying the first function
+in case the result is ok, or the second, if the result is an error.</p>
+</div>
+    </div>
+</body>
+</html>

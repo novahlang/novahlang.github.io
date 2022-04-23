@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novah apidocs</title>
+    <meta charset="UTF-8">
+    <style>
+        a {
+            color: #111;
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        hr {
+            margin-top: 40px;
+        }
+
+        h2 {
+            padding-top: 40px;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .menu {
+            min-width: 15%;
+            padding-right: 10px;
+            border-right: 1px solid #aaa;
+        }
+
+        .docs {
+            padding-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Novah Documentation</h1>
+    <div class="content">
+        <div class="menu"><h3>Modules</h3><p><a href="novah.core.html">novah.core</a></p><p><a href="novah.result.html">novah.result</a></p><p><a href="novah.number.html">novah.number</a></p><p><a href="novah.random.html">novah.random</a></p><p><a href="novah.java.html">novah.java</a></p><p><a href="novah.math.html">novah.math</a></p><p><a href="novah.meta.html">novah.meta</a></p><p><a href="novah.linkedList.html">novah.linkedList</a></p><p><a href="novah.option.html">novah.option</a></p><p><a href="novah.stream.html">novah.stream</a></p><p><a href="novah.list.html">novah.list</a></p><p><a href="novah.map.html">novah.map</a></p><p><a href="novah.set.html">novah.set</a></p><p><a href="novah.regex.html">novah.regex</a></p><p><a href="novah.string.html">novah.string</a></p><p><a href="novah.io.html">novah.io</a></p><p><a href="novah.test.html">novah.test</a></p><p><a href="novah.async.html">novah.async</a></p><p><a href="novah.computation.html">novah.computation</a></p><p><a href="novah.array.html">novah.array</a></p></div>
+        <div class="docs"><h2>novah.list</h2><p>Functions to work with persistent lists.
+They can also be used as queues or stacks.
+Literal lists can be created using <code>[]</code>.</p>
+<h2>Types</h2><h2>Declarations</h2><hr><h4>stream</h4><pre>visibility: public</pre><pre>type: List a -> Stream a</pre><div><p>Returns a stream for this list.</p>
+</div><hr><h4>fromStream</h4><pre>visibility: public</pre><pre>type: Stream a -> List a</pre><div><p>Collects this stream into a list.
+Runtime: O(n)</p>
+</div><hr><h4>forEach</h4><pre>visibility: public</pre><pre>type: List a -> (a -> Unit) -> Unit</pre><div><p>Runs function f for every element of this list, ignoring the result.
+Runtime: O(n)</p>
+</div><hr><h4>forEachIndexed</h4><pre>visibility: public</pre><pre>type: List a -> (Int32 -> a -> Unit) -> Unit</pre><div><p>Runs function f for every index and element of this list, ignoring the result.
+Runtime: O(n)</p>
+</div><hr><h4>map</h4><pre>visibility: public</pre><pre>type: (a -> b) -> List a -> List b</pre><div><p>Maps function f over all elements of this list
+returning a list of the same size.
+Runtime: O(n)</p>
+</div><hr><h4>mapIndexed</h4><pre>visibility: public</pre><pre>type: (Int32 -> a -> b) -> List a -> List b</pre><div><p>Maps function f over all elements of this list
+returning a list of the same size.
+Also receives the index of the element as a parameter.
+Runtime: O(n)</p>
+</div><hr><h4>mapSome</h4><pre>visibility: public</pre><pre>type: (a -> Option b) -> List a -> List b</pre><div><p>Maps a function over a list and returns
+only the non-empty values.
+Runtime: O(n)</p>
+</div><hr><h4>nth</h4><pre>visibility: public</pre><pre>type: Int32 -> List a -> Option a</pre><div><p>Returns some value at index for this list if it exists or none.
+This is a safe version of the index operator: <code>list.[index]</code>.
+Runtime: ~O(1)</p>
+</div><hr><h4>size</h4><pre>visibility: public</pre><pre>type: List a -> Int32</pre><div><p>Returns the size of this list.
+Runtime: O(1)</p>
+</div><hr><h4>lastIndex</h4><pre>visibility: public</pre><pre>type: List a -> Int32</pre><div><p>Returns the index of the last element of this list or -1 if the list is empty.
+Runtime: O(1)</p>
+</div><hr><h4>first</h4><pre>visibility: public</pre><pre>type: List a -> Option a</pre><div><p>Returns the first element of this list if it's not empty.
+Runtime: ~O(1)</p>
+</div><hr><h4>last</h4><pre>visibility: public</pre><pre>type: List a -> Option a</pre><div><p>Returns the last element of this list if it's not empty.
+Runtime: ~O(1)</p>
+</div><hr><h4>isEmpty</h4><pre>visibility: public</pre><pre>type: List a -> Boolean</pre><div><p>Returns true if this list is empty.
+Runtime: O(1)</p>
+</div><hr><h4>isNotEmpty</h4><pre>visibility: public</pre><pre>type: List a -> Boolean</pre><div><p>Returns true if this list is not empty.
+Runtime: O(1)</p>
+</div><hr><h4>randNth</h4><pre>visibility: public</pre><pre>type: List a -> Option a</pre><div><p>Returns a random element of this list if the list is not empty.
+Runtime: O(1)</p>
+</div><hr><h4>shuffle</h4><pre>visibility: public</pre><pre>type: List a -> List a</pre><div><p>Returns a list with the same values as the input list in random order.
+Runtime: O(n)</p>
+</div><hr><h4>toTypedArray</h4><pre>visibility: public</pre><pre>type: Class a -> List a -> Array a</pre><div><p>Converts this list into a typed array.
+Runtime: O(n)</p>
+</div><hr><h4>toArray</h4><pre>visibility: public</pre><pre>type: List a -> Array Object</pre><div><p>Converts this list into an object array.
+Runtime: O(n)</p>
+</div><hr><h4>fromArray</h4><pre>visibility: public</pre><pre>type: Array a -> List a</pre><div><p>Converts this array into a list.
+Runtime: O(n)</p>
+</div><hr><h4>filter</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> List a -> List a</pre><div><p>Returns a list of the elements that match the given predicate.
+Runtime: O(n)</p>
+</div><hr><h4>filterIndexed</h4><pre>visibility: public</pre><pre>type: (Int32 -> a -> Boolean) -> List a -> List a</pre><div><p>Returns a list of the elements that match the given predicate.
+Also receives the index of the list as parameter.
+Runtime: O(n)</p>
+</div><hr><h4>remove</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> List a -> List a</pre><div><p>Returns a list of the elements that do not match the given predicate.
+Does the opposite of <code>filter</code>.
+Runtime: O(n)</p>
+</div><hr><h4>removeIndexed</h4><pre>visibility: public</pre><pre>type: (Int32 -> a -> Boolean) -> List a -> List a</pre><div><p>Returns a list of the elements that does not match the given predicate.
+Also receives the index of the list as parameter.
+Runtime: O(n)</p>
+</div><hr><h4>find</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> List a -> Option a</pre><div><p>Returns the first occurrence of elem in this list for which the predicate returns true.
+Runtime: O(n)</p>
+</div><hr><h4>findIndex</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> List a -> Option Int32</pre><div><p>Returns the first index in this list for which the predicate returns true.
+Runtime: O(n)</p>
+</div><hr><h4>sortWith</h4><pre>visibility: public</pre><pre>type: (a -> a -> Ordering) -> List a -> List a</pre><div><p>Sorts this list according to the comparing function.</p>
+</div><hr><h4>sort</h4><pre>visibility: public</pre><pre>type: {{ Ord a }} -> List a -> List a</pre><div><p>Sorts this list according to the element's Ord instance.</p>
+</div><hr><h4>sortBy</h4><pre>visibility: public</pre><pre>type: {{ Ord b }} -> (a -> b) -> List a -> List a</pre><div><p>Sorts this list based on the natural sort order of
+the values returned by the function.</p>
+</div><hr><h4>push</h4><pre>visibility: public</pre><pre>type: a -> List a -> List a</pre><div><p>An alias to <code>addFirst</code>.
+Should be used when using this list as a stack.
+Runtime: ~O(1)</p>
+</div><hr><h4>pop</h4><pre>visibility: public</pre><pre>type: List a -> List a</pre><div><p>An alias to <code>removeFirst</code>.
+Should be used when using this list as a stack.
+Runtime: ~O(1)</p>
+</div><hr><h4>tail</h4><pre>visibility: public</pre><pre>type: List a -> Option (List a)</pre><div><p>Returns the tail of this list if it's not empty.
+Runtime: ~O(1)</p>
+</div><hr><h4>slice</h4><pre>visibility: public</pre><pre>type: Int32 -> Int32 -> List a -> List a</pre><div><p>Returns a slice of this list starting at from (inclusive)
+and ending at to (exclusive).
+Runtime: ~O(1)</p>
+</div><hr><h4>splitIndex</h4><pre>visibility: public</pre><pre>type: Int32 -> List a -> Tuple (List a) (List a)</pre><div><p>Splits this list into elements before the index
+and elements after the index.
+Runtime: ~O(1)</p>
+</div><hr><h4>split</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> a -> List a -> Tuple (List a) (List a)</pre><div><p>Splits this list into elements before the given element
+and elements after it.
+Considers only the first occurence of the element.
+Runtime: O(n)</p>
+</div><hr><h4>take</h4><pre>visibility: public</pre><pre>type: Int32 -> List a -> List a</pre><div><p>Returns the first n elements of this list.
+Runtime: ~O(1)</p>
+</div><hr><h4>drop</h4><pre>visibility: public</pre><pre>type: Int32 -> List a -> List a</pre><div><p>Returns this list without the first n elements.
+Runtime: ~O(1)</p>
+</div><hr><h4>takeWhile</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> List a -> List a</pre><div><p>Keeps taking elements of this list while the predicate holds.
+Runtime: O(n)</p>
+</div><hr><h4>dropWhile</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> List a -> List a</pre><div><p>Keeps droping elements from this list while the predicate holds.
+Runtime: O(n)</p>
+</div><hr><h4>foldl</h4><pre>visibility: public</pre><pre>type: (b -> a -> b) -> b -> List a -> b</pre><div><p>Reduces this list to a single value according to the reducing function.
+Goes from the left to the right.
+Runtime: O(n)</p>
+</div><hr><h4>reduce</h4><pre>visibility: public</pre><pre>type: (a -> a -> a) -> List a -> Option a</pre><div><p>A specialized version of <code>foldl</code> where the first element of the list is used as initial value.
+Returns none if the list is empty
+Runtime: O(n)</p>
+</div><hr><h4>foldr</h4><pre>visibility: public</pre><pre>type: (a -> b -> b) -> b -> List a -> b</pre><div><p>Reduces this list to a single value according to the reducing function.
+Goes from the right to the left.
+Runtime: O(n)</p>
+</div><hr><h4>flatten</h4><pre>visibility: public</pre><pre>type: List (List a) -> List a</pre><div><p>Flattens a list of lists into a single list by concatenating them together.
+Runtime: O(n)</p>
+</div><hr><h4>flatMap</h4><pre>visibility: public</pre><pre>type: (a -> List b) -> List a -> List b</pre><div><p>Like map, but the mapping function should return a list.
+Flattens the result.
+Runtime: O(n)</p>
+</div><hr><h4>reverse</h4><pre>visibility: public</pre><pre>type: List a -> List a</pre><div><p>Returns a reversed version of this list.
+Runtime: O(n)</p>
+</div><hr><h4>all</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> List a -> Boolean</pre><div><p>Returns true if the predicate is true for all elements in this list.
+Runtime: O(n)</p>
+</div><hr><h4>any</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> List a -> Boolean</pre><div><p>Returns true if the predicate is true for any element in this list.
+Runtime: O(n)</p>
+</div><hr><h4>count</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> List a -> Int32</pre><div><p>Returns the number of elements matching the given predicate.
+Runtime: O(n)</p>
+</div><hr><h4>min</h4><pre>visibility: public</pre><pre>type: {{ NumberOps a }} -> List a -> Option a</pre><div><p>Returns the smallest number in the list, if the list is not empty.
+Runtime: O(n)</p>
+</div><hr><h4>minOr</h4><pre>visibility: public</pre><pre>type: {{ NumberOps a }} -> a -> List a -> a</pre><div><p>Returns the smallest number in the list, or the default value.
+Runtime: O(n)</p>
+</div><hr><h4>minBy</h4><pre>visibility: public</pre><pre>type: {{ Ord b }} -> (a -> b) -> List a -> Option a</pre><div><p>Returns the smallest element in the list according to the
+given function, if the list is not empty.
+Runtime: O(n)</p>
+</div><hr><h4>minOf</h4><pre>visibility: public</pre><pre>type: {{ NumberOps b }} -> (a -> b) -> List a -> Option b</pre><div><p>Returns the smallest element returned by applying the
+function to every element in the list, if the list is not empty.
+Runtime: O(n)</p>
+</div><hr><h4>max</h4><pre>visibility: public</pre><pre>type: {{ NumberOps a }} -> List a -> Option a</pre><div><p>Returns the biggest number in the list, if the list is not empty.
+Runtime: O(n)</p>
+</div><hr><h4>maxOr</h4><pre>visibility: public</pre><pre>type: {{ NumberOps a }} -> a -> List a -> a</pre><div><p>Returns the biggest number in the list, or the default value.
+Runtime: O(n)</p>
+</div><hr><h4>maxBy</h4><pre>visibility: public</pre><pre>type: {{ Ord b }} -> (a -> b) -> List a -> Option a</pre><div><p>Returns the biggest element in the list according to the
+given function, if the list is not empty.
+Runtime: O(n)</p>
+</div><hr><h4>maxOf</h4><pre>visibility: public</pre><pre>type: {{ NumberOps b }} -> (a -> b) -> List a -> Option b</pre><div><p>Returns the biggest element returned by applying the
+function to every element in the list, if the list is not empty.
+Runtime: O(n)</p>
+</div><hr><h4>sum</h4><pre>visibility: public</pre><pre>type: {{ Plus a }} -> List a -> a</pre><div><p>Returns the sum of all elements in this list.
+Runtime: O(n)</p>
+</div><hr><h4>sumOf</h4><pre>visibility: public</pre><pre>type: {{ Plus b }} -> (a -> b) -> List a -> b</pre><div><p>Returns the sum of all elements by first applying the
+function to every element in this list.
+Runtime: O(n)</p>
+</div><hr><h4>product</h4><pre>visibility: public</pre><pre>type: {{ Mult a }} -> List a -> a</pre><div><p>Returns the product of all elements in this list.
+Runtime: O(n)</p>
+</div><hr><h4>productOf</h4><pre>visibility: public</pre><pre>type: {{ Mult b }} -> (a -> b) -> List a -> b</pre><div><p>Returns the product of all elements by first applying the
+function to every element in this list.
+Runtime: O(n)</p>
+</div><hr><h4>fromByteArray</h4><pre>visibility: public</pre><pre>type: ByteArray -> List Byte</pre><div><p>Converts this byte array to a list of bytes.
+Runtime: O(n)</p>
+</div><hr><h4>fromInt16Array</h4><pre>visibility: public</pre><pre>type: Int16Array -> List Int16</pre><div><p>Converts this int16 array to a list of int16s.
+Runtime: O(n)</p>
+</div><hr><h4>fromInt32Array</h4><pre>visibility: public</pre><pre>type: Int32Array -> List Int32</pre><div><p>Converts this int array to a list of ints.
+Runtime: O(n)</p>
+</div><hr><h4>fromInt64Array</h4><pre>visibility: public</pre><pre>type: Int64Array -> List Int64</pre><div><p>Converts this int64 array to a list of int64s.
+Runtime: O(n)</p>
+</div><hr><h4>fromFloat32Array</h4><pre>visibility: public</pre><pre>type: Float32Array -> List Float32</pre><div><p>Converts this float32 array to a list of float32s.
+Runtime: O(n)</p>
+</div><hr><h4>fromFloat64Array</h4><pre>visibility: public</pre><pre>type: Float64Array -> List Float64</pre><div><p>Converts this float64 array to a list of float64s.
+Runtime: O(n)</p>
+</div><hr><h4>fromBooleanArray</h4><pre>visibility: public</pre><pre>type: BooleanArray -> List Boolean</pre><div><p>Converts this boolean array to a list of booleans.
+Runtime: O(n)</p>
+</div><hr><h4>fromCharArray</h4><pre>visibility: public</pre><pre>type: CharArray -> List Char</pre><div><p>Converts this char array to a list of chars.
+Runtime: O(n)</p>
+</div><hr><h4>toByteArray</h4><pre>visibility: public</pre><pre>type: List Byte -> ByteArray</pre><div><p>Converts this list of bytes to a byte array.
+Runtime: O(n)</p>
+</div><hr><h4>toInt16Array</h4><pre>visibility: public</pre><pre>type: List Int16 -> Int16Array</pre><div><p>Converts this list of int16s to a int16 array.
+Runtime: O(n)</p>
+</div><hr><h4>toInt32Array</h4><pre>visibility: public</pre><pre>type: List Int32 -> Int32Array</pre><div><p>Converts this list of ints to a int array.
+Runtime: O(n)</p>
+</div><hr><h4>toInt64Array</h4><pre>visibility: public</pre><pre>type: List Int64 -> Int64Array</pre><div><p>Converts this list of int64s to a int64 array.
+Runtime: O(n)</p>
+</div><hr><h4>toFloat32Array</h4><pre>visibility: public</pre><pre>type: List Float32 -> Float32Array</pre><div><p>Converts this list of float32s to a float32 array.
+Runtime: O(n)</p>
+</div><hr><h4>toFloat64Array</h4><pre>visibility: public</pre><pre>type: List Float64 -> Float64Array</pre><div><p>Converts this list of float64s to a float64 array.
+Runtime: O(n)</p>
+</div><hr><h4>toBooleanArray</h4><pre>visibility: public</pre><pre>type: List Boolean -> BooleanArray</pre><div><p>Converts this list of booleans to a boolean array.
+Runtime: O(n)</p>
+</div><hr><h4>toCharArray</h4><pre>visibility: public</pre><pre>type: List Char -> CharArray</pre><div><p>Converts this list of chars to a char array.
+Runtime: O(n)</p>
+</div><hr><h4>groupBy</h4><pre>visibility: public</pre><pre>type: (a -> b) -> List a -> Map b (List a)</pre><div><p>Groups the elements of the list according
+to the the function.
+Ex:</p>
+<pre><code class="language-novah">groupBy isOdd [1, 2, 3, 4, 5, 6]
+// =&gt; { true: [1, 3, 5], false: [2, 4, 6] }
+</code></pre>
+</div><hr><h4>partitionStep</h4><pre>visibility: public</pre><pre>type: Int32 -> Int32 -> List a -> List (List a)</pre><div><p>Returns the list partitioned in lists of size n and going forward by step.
+Ex:</p>
+<pre><code class="language-novah">partitionStep 3L 2L [1, 2, 3, 4, 5, 6, 7, 8]
+// =&gt; [[1, 2, 3], [3, 4, 5], [5, 6, 7]]
+</code></pre>
+</div><hr><h4>partitionAllStep</h4><pre>visibility: public</pre><pre>type: Int32 -> Int32 -> List a -> List (List a)</pre><div><p>Returns the list partitioned in lists of size n and going forward by step.
+May include sub lists smaller than n if there's some leftovers.
+Ex:</p>
+<pre><code class="language-novah">partitionAllStep 3L 2L [1, 2, 3, 4, 5, 6, 7, 8]
+// =&gt; [[1, 2, 3], [3, 4, 5], [5, 6, 7], [7, 8]]
+</code></pre>
+</div><hr><h4>partition</h4><pre>visibility: public</pre><pre>type: Int32 -> List a -> List (List a)</pre><div><p>Returns the list partitioned in lists of size n.
+Ex:</p>
+<pre><code class="language-novah">partition 3L [1, 2, 3, 4, 5, 6, 7, 8]
+// =&gt; [[1, 2, 3], [4, 5, 6]]
+</code></pre>
+</div><hr><h4>partitionAll</h4><pre>visibility: public</pre><pre>type: Int32 -> List a -> List (List a)</pre><div><p>Returns the list partitioned in lists of size n.
+May include sub lists smaller than n if there's some leftovers.
+Ex:</p>
+<pre><code class="language-novah">partitionAll 3L [1, 2, 3, 4, 5, 6, 7, 8]
+// =&gt; [[1, 2, 3], [4, 5, 6], [7, 8]]
+</code></pre>
+</div><hr><h4>repeat</h4><pre>visibility: public</pre><pre>type: Int32 -> a -> List a</pre><div><p>Returns a list consisting of the given element repeated n times.
+Runtime: O(n)</p>
+</div><hr><h4>indices</h4><pre>visibility: public</pre><pre>type: List a -> List Int32</pre><div><p>Returns a list of all the indices from the input list.
+Ex:</p>
+<pre><code class="language-novah">indices [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;] // =&gt; [0, 1, 2]
+</code></pre>
+</div><hr><h4>zip</h4><pre>visibility: public</pre><pre>type: List a -> List b -> List (Tuple a b)</pre><div><p>Zips the two lists together.
+The resulting list will be as big as the smallest one.
+Ex:</p>
+<pre><code class="language-novah">zip [1, 2, 3, 4, 5] [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]
+// =&gt; [1 ; &quot;a&quot;, 2 ; &quot;b&quot;, 3 ; &quot;c&quot;]
+</code></pre>
+<p>Runtime: O(n)</p>
+</div><hr><h4>zipWith</h4><pre>visibility: public</pre><pre>type: (a -> b -> c) -> List a -> List b -> List c</pre><div><p>Zips the two lists together according to the function.
+The resulting list will be as big as the smallest one.
+Ex:</p>
+<pre><code class="language-novah">zipWith (+) [1, 2, 3, 4, 5] [10, 11, 12]
+// =&gt; [11, 13, 15]
+</code></pre>
+<p>Runtime: O(n)</p>
+</div><hr><h4>zipAll</h4><pre>visibility: public</pre><pre>type: List (List a) -> List (List a)</pre><div><p>Zips all lists together. The resulting list will
+as big as the smallest sub list.
+Ex:</p>
+<pre><code class="language-novah">zipAll [[1, 2, 3], [4, 5], [6, 7, 8]]
+// =&gt; [[1, 4, 6], [2, 5, 7]]
+</code></pre>
+<p>Runtime: O(n*m)</p>
+</div><hr><h4>unzip</h4><pre>visibility: public</pre><pre>type: List (Tuple a b) -> Tuple (List a) (List b)</pre><div><p>Unzips a list into two lists.
+The opposite of <code>zip</code>.
+Ex:</p>
+<pre><code class="language-novah">unzip [1 ; &quot;a&quot;, 2 ; &quot;b&quot;, 3 ; &quot;c&quot;]
+// =&gt; [1, 2, 3, 4, 5] ; [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]
+</code></pre>
+<p>Runtime: O(n)</p>
+</div><hr><h4>removeNones</h4><pre>visibility: public</pre><pre>type: List (Option a) -> List a</pre><div><p>Removes all empty options from the list.
+Runtime: O(n)</p>
+</div><hr><h4>toLinear</h4><pre>visibility: public</pre><pre>type: List a -> LinearList a</pre><div><p>Returns a linear (mutable) list out of this list</p>
+</div><hr><h4>withLinear</h4><pre>visibility: public</pre><pre>type: List a -> (List a -> b) -> List a</pre><div><p>Creates a linear (mutable) version of the given list and applies the function to it.
+Returns a forked (persistent) version of the returned linear list.
+This function should be used when lots of expensive mutating operations have to be run on a list
+and can be seen as a builder for the resulting list.
+All functions that alter lists like <code>addFirst</code>, <code>setAt</code>, <code>removeLast</code>, etc.
+will mutate a linear list.
+Ex:
+withLinear [1, 2, 3] \list -&gt;
+addFirst 0 list
+addLast 4 list</p>
+<p>-&gt; [0, 1, 2, 3, 4]</p>
+</div>
+    </div>
+</body>
+</html>

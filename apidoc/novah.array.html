@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novah apidocs</title>
+    <meta charset="UTF-8">
+    <style>
+        a {
+            color: #111;
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        hr {
+            margin-top: 40px;
+        }
+
+        h2 {
+            padding-top: 40px;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .menu {
+            min-width: 15%;
+            padding-right: 10px;
+            border-right: 1px solid #aaa;
+        }
+
+        .docs {
+            padding-left: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Novah Documentation</h1>
+    <div class="content">
+        <div class="menu"><h3>Modules</h3><p><a href="novah.core.html">novah.core</a></p><p><a href="novah.result.html">novah.result</a></p><p><a href="novah.number.html">novah.number</a></p><p><a href="novah.random.html">novah.random</a></p><p><a href="novah.java.html">novah.java</a></p><p><a href="novah.math.html">novah.math</a></p><p><a href="novah.meta.html">novah.meta</a></p><p><a href="novah.linkedList.html">novah.linkedList</a></p><p><a href="novah.option.html">novah.option</a></p><p><a href="novah.stream.html">novah.stream</a></p><p><a href="novah.list.html">novah.list</a></p><p><a href="novah.map.html">novah.map</a></p><p><a href="novah.set.html">novah.set</a></p><p><a href="novah.regex.html">novah.regex</a></p><p><a href="novah.string.html">novah.string</a></p><p><a href="novah.io.html">novah.io</a></p><p><a href="novah.test.html">novah.test</a></p><p><a href="novah.async.html">novah.async</a></p><p><a href="novah.computation.html">novah.computation</a></p><p><a href="novah.array.html">novah.array</a></p></div>
+        <div class="docs"><h2>novah.array</h2><p>Functions to work with native Java arrays.</p>
+<h2>Types</h2><h2>Declarations</h2><hr><h4>size</h4><pre>visibility: public</pre><pre>type: Array a -> Int32</pre><div><p>Returns the size of this array.
+Runtime: O(1)</p>
+</div><hr><h4>stream</h4><pre>visibility: public</pre><pre>type: Array a -> Stream a</pre><div><p>Returns a stream for this array.</p>
+</div><hr><h4>fromStream</h4><pre>visibility: public</pre><pre>type: Stream a -> Array Object</pre><div><p>Collects this stream into an array.</p>
+</div><hr><h4>nth</h4><pre>visibility: public</pre><pre>type: Int32 -> Array a -> Option a</pre><div><p>Returns some value at index for this array if it exists or none.
+This is a safe version of <code>aget</code>.
+Runtime: O(1)</p>
+</div><hr><h4>isEmpty</h4><pre>visibility: public</pre><pre>type: Array a -> Boolean</pre><div><p>Returns true if the array is empty.
+Runtime: O(1)</p>
+</div><hr><h4>isNotEmpty</h4><pre>visibility: public</pre><pre>type: Array a -> Boolean</pre><div><p>Returns true if the array is not empty.
+Runtime: O(1)</p>
+</div><hr><h4>find</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> Array a -> Option a</pre><div><p>Returns the first occurrence of elem in the array for which the predicate returns true.
+Runtime: O(n)</p>
+</div><hr><h4>containedArray</h4><pre>visibility: public</pre><pre>type: {{ Equals a }} -> Contained a (Array a)</pre><hr><h4>forEach</h4><pre>visibility: public</pre><pre>type: Array a -> (a -> Unit) -> Unit</pre><div><p>Runs function f for every element of this array, ignoring the result.
+Runtime: O(n)</p>
+</div><hr><h4>forEachIndexed</h4><pre>visibility: public</pre><pre>type: Array a -> (Int32 -> a -> Unit) -> Unit</pre><div><p>Runs function f for every index and element of this array, ignoring the result.
+Runtime: O(n)</p>
+</div><hr><h4>map</h4><pre>visibility: public</pre><pre>type: (a -> b) -> Array a -> Array Object</pre><div><p>Maps function f over all elements of this array
+returning an array of the same size.
+Runtime: O(n)</p>
+</div><hr><h4>filter</h4><pre>visibility: public</pre><pre>type: (a -> Boolean) -> Array a -> Array Object</pre><div><p>Returns an array of the elements that match the given predicate.
+Runtime: O(n)</p>
+</div><hr><h4>sortBy</h4><pre>visibility: public</pre><pre>type: (a -> a -> Ordering) -> Array a -> Unit</pre><div><p>Sorts this array in place according to the comparing function.</p>
+</div><hr><h4>sort</h4><pre>visibility: public</pre><pre>type: {{ Ord a }} -> Array a -> Unit</pre><div><p>Sorts this array in place according to the elements Ord instance.</p>
+</div><hr><h4>reverse</h4><pre>visibility: public</pre><pre>type: Array a -> Array a</pre><div><p>Returns a new array with the same elements in the reverse order of the input array.
+Runtime: O(n)</p>
+</div><hr><h4>reversed</h4><pre>visibility: public</pre><pre>type: Array a -> Unit</pre><div><p>Reverses this array in place.
+Runtime: O(n/2)</p>
+</div><hr><h4>byteArray</h4><pre>visibility: public</pre><pre>type: Int32 -> ByteArray</pre><div><p>Creates a byte array of the specified size.</p>
+</div><hr><h4>int16Array</h4><pre>visibility: public</pre><pre>type: Int32 -> Int16Array</pre><div><p>Creates a int16 array of the specified size.</p>
+</div><hr><h4>int32Array</h4><pre>visibility: public</pre><pre>type: Int32 -> Int32Array</pre><div><p>Creates a int32 array of the specified size.</p>
+</div><hr><h4>int64Array</h4><pre>visibility: public</pre><pre>type: Int32 -> Int64Array</pre><div><p>Creates a int64 array of the specified size.</p>
+</div><hr><h4>float32Array</h4><pre>visibility: public</pre><pre>type: Int32 -> Float32Array</pre><div><p>Creates a float32 array of the specified size.</p>
+</div><hr><h4>float64Array</h4><pre>visibility: public</pre><pre>type: Int32 -> Float64Array</pre><div><p>Creates a float64 array of the specified size.</p>
+</div><hr><h4>charArray</h4><pre>visibility: public</pre><pre>type: Int32 -> CharArray</pre><div><p>Creates a char array of the specified size.</p>
+</div><hr><h4>booleanArray</h4><pre>visibility: public</pre><pre>type: Int32 -> BooleanArray</pre><div><p>Creates a boolean array of the specified size.</p>
+</div><hr><h4>copy</h4><pre>visibility: public</pre><pre>type: Array a -> Array a</pre><div><p>Returns a copy of this array.</p>
+</div><hr><h4>emptyCopy</h4><pre>visibility: public</pre><pre>type: Array a -> Array a</pre><div><p>Returns a new array of the same size and type as the supplied array.</p>
+</div><hr><h4>byteaset</h4><pre>visibility: public</pre><pre>type: Int32 -> Byte -> ByteArray -> Unit</pre><div><p>Sets the element of this byte array at the specified index.
+<em>Unsafe</em>: Will thrown a <code>java.lang.IndexOutOfBoundsException</code> if the index doesn't exist.
+Runtime: O(1)</p>
+</div><hr><h4>int16aset</h4><pre>visibility: public</pre><pre>type: Int32 -> Int16 -> Int16Array -> Unit</pre><div><p>Sets the element of this int16 array at the specified index.
+<em>Unsafe</em>: Will thrown a <code>java.lang.IndexOutOfBoundsException</code> if the index doesn't exist.
+Runtime: O(1)</p>
+</div><hr><h4>int32aset</h4><pre>visibility: public</pre><pre>type: Int32 -> Int32 -> Int32Array -> Unit</pre><div><p>Sets the element of this int array at the specified index.
+<em>Unsafe</em>: Will thrown a <code>java.lang.IndexOutOfBoundsException</code> if the index doesn't exist.
+Runtime: O(1)</p>
+</div><hr><h4>int64aset</h4><pre>visibility: public</pre><pre>type: Int32 -> Int64 -> Int64Array -> Unit</pre><div><p>Sets the element of this int64 array at the specified index.
+<em>Unsafe</em>: Will thrown a <code>java.lang.IndexOutOfBoundsException</code> if the index doesn't exist.
+Runtime: O(1)</p>
+</div><hr><h4>float32aset</h4><pre>visibility: public</pre><pre>type: Int32 -> Float32 -> Float32Array -> Unit</pre><div><p>Sets the element of this float32 array at the specified index.
+<em>Unsafe</em>: Will thrown a <code>java.lang.IndexOutOfBoundsException</code> if the index doesn't exist.
+Runtime: O(1)</p>
+</div><hr><h4>float64aset</h4><pre>visibility: public</pre><pre>type: Int32 -> Float64 -> Float64Array -> Unit</pre><div><p>Sets the element of this float64 array at the specified index.
+<em>Unsafe</em>: Will thrown a <code>java.lang.IndexOutOfBoundsException</code> if the index doesn't exist.
+Runtime: O(1)</p>
+</div><hr><h4>booleanaset</h4><pre>visibility: public</pre><pre>type: Int32 -> Boolean -> BooleanArray -> Unit</pre><div><p>Sets the element of this boolean array at the specified index.
+<em>Unsafe</em>: Will thrown a <code>java.lang.IndexOutOfBoundsException</code> if the index doesn't exist.
+Runtime: O(1)</p>
+</div><hr><h4>charaset</h4><pre>visibility: public</pre><pre>type: Int32 -> Char -> CharArray -> Unit</pre><div><p>Sets the element of this char array at the specified index.
+<em>Unsafe</em>: Will thrown a <code>java.lang.IndexOutOfBoundsException</code> if the index doesn't exist.
+Runtime: O(1)</p>
+</div><hr><h4>containedByteArray</h4><pre>visibility: public</pre><pre>type: Contained Byte ByteArray</pre><hr><h4>containedInt16Array</h4><pre>visibility: public</pre><pre>type: Contained Int16 Int16Array</pre><hr><h4>containedInt32Array</h4><pre>visibility: public</pre><pre>type: Contained Int32 Int32Array</pre><hr><h4>containedInt64Array</h4><pre>visibility: public</pre><pre>type: Contained Int64 Int64Array</pre><hr><h4>containedFloat32Array</h4><pre>visibility: public</pre><pre>type: Contained Float32 Float32Array</pre><hr><h4>containedFloat64Array</h4><pre>visibility: public</pre><pre>type: Contained Float64 Float64Array</pre><hr><h4>containedBoolean</h4><pre>visibility: public</pre><pre>type: Contained Boolean BooleanArray</pre><hr><h4>containedChar</h4><pre>visibility: public</pre><pre>type: Contained Char CharArray</pre>
+    </div>
+</body>
+</html>
