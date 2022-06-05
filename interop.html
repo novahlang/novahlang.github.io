@@ -1,26 +1,23 @@
-<!DOCTYPE html><html><head><title>Novah language</title><meta charset="UTF-8"><link rel="stylesheet" href="/css/main.css"><link rel="icon" href="/img/novah.png"><script src="/js/microlight.js"> </script></head><body><header class="novah-header"><div class="title-header"><a href="/"><object data="/img/novah.svg" type="image/svg+xml" width="32" height="32" class="logo"></object>Novah</a></div><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16px" height="16px" alt="Github">Source</a></header><div id="content"><div class="main-menu"><ul class="menu-list"><li><a href="/">Home</a></li><li><a href="/syntax">Syntax</a></li><li><a href="/types">Types</a></li><li><a href="/records">Records</a></li><li><a href="/pattern-matching">Pattern matching</a></li><li class="selected"><a href="/interop">Java interoperability</a></li><li><a href="/computations">Computation expressions</a></li><li><a href="/instance">Instance arguments</a></li><li><a href="/apidoc">API docs</a></li></ul></div><div class="main"><h1>Java Interoperability</h1><p>It's possible to import java classes and call java methods, constructors and fields from Novah.</p><h2>Foreign imports</h2><p>Java classes in Novah cannot be used fully qualified, they have to be imported first.
+<!DOCTYPE html><html lang="en"><head><title>Java interoperability | Novah language</title><meta charset="UTF-8"><link rel="stylesheet" href="/css/main.css"><link rel="icon" href="/img/novah.png"><script src="/js/microlight.js"></script></head><body><a href="#main" class="visually-hidden">Skip to main content</a><header><div class="title-header"><a href="/" aria-label="Novah homepage"><img src="/img/novah.svg" width="32" height="32" alt="logo" class="logo">Novah</a></div><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16" height="16" alt="Github">Source</a></header><div id="content"><nav><ul class="nav-list"><li><a href="/">Home</a></li><li><a href="/syntax">Syntax</a></li><li><a href="/types">Types</a></li><li><a href="/records">Records</a></li><li><a href="/pattern-matching">Pattern matching</a></li><li class="nav-selected"><a href="/interop">Java interoperability</a></li><li><a href="/computations">Computation expressions</a></li><li><a href="/instance">Instance arguments</a></li><li><a href="/apidoc">API docs</a></li></ul></nav><main id="main"><h1>Java Interoperability</h1><p>It's possible to import java classes and call java methods, constructors and fields from Novah.</p><h2>Foreign imports</h2><p>Java classes in Novah cannot be used fully qualified, they have to be imported first.
 You can rename a Java class at import time with the `as` keyword.
-</p><pre class="code"><code class="microlight">module foreigns
+</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module foreigns
 
 foreign import java.io.File
-foreign import java.util.HashMap as JavaMap
-</code></pre><h2>Methods</h2><p>Methods, static or not, can be called using the hash (#) operator.</p><pre class="code"><code class="microlight">module methods
+foreign import java.util.HashMap as JavaMap</code></pre><p class="visually-hidden">End code.</p><h2>Methods</h2><p>Methods, static or not, can be called using the hash (#) operator.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module methods
 
 foo : Unit -> Unit
 foo () =
   // a static method call
   println (String#valueOf('a'))
   // a non-static method call
-  println ("fox"#substring(1))
-</code></pre><h2>Constructors</h2><p>Constructors are special static methods named `new`.</p><pre class="code"><code class="microlight">module staticmethods
+  println ("fox"#substring(1))</code></pre><p class="visually-hidden">End code.</p><h2>Constructors</h2><p>Constructors are special static methods named `new`.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module staticmethods
 
 foreign import java.io.File
 
 newFile : String -> File
-newFile name = File#new(name)
-</code></pre><h2>Fields</h2><p>Fields are accessed in the same way as methods except they use the hash-dash operator (#-).
-Setting a field can be done with the setter operator (<-).
-</p><pre class="code"><code class="microlight">module fields
+newFile name = File#new(name)</code></pre><p class="visually-hidden">End code.</p><h2>Fields</h2><p>Fields are accessed in the same way as methods except they use the hash-dash operator (#-).
+Setting a field can be done with the setter operator (&lt;-).
+</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module fields
 
 /*
 public static class ForeignClass {
@@ -38,18 +35,17 @@ foreign import my.java.ForeignClass
 setValue : ForeignClass -> Int -> Int
 setValue fclass newVal =
   let tmp = fclass#-value
-  fclass#-value <- newVal
+  fclass#-value &lt;- newVal
   tmp
 
 pub
 main : Array String -> Unit
 main _ =
   let fclass = ForeignClass#new(3)
-  println (setValue fclass 10)
-</code></pre><h1>Caveats</h1><p>Because Novah's type system doesn't understand object orientation, interoperability may require
+  println (setValue fclass 10)</code></pre><p class="visually-hidden">End code.</p><h2>Caveats</h2><p>Because Novah's type system doesn't understand object orientation, interoperability may require
 type casting in order for the code to compile.
 This is specially true with (co/contra)variant generic functions.
-</p><pre class="code"><code class="microlight">module caveats
+</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module caveats
 
 foreign import java.lang.CharSequence
 
@@ -60,4 +56,4 @@ main _ =
   // expected CharSequence, got String
   println ("fox"#contains("o"))
   // compiles
-  println ("fox"#contains("o" as CharSequence))</code></pre><div class="footer">&nbsp;</div></div></div></body></html>
+  println ("fox"#contains("o" as CharSequence))</code></pre><p class="visually-hidden">End code.</p></main></div></body></html>

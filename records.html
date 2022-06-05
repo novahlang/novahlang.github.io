@@ -1,24 +1,22 @@
-<!DOCTYPE html><html><head><title>Novah language</title><meta charset="UTF-8"><link rel="stylesheet" href="/css/main.css"><link rel="icon" href="/img/novah.png"><script src="/js/microlight.js"> </script></head><body><header class="novah-header"><div class="title-header"><a href="/"><object data="/img/novah.svg" type="image/svg+xml" width="32" height="32" class="logo"></object>Novah</a></div><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16px" height="16px" alt="Github">Source</a></header><div id="content"><div class="main-menu"><ul class="menu-list"><li><a href="/">Home</a></li><li><a href="/syntax">Syntax</a></li><li><a href="/types">Types</a></li><li class="selected"><a href="/records">Records</a></li><li><a href="/pattern-matching">Pattern matching</a></li><li><a href="/interop">Java interoperability</a></li><li><a href="/computations">Computation expressions</a></li><li><a href="/instance">Instance arguments</a></li><li><a href="/apidoc">API docs</a></li></ul></div><div class="main"><h1>Records</h1><p>Records and row polymorphism are the core of Novah data structures.
+<!DOCTYPE html><html lang="en"><head><title>Records | Novah language</title><meta charset="UTF-8"><link rel="stylesheet" href="/css/main.css"><link rel="icon" href="/img/novah.png"><script src="/js/microlight.js"></script></head><body><a href="#main" class="visually-hidden">Skip to main content</a><header><div class="title-header"><a href="/" aria-label="Novah homepage"><img src="/img/novah.svg" width="32" height="32" alt="logo" class="logo">Novah</a></div><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16" height="16" alt="Github">Source</a></header><div id="content"><nav><ul class="nav-list"><li><a href="/">Home</a></li><li><a href="/syntax">Syntax</a></li><li><a href="/types">Types</a></li><li class="nav-selected"><a href="/records">Records</a></li><li><a href="/pattern-matching">Pattern matching</a></li><li><a href="/interop">Java interoperability</a></li><li><a href="/computations">Computation expressions</a></li><li><a href="/instance">Instance arguments</a></li><li><a href="/apidoc">API docs</a></li></ul></nav><main id="main"><h1>Records</h1><p>Records and row polymorphism are the core of Novah data structures.
 Records are immutable and persistent, so functions that change records will always return a new version.
 Novah records support duplicated fields, but you can only retrieve the last value of a field.
-</p><h3>Accessing fields</h3><p>Fields can be accessed using dot syntax.</p><pre class="code"><code class="microlight">module records
+</p><h2>Accessing fields</h2><p>Fields can be accessed using dot syntax.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module records
 
 name : { name : String | r } -> String
 name person = person.name
 
 // nested record access
 city : { address : { city : String } | a } -> String
-city = _.address.city
-</code></pre><h3>String fields</h3><p>Novah requires every field to be a valid identifier but it's possible to use any string
+city = _.address.city</code></pre><p class="visually-hidden">End code.</p><h2>String fields</h2><p>Novah requires every field to be a valid identifier but it's possible to use any string
 as a field.
-</p><pre class="code"><code class="microlight">module records
+</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module records
 
 stringFields : { "Password" : String, "User Name" : String }
 stringFields = { "User Name": "foo", "Password": "***"}
 
 utfFields : { "∀" : String, "∉" : Boolean, "😉" : String }
-utfFields = {"😉": "wink", "∉": true, "∀": "forall"}
-</code></pre><h3>Adding new fields</h3><pre class="code"><code class="microlight">module records
+utfFields = {"😉": "wink", "∉": true, "∀": "forall"}</code></pre><p class="visually-hidden">End code.</p><h2>Adding new fields</h2><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module records
 
 addData :
   { name : String }
@@ -33,8 +31,7 @@ addData2 = { age: 31, eyeColor: "blue" | _ }
 
 // the original name cannot be accessed until the current is removed
 duplicates : { name : String } -> { name : String, name : String }
-duplicates person = { name : "Override" | person }
-</code></pre><h3>Removing fields</h3><pre class="code"><code class="microlight">module records
+duplicates person = { name : "Override" | person }</code></pre><p class="visually-hidden">End code.</p><h2>Removing fields</h2><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module records
 
 typealias Person = { name : String, age : Int}
 
@@ -43,10 +40,9 @@ nameless = { - name | _ }
 
 // removing multiple fields
 nothing : Person -> {}
-nothing = { - name, age | _ }
-</code></pre><h3>Updating and setting fields</h3><p>Setting a new value to a field can be done using the `{ .field = newValue | record }` syntax.
+nothing = { - name, age | _ }</code></pre><p class="visually-hidden">End code.</p><h2>Updating and setting fields</h2><p>Setting a new value to a field can be done using the `{ .field = newValue | record }` syntax.
 Updating a field can be done using the `{ .field -> function | record }` syntax.
-</p><pre class="code"><code class="microlight">module records
+</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module records
 
 setName : String -> { name : String | r } -> { name : String | r }
 setName newName = { .name = newName | _ }
@@ -58,8 +54,7 @@ upperName = { .name -> String.upperCase | _ }
 nested :
   { address : { city : String | r2 } | r }
   -> { address : { city : String | r2 } | r }
-nested = { .address.city = "Tokyo" | _ }
-</code></pre><h3>Merging records</h3><pre class="code"><code class="microlight">module records
+nested = { .address.city = "Tokyo" | _ }</code></pre><p class="visually-hidden">End code.</p><h2>Merging records</h2><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module records
 
 typealias Person = { name : String, age : Int}
 
@@ -76,4 +71,4 @@ dups = { + tim, { age: 44 }}
 // it's not possible to merge two records with unknow labels
 // at least one of the records should have no unknow labels
 #[noWarn]
-fail rec1 rec2 = { + rec1, rec2}</code></pre><div class="footer">&nbsp;</div></div></div></body></html>
+fail rec1 rec2 = { + rec1, rec2}</code></pre><p class="visually-hidden">End code.</p></main></div></body></html>

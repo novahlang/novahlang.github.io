@@ -1,7 +1,6 @@
 
-.main-menu
-  ul.menu-list
+nav
+  ul.nav-list
     for page in pages
-      li(class=page.name === pageName ? "selected" : "")
+      li(class=page.name === pageName ? "nav-selected" : "")
         a(href="#{page.href}") #{page.name}
-    

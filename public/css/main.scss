@@ -10,16 +10,9 @@ body {
   color: $white;
 }
 
-.main a {
-  color: $white;
-  text-decoration: none;
-  padding-bottom: 2px;
-  border-bottom: 1px solid $light_grey;
-}
-
-.novah-header {
-  padding: 0 32px;
-  height: 64px;
+header {
+  padding: 0 2rem;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -35,17 +28,13 @@ body {
   text-decoration: none;
 }
 
-.logo {
-  margin-right: 8px;
-}
-
 .source {
   font-size: 1.2rem;
   color: $white;
   text-decoration: none;
 }
 
-.source > img {
+.logo, .source > img {
   margin-right: 8px;
 }
 
@@ -60,21 +49,21 @@ body {
   min-width: 60%;
 }
 
-.main-menu {
+nav {
   flex-basis: 310px;
   flex-grow: 1;
   height: auto;
   border-right: 1px solid $light_grey;
 }
 
-.menu-list {
+.nav-list {
   margin: 0;
   padding: 1.2rem 0 0 0;
   border: 0;
   list-style-type: none;
 }
 
-.menu-list > li {
+.nav-list > li {
   padding-left: 2rem;
 
   &:hover {
@@ -82,15 +71,15 @@ body {
   }
 }
 
-li.selected {
-  background-color: $novah_logo_dark;
-}
-
-.menu-list > li > a {
+.nav-list > li > a {
   text-decoration: none;
   color: $white;
   display: block;
-  padding: 8px 0 8px 0;
+  padding: 0.5rem 0 0.5rem 0;
+}
+
+.nav-selected {
+  background-color: $novah_logo_dark;
 }
 
 #content {
@@ -98,7 +87,7 @@ li.selected {
   width: 100%;
 }
 
-.main {
+main {
   margin: 0 4rem;
 
   @media (min-width: 768px) {
@@ -106,13 +95,16 @@ li.selected {
   }
 }
 
-.main > ul {
-  line-height: 1.6;
-  list-style-type: square;
+main a {
+  color: $white;
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid $light_grey;
 }
 
-.footer {
-  min-height: 80px;
+main > ul {
+  line-height: 1.8;
+  list-style-type: square;
 }
 
 .hero {
@@ -137,20 +129,33 @@ li.selected {
 table {
   min-width: 50%;
   border-spacing: 0;
+  margin-bottom: 3rem;
 }
 
 th {
   text-align: left;
-  padding-right: 32px;
+  padding-right: 2rem;
   vertical-align: top;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 td {
   border-top: 1px solid $light_grey;
-  padding-right: 32px;
+  padding-right: 2rem;
   vertical-align: top;
-  padding-top: 11px;
-  padding-bottom: 12px;
+  padding-top: 0.688rem;
+  padding-bottom: 0.75rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  border: 0;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  width: 1px;
+  white-space: nowrap;
 }

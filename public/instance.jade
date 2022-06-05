@@ -12,6 +12,7 @@ p.
   Instance arguments to the rescue!
   Instance arguments allow you to create something similiar to type classes and their instances.
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module instanceargs
@@ -32,12 +33,14 @@ pre.code
 
     // using it
     theSum = 3 + 4
+p.visually-hidden End code.
 
 p.
   Any type can be used as an instance argument as long as it's a named type.
   You can use the double bracket syntax to annotate a function parameter as an instance argument.
   These arguments can be explicitily passed to a function using double bracket syntax.
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module instanceargs
@@ -53,10 +56,12 @@ pre.code
       showAndPrint 4
       // explicitily passing the argument
       showAndPrint {{showChar}} 'a'
+p.visually-hidden End code.
 
 p.
   The Novah compiler can automatically infer the type of an instance argument if it's unambiguous.
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module instanceargs
@@ -68,3 +73,4 @@ pre.code
       // automatically infer the instance type
       let sum {{_}} x y = x + y
       println (sum 5.6 9.0)
+p.visually-hidden End code.

@@ -1,12 +1,13 @@
 h1.hero Novah is a strongly-typed functional programming language for the JVM
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module greetings
-    
+
     greet : String -> String
     greet name = "Hello " ++ name
-    
+
     pub
     main : Array String -> Unit
     main args =
@@ -14,6 +15,7 @@ pre.code
         println (greet "World")
       else
         println (greet args.[0])
+p.visually-hidden End code.
 
 h2 Features
 

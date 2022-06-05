@@ -9,17 +9,20 @@ p.
   Java classes in Novah cannot be used fully qualified, they have to be imported first.
   You can rename a Java class at import time with the `as` keyword.
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module foreigns
 
     foreign import java.io.File
     foreign import java.util.HashMap as JavaMap
+p.visually-hidden End code.
 
 h2 Methods
 
 p Methods, static or not, can be called using the hash (#) operator.
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module methods
@@ -30,11 +33,13 @@ pre.code
       println (String#valueOf('a'))
       // a non-static method call
       println ("fox"#substring(1))
+p.visually-hidden End code.
 
 h2 Constructors
 
 p Constructors are special static methods named `new`.
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module staticmethods
@@ -43,13 +48,15 @@ pre.code
 
     newFile : String -> File
     newFile name = File#new(name)
+p.visually-hidden End code.
 
 h2 Fields
 
 p.
   Fields are accessed in the same way as methods except they use the hash-dash operator (#-).
-  Setting a field can be done with the setter operator (<-).
+  Setting a field can be done with the setter operator (&lt;-).
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module fields
@@ -70,7 +77,7 @@ pre.code
     setValue : ForeignClass -> Int -> Int
     setValue fclass newVal =
       let tmp = fclass#-value
-      fclass#-value <- newVal
+      fclass#-value &lt;- newVal
       tmp
 
     pub
@@ -78,14 +85,16 @@ pre.code
     main _ =
       let fclass = ForeignClass#new(3)
       println (setValue fclass 10)
+p.visually-hidden End code.
 
-h1 Caveats
+h2 Caveats
 
 p.
   Because Novah's type system doesn't understand object orientation, interoperability may require
   type casting in order for the code to compile.
   This is specially true with (co/contra)variant generic functions.
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module caveats
@@ -100,3 +109,4 @@ pre.code
       println ("fox"#contains("o"))
       // compiles
       println ("fox"#contains("o" as CharSequence))
+p.visually-hidden End code.

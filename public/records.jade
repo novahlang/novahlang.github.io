@@ -6,10 +6,11 @@ p.
   Records are immutable and persistent, so functions that change records will always return a new version.
   Novah records support duplicated fields, but you can only retrieve the last value of a field.
 
-h3 Accessing fields
+h2 Accessing fields
 
 p Fields can be accessed using dot syntax.
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module records
@@ -20,13 +21,15 @@ pre.code
     // nested record access
     city : { address : { city : String } | a } -> String
     city = _.address.city
+p.visually-hidden End code.
 
-h3 String fields
+h2 String fields
 
 p.
   Novah requires every field to be a valid identifier but it's possible to use any string
   as a field.
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module records
@@ -36,9 +39,11 @@ pre.code
 
     utfFields : { "∀" : String, "∉" : Boolean, "😉" : String }
     utfFields = {"😉": "wink", "∉": true, "∀": "forall"}
+p.visually-hidden End code.
 
-h3 Adding new fields
+h2 Adding new fields
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module records
@@ -57,9 +62,11 @@ pre.code
     // the original name cannot be accessed until the current is removed
     duplicates : { name : String } -> { name : String, name : String }
     duplicates person = { name : "Override" | person }
+p.visually-hidden End code.
 
-h3 Removing fields
+h2 Removing fields
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module records
@@ -72,13 +79,15 @@ pre.code
     // removing multiple fields
     nothing : Person -> {}
     nothing = { - name, age | _ }
+p.visually-hidden End code.
 
-h3 Updating and setting fields
+h2 Updating and setting fields
 
 p.
   Setting a new value to a field can be done using the `{ .field = newValue | record }` syntax.
   Updating a field can be done using the `{ .field -> function | record }` syntax.
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module records
@@ -94,9 +103,11 @@ pre.code
       { address : { city : String | r2 } | r }
       -> { address : { city : String | r2 } | r }
     nested = { .address.city = "Tokyo" | _ }
+p.visually-hidden End code.
 
-h3 Merging records
+h2 Merging records
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module records
@@ -117,3 +128,4 @@ pre.code
     // at least one of the records should have no unknow labels
     \#[noWarn]
     fail rec1 rec2 = { + rec1, rec2}
+p.visually-hidden End code.

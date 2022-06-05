@@ -1,10 +1,11 @@
 
-h1 Computation expressions
+h1#computations Computation expressions
 
 p.
   Computation expressions streamlines some types of repetitive code.
   Similar to monads in Haskell or computation expressions in F#.
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module compexp
@@ -27,7 +28,7 @@ pre.code
       let! user = fetchUser name
       let! address = fetchAddress user
       return { address | user }
-    
+
     // all permutations of x and y where x and y are not equals
     uglyPairs : List (Tuple Int Int)
     uglyPairs =
@@ -44,19 +45,20 @@ pre.code
       for x in [1 .. 10] do
         for y in [1 .. 10] do
           if x != y then yield x ; y
+p.visually-hidden End code.
 
-h3 Defining your own
+h2 Defining your own
 
 p.
   Computation expressions are just a syntactic sugar for direct function calls.
   Defining your own is pretty simple and only requires that you choose which functions to support.
 
-table
+table(aria-labelledby="computations")
   thead
     tr
-      th Function name
-      th Typical type
-      th Description
+      th(scope="col") Function name
+      th(scope="col") Typical type
+      th(scope="col") Description
   tbody
     tr
       td bind
@@ -92,8 +94,9 @@ table
       td
         code m a -> m a -> m a
       td `combine` will be used to join line-separated expressions
-    
 
+
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module compexp
@@ -112,7 +115,7 @@ pre.code
       , combine: \(l1 : List a) l2 -> l1 ++ l2
       , zero: []
       }
-    
+
     // define a computation expression for optional values
     pub
     option :
@@ -127,13 +130,14 @@ pre.code
       , combine: optCombine
       , zero: None
       }
-    
+
     optCombine : Option a -> Option a -> Option a
     optCombine x y = case x of
       Some _ -> x
       None -> y
-    
+
     // using the computation expression
     squares : List Int
     squares = do.list
       for x in [1 .. 10] do yield x * x
+p.visually-hidden End code.

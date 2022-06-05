@@ -1,16 +1,16 @@
 
-h1 Pattern Matching
+h1#patterns Pattern Matching
 
 p.
   Novah supports pattern matching using the `case ... of` syntax.
   It also supports pattern destructuring for functions and let declarations.
 
-table
+table(aria-labelledby="patterns")
   thead
     tr
-      th Pattern
-      th Example
-      th Description
+      th(scope="col") Pattern
+      th(scope="col") Example
+      th(scope="col") Description
   tbody
     tr
       td Wildcard
@@ -67,6 +67,7 @@ h2 Pattern guards
 
 p Patterns can have guards for additional filtering.
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module guards
@@ -74,13 +75,15 @@ pre.code
     foo : Int -> Int
     foo x = case x of
       0 -> 0
-      n if n < 0 -> n * -1
+      n if n &lt; 0 -> n * -1
       n -> n
+p.visually-hidden End code.
 
 h2 Multiple patterns
 
 p Case expressions can match on multiple patterns at the same time.
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module multipatterns
@@ -89,6 +92,7 @@ pre.code
     foo x y = case x, y of
       Some v1, Some v2 -> Some (v1 + v2)
       _, _ -> None
+p.visually-hidden End code.
 
 h2 Destructuring
 
@@ -96,6 +100,7 @@ p.
   Function parameters and let declarations can be destructured directly.
   Incomplete patterns require a `noWarn` attribute to compile.
 
+p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module destructuring
@@ -108,3 +113,4 @@ pre.code
       let [match, group1, group2] = Re.find #"(\d), (\d)" "3, 9"
       let sum = int group1 + int group2
       printfln "the sum of %s is %s" [match, toString sum]
+p.visually-hidden End code.
