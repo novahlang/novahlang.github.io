@@ -17,8 +17,8 @@ h2 Imports
 
 p.
   Imports need to be defined after the module definition and before any other definitions.
-  They can be qualified with the `as` keyword or given a list of names to import.
-  Type constructors can be imported explicitly for a type or all at once with `(..)`.
+  They can be qualified with the <code class="inline-code">as</code> keyword or given a list of names to import.
+  Type constructors can be imported explicitly for a type or all at once with <code class="inline-code">(..)</code>.
   Raw unqualified imports are not allowed except for core namespaces.
 
 p.visually-hidden Begin code:
@@ -36,7 +36,7 @@ p.visually-hidden End code.
 h2 Visibility
 
 p.
-  Declarations in Novah are private by default. The `pub` keyword should be used to create public declarations.
+  Declarations in Novah are private by default. The <code class="inline-code">pub</code> keyword should be used to create public declarations.
 
 p.visually-hidden Begin code:
 pre.code
@@ -54,7 +54,7 @@ pre.code
 p.visually-hidden End code.
 
 p.
-  The same is true for declared types, except the `pub+` keyword can be used to also expose the constructors.
+  The same is true for declared types, except the <code class="inline-code">pub+</code> keyword can be used to also expose the constructors.
 
 p.visually-hidden Begin code:
 pre.code
@@ -76,8 +76,7 @@ p.visually-hidden End code.
 h2 Entry point
 
 p.
-  Any namespace containing a public function called `main` with type `Array String -> Unit`
-  will be compiled into a runnable jvm class.
+  Any namespace containing a public function called <code class="inline-code">main</code> with type <code class="inline-code">Array String -> Unit</code> will be compiled into a runnable jvm class.
 
 p.visually-hidden Begin code:
 pre.code
@@ -119,7 +118,7 @@ p.visually-hidden End code.
 h2 Algebraic data types (ADTs)
 
 p.
-  Types can be defined with the keyword `type`.
+  Types can be defined with the keyword <code class="inline-code">type</code>.
   A type can have multiple constructors (sum type) and multiple parameters (product type).
   Both types and constructors must start with an upper case character.
 
@@ -141,9 +140,9 @@ p.visually-hidden End code.
 h2 Type aliases
 
 p.
-  An alias to a type can be created with the `typealias` keyword.
+  An alias to a type can be created with the <code class="inline-code">typealias</code> keyword.
   Aliases are just syntatic sugar and are considered the same type as their alias by the compiler.
-  `Int` is a typealias to `Int32`.
+  <code class="inline-code">Int</code> is a typealias to <code class="inline-code">Int32</code>.
 
 p.visually-hidden Begin code:
 pre.code
@@ -194,7 +193,7 @@ p.visually-hidden End code.
 
 h2 Conditional expressions
 
-p Novah has two conditional expressions: `if` and `case`.
+p Novah has two conditional expressions: <code class="inline-code">if</code> and <code class="inline-code">case</code>.
 
 p.visually-hidden Begin code:
 pre.code
@@ -404,7 +403,7 @@ p See
 
 h2 Type annotations and casts
 
-p Novah requires almost no type annotations but values can still be annotated with a type
+p Novah requires almost no type annotations but values can still be annotated with a type.
 
 p.visually-hidden Begin code:
 pre.code
@@ -421,7 +420,7 @@ pre.code
       let fun (x : Int) = x + 1
 p.visually-hidden End code.
 
-p Top level values are required to be annotated for documentation purpose unless a \#[noWarn] attribute is present.
+p Top level values are required to be annotated for documentation purpose unless a <code class="inline-code">\#[noWarn]</code> attribute is present.
 
 p.visually-hidden Begin code:
 pre.code
@@ -436,7 +435,7 @@ pre.code
     bar () = 1
 p.visually-hidden End code.
 
-p Types can also be cast to some other types with the `as` keyword. Casts should only be used for Java interoperability as they can cause runtime errors.
+p Types can also be cast to some other types with the <code class="inline-code">as</code> keyword. Casts should only be used for Java interoperability as they can cause runtime errors.
 
 p.visually-hidden Begin code:
 pre.code
@@ -453,7 +452,7 @@ p.visually-hidden End code.
 
 h2 Anonymous function arguments
 
-p Novah support anonymous lambdas in some specific cases using _ (underscore) as the function parameter.
+p Novah support anonymous lambdas in some specific cases using <code class="inline-code">_</code> (underscore) as the function parameter.
 
 p.visually-hidden Begin code:
 pre.code

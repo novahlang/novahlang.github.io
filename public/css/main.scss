@@ -126,6 +126,12 @@ main > ul {
   font-family: monospace;
 }
 
+.inline-code {
+  background-color: $novah_logo_darker;
+  font-size: 1.1rem;
+  padding: 0 0.3rem;
+}
+
 table {
   min-width: 50%;
   border-spacing: 0;

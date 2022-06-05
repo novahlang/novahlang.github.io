@@ -40,8 +40,8 @@ nameless = { - name | _ }
 
 // removing multiple fields
 nothing : Person -> {}
-nothing = { - name, age | _ }</code></pre><p class="visually-hidden">End code.</p><h2>Updating and setting fields</h2><p>Setting a new value to a field can be done using the `{ .field = newValue | record }` syntax.
-Updating a field can be done using the `{ .field -> function | record }` syntax.
+nothing = { - name, age | _ }</code></pre><p class="visually-hidden">End code.</p><h2>Updating and setting fields</h2><p>Setting a new value to a field can be done using the <code class="inline-code">{ .field = newValue | record }</code> syntax.
+Updating a field can be done using the <code class="inline-code">{ .field -> function | record }</code> syntax.
 </p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module records
 
 setName : String -> { name : String | r } -> { name : String | r }

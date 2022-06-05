@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><title>Java interoperability | Novah language</title><meta charset="UTF-8"><link rel="stylesheet" href="/css/main.css"><link rel="icon" href="/img/novah.png"><script src="/js/microlight.js"></script></head><body><a href="#main" class="visually-hidden">Skip to main content</a><header><div class="title-header"><a href="/" aria-label="Novah homepage"><img src="/img/novah.svg" width="32" height="32" alt="logo" class="logo">Novah</a></div><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16" height="16" alt="Github">Source</a></header><div id="content"><nav><ul class="nav-list"><li><a href="/">Home</a></li><li><a href="/syntax">Syntax</a></li><li><a href="/types">Types</a></li><li><a href="/records">Records</a></li><li><a href="/pattern-matching">Pattern matching</a></li><li class="nav-selected"><a href="/interop">Java interoperability</a></li><li><a href="/computations">Computation expressions</a></li><li><a href="/instance">Instance arguments</a></li><li><a href="/apidoc">API docs</a></li></ul></nav><main id="main"><h1>Java Interoperability</h1><p>It's possible to import java classes and call java methods, constructors and fields from Novah.</p><h2>Foreign imports</h2><p>Java classes in Novah cannot be used fully qualified, they have to be imported first.
-You can rename a Java class at import time with the `as` keyword.
+You can rename a Java class at import time with the <code class="inline-code">as</code> keyword.
 </p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module foreigns
 
 foreign import java.io.File
@@ -10,13 +10,13 @@ foo () =
   // a static method call
   println (String#valueOf('a'))
   // a non-static method call
-  println ("fox"#substring(1))</code></pre><p class="visually-hidden">End code.</p><h2>Constructors</h2><p>Constructors are special static methods named `new`.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module staticmethods
+  println ("fox"#substring(1))</code></pre><p class="visually-hidden">End code.</p><h2>Constructors</h2><p>Constructors are special static methods named <code class="inline-code">new</code>.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module staticmethods
 
 foreign import java.io.File
 
 newFile : String -> File
-newFile name = File#new(name)</code></pre><p class="visually-hidden">End code.</p><h2>Fields</h2><p>Fields are accessed in the same way as methods except they use the hash-dash operator (#-).
-Setting a field can be done with the setter operator (&lt;-).
+newFile name = File#new(name)</code></pre><p class="visually-hidden">End code.</p><h2>Fields</h2><p>Fields are accessed in the same way as methods except they use the hash-dash operator (<code class="inline-code">#-</code>).
+Setting a field can be done with the setter operator (<code class="inline-code">&lt;-</code>).
 </p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module fields
 
 /*

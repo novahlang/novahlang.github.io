@@ -1,8 +1,8 @@
 <!DOCTYPE html><html lang="en"><head><title>Syntax | Novah language</title><meta charset="UTF-8"><link rel="stylesheet" href="/css/main.css"><link rel="icon" href="/img/novah.png"><script src="/js/microlight.js"></script></head><body><a href="#main" class="visually-hidden">Skip to main content</a><header><div class="title-header"><a href="/" aria-label="Novah homepage"><img src="/img/novah.svg" width="32" height="32" alt="logo" class="logo">Novah</a></div><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16" height="16" alt="Github">Source</a></header><div id="content"><nav><ul class="nav-list"><li><a href="/">Home</a></li><li class="nav-selected"><a href="/syntax">Syntax</a></li><li><a href="/types">Types</a></li><li><a href="/records">Records</a></li><li><a href="/pattern-matching">Pattern matching</a></li><li><a href="/interop">Java interoperability</a></li><li><a href="/computations">Computation expressions</a></li><li><a href="/instance">Instance arguments</a></li><li><a href="/apidoc">API docs</a></li></ul></nav><main id="main"><h1>Syntax</h1><h2>Module definition</h2><p>Every novah file should start with a module definition.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module my.namespace
 
 ...</code></pre><p class="visually-hidden">End code.</p><h2>Imports</h2><p>Imports need to be defined after the module definition and before any other definitions.
-They can be qualified with the `as` keyword or given a list of names to import.
-Type constructors can be imported explicitly for a type or all at once with `(..)`.
+They can be qualified with the <code class="inline-code">as</code> keyword or given a list of names to import.
+Type constructors can be imported explicitly for a type or all at once with <code class="inline-code">(..)</code>.
 Raw unqualified imports are not allowed except for core namespaces.
 </p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module my.namespace
 
@@ -10,7 +10,7 @@ import module1 as Mod
 import module2 (fun1, Type1(Ctor1, Ctor2), Type2(..))
 
 // error
-import unqualified</code></pre><p class="visually-hidden">End code.</p><h2>Visibility</h2><p>Declarations in Novah are private by default. The `pub` keyword should be used to create public declarations.
+import unqualified</code></pre><p class="visually-hidden">End code.</p><h2>Visibility</h2><p>Declarations in Novah are private by default. The <code class="inline-code">pub</code> keyword should be used to create public declarations.
 </p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module visibility
 
 // private declaration
@@ -20,7 +20,7 @@ foo = 3
 // public declaration
 pub
 bar : Int -> String
-bar x = toString x</code></pre><p class="visually-hidden">End code.</p><p>The same is true for declared types, except the `pub+` keyword can be used to also expose the constructors.
+bar x = toString x</code></pre><p class="visually-hidden">End code.</p><p>The same is true for declared types, except the <code class="inline-code">pub+</code> keyword can be used to also expose the constructors.
 </p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module visibility
 
 // private type
@@ -32,8 +32,7 @@ type Bar = Bar Int
 
 // public type with public constructors
 pub+
-type Baz = Baz Int</code></pre><p class="visually-hidden">End code.</p><h2>Entry point</h2><p>Any namespace containing a public function called `main` with type `Array String -> Unit`
-will be compiled into a runnable jvm class.
+type Baz = Baz Int</code></pre><p class="visually-hidden">End code.</p><h2>Entry point</h2><p>Any namespace containing a public function called <code class="inline-code">main</code> with type <code class="inline-code">Array String -> Unit</code> will be compiled into a runnable jvm class.
 </p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module entrypoint
 
 pub
@@ -55,7 +54,7 @@ val1 = 9876543
 // unless they have a `noWarn` attribute
 // which can also be put at the module level
 #[noWarn]
-times10 x = x * 10</code></pre><p class="visually-hidden">End code.</p><h2>Algebraic data types (ADTs)</h2><p>Types can be defined with the keyword `type`.
+times10 x = x * 10</code></pre><p class="visually-hidden">End code.</p><h2>Algebraic data types (ADTs)</h2><p>Types can be defined with the keyword <code class="inline-code">type</code>.
 A type can have multiple constructors (sum type) and multiple parameters (product type).
 Both types and constructors must start with an upper case character.
 </p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module types
@@ -67,9 +66,9 @@ type Option a = Some a | None
 type Color = Red | Black
 
 // A recursive type
-type LinkedList a = Nil | Cons a (LinkedList a)</code></pre><p class="visually-hidden">End code.</p><h2>Type aliases</h2><p>An alias to a type can be created with the `typealias` keyword.
+type LinkedList a = Nil | Cons a (LinkedList a)</code></pre><p class="visually-hidden">End code.</p><h2>Type aliases</h2><p>An alias to a type can be created with the <code class="inline-code">typealias</code> keyword.
 Aliases are just syntatic sugar and are considered the same type as their alias by the compiler.
-`Int` is a typealias to `Int32`.
+<code class="inline-code">Int</code> is a typealias to <code class="inline-code">Int32</code>.
 </p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module types2
 
 typealias MyBoolean = Boolean
@@ -91,7 +90,7 @@ and don't consider any kind of escape like \n \t
 #[noWarn]
 foo () =
   let [_, num] = Re.find #"(\d+)" "12345"
-  println (int num)</code></pre><p class="visually-hidden">End code.</p><h2>Conditional expressions</h2><p>Novah has two conditional expressions: `if` and `case`.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module conditionals
+  println (int num)</code></pre><p class="visually-hidden">End code.</p><h2>Conditional expressions</h2><p>Novah has two conditional expressions: <code class="inline-code">if</code> and <code class="inline-code">case</code>.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module conditionals
 
 // Both the then and else cases must have the same type
 abs : Int -> Int
@@ -169,7 +168,7 @@ aMap = Map.new ["a" ; 0, "b" ; 1, "c" ; 2]
 typealias Point = { x : Float64, y : Float64 }
 
 pointRecord : Point
-pointRecord = {x: 1.2, y: 5.66}</code></pre><p class="visually-hidden">End code.</p><p>See <a href="/records">records.</a></p><h2>Type annotations and casts</h2><p>Novah requires almost no type annotations but values can still be annotated with a type</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module annotations
+pointRecord = {x: 1.2, y: 5.66}</code></pre><p class="visually-hidden">End code.</p><p>See <a href="/records">records.</a></p><h2>Type annotations and casts</h2><p>Novah requires almost no type annotations but values can still be annotated with a type.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module annotations
 
 foo : Unit -> Int
 foo () =
@@ -178,21 +177,21 @@ foo () =
   // compilation error: types don't match
   let piInt = Math.pi : Int
   // annotate a parameter
-  let fun (x : Int) = x + 1</code></pre><p class="visually-hidden">End code.</p><p>Top level values are required to be annotated for documentation purpose unless a #[noWarn] attribute is present.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module annotations
+  let fun (x : Int) = x + 1</code></pre><p class="visually-hidden">End code.</p><p>Top level values are required to be annotated for documentation purpose unless a <code class="inline-code">#[noWarn]</code> attribute is present.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module annotations
 
 // compilation error: no type annotation
 foo () = 1
 
 // OK
 #[noWarn]
-bar () = 1</code></pre><p class="visually-hidden">End code.</p><p>Types can also be cast to some other types with the `as` keyword. Casts should only be used for Java interoperability as they can cause runtime errors.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module casts
+bar () = 1</code></pre><p class="visually-hidden">End code.</p><p>Types can also be cast to some other types with the <code class="inline-code">as</code> keyword. Casts should only be used for Java interoperability as they can cause runtime errors.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module casts
 
 toStringNullable : Nullable String -> String
 toStringNullable val =
   if val === null then
     "null"
   else
-    val as String</code></pre><p class="visually-hidden">End code.</p><h2>Anonymous function arguments</h2><p>Novah support anonymous lambdas in some specific cases using _ (underscore) as the function parameter.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module anonymouslambdas
+    val as String</code></pre><p class="visually-hidden">End code.</p><h2>Anonymous function arguments</h2><p>Novah support anonymous lambdas in some specific cases using <code class="inline-code">_</code> (underscore) as the function parameter.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module anonymouslambdas
 
 foreign import java.lang.Math
 
