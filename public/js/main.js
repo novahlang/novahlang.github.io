@@ -5,7 +5,7 @@ function closeNav() {
 
   nav.classList.add('closed');
   nav.classList.remove('open');
-  links.classList.add('visually-hidden');
+  links.classList.add('hidden');
   button.setAttribute('aria-expanded', false);
 }
 
@@ -16,7 +16,7 @@ function openNav() {
 
   nav.classList.add('open');
   nav.classList.remove('closed');
-  links.classList.remove('visually-hidden');
+  links.classList.remove('hidden');
   button.setAttribute('aria-expanded', true);
 }
 
@@ -57,3 +57,7 @@ const debounce = (callback, time) => {
 window.onload = forceCloseNav;
 window.onresize = () => debounce(forceCloseNav, 100);
 window.addEventListener('keyup', e => escapeNav(e));
+window.addEventListener('DOMContentLoaded', () => {
+  const lastLink = document.querySelector('.nav-list').lastElementChild.firstElementChild;
+  lastLink.addEventListener('blur', forceCloseNav);
+});
