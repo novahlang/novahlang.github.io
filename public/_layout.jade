@@ -3,21 +3,24 @@ html(lang="en")
   head
     title= pageName === 'Home' ? "Novah language" : pageName + " | Novah language"
     meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel="stylesheet", href="/css/main.css")
     link(rel="icon", href="/img/novah.png")
+    script(src="/js/main.js")
     script(src="/js/microlight.js")
   body
     a.visually-hidden(href="#main") Skip to main content
     header
-      div.title-header
-        a(href="/" aria-label="Novah homepage")
+      div.header-content
+        a.header-title(href="/" aria-label="Novah homepage")
           img.logo(src="/img/novah.svg", width="32", height="32", alt="logo")
           | Novah
-      a.source(href="//github.com/stackoverflow/novah")
-        img(src="/img/GitHub-Mark-Light-32px.png", width="16", height="16", alt="Github")
-        | Source
+        a.source(href="//github.com/stackoverflow/novah")
+          img(src="/img/GitHub-Mark-Light-32px.png", width="16", height="16", alt="Github")
+          | Source
+      != partial("_nav-mobile")
 
     #content
-      != partial("_menu")
+      != partial("_nav")
       main#main
         != yield

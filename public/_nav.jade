@@ -1,0 +1,6 @@
+
+nav#nav
+  ul.nav-list
+    for page in pages
+      li(class=page.name === pageName ? "nav-selected" : "", aria-current=page.name === pageName ? "page" : "false", role="menuitem")
+        a(href="#{page.href}") #{page.name}

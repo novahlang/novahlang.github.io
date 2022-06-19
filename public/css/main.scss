@@ -11,15 +11,26 @@ body {
 }
 
 header {
+  position: sticky;
+  top: 0;
   padding: 0 2rem;
   height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: $grey;
   border-bottom: 1px solid $light_grey;
+  z-index: $zindex-sticky;
 }
 
-.title-header > a {
+.header-content {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-title {
   display: flex;
   align-items: center;
   color: $white;
@@ -39,21 +50,50 @@ header {
 }
 
 #content {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-#content > :last-child {
-  flex-basis: 0;
-  flex-grow: 999;
-  min-width: 60%;
+  @media (min-width: 1030px) {
+        display: grid;
+        grid-template-columns: 310px auto;
+    }
 }
 
 nav {
-  flex-basis: 310px;
-  flex-grow: 1;
-  height: auto;
+  height: calc(100dvh - 4rem - 1px);
+  align-self: start;
+  position: sticky;
+  top: calc(4rem + 1px);
   border-right: 1px solid $light_grey;
+  z-index: $zindex-sticky;
+
+  &.open {
+    height: calc(100dvh - 4rem - 1px);
+    background-color: $grey;
+    border-right: 1px solid $light_grey;
+
+  }
+
+  &.closed {
+    height: 0;
+    border-right: none;
+  }
+}
+
+.nav-mobile {
+  display: flex;
+
+  @media (min-width: 1030px) {
+    display: none;
+  }
+}
+
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: 1px solid $light_grey;
+  border-radius: 4px;
+  margin-left: 1.7rem;
 }
 
 .nav-list {
@@ -75,24 +115,17 @@ nav {
   text-decoration: none;
   color: $white;
   display: block;
-  padding: 0.5rem 0 0.5rem 0;
+  padding: 0.5rem 0;
 }
 
 .nav-selected {
   background-color: $novah_logo_dark;
 }
 
-#content {
-  display: flex;
-  width: 100%;
-}
-
 main {
-  margin: 0 4rem;
-
-  @media (min-width: 768px) {
-    margin: 0 7rem;
-  }
+  max-width: 720px;
+  margin: 0 auto;
+  padding-inline: 1rem;
 }
 
 main a {
@@ -154,9 +187,16 @@ td {
   padding-bottom: 0.75rem;
 }
 
+:focus {
+  outline: 2px solid #d71ef7;
+}
+
+h1:focus {
+  outline: none;
+}
+
 .visually-hidden {
   position: absolute;
-  clip: rect(0 0 0 0);
   border: 0;
   height: 1px;
   margin: -1px;
