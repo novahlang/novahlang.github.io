@@ -50,7 +50,7 @@ header {
 }
 
 #content {
-  @media (min-width: 1030px) {
+  @media (min-width: $min-width) {
         display: grid;
         grid-template-columns: 310px auto;
     }
@@ -80,7 +80,7 @@ nav {
 .nav-mobile {
   display: flex;
 
-  @media (min-width: 1030px) {
+  @media (min-width: $min-width) {
     display: none;
   }
 }
@@ -107,7 +107,7 @@ button {
   padding-left: 2rem;
 
   &:hover {
-    background-color: $novah_logo_darker;
+    background-color: $novah_logo_light;
   }
 }
 
@@ -116,6 +116,11 @@ button {
   color: $white;
   display: block;
   padding: 0.5rem 0;
+
+  &:hover {
+    color: $grey;
+    font-weight: bold;
+  }
 }
 
 .nav-selected {
@@ -188,10 +193,10 @@ td {
 }
 
 :focus {
-  outline: 2px solid #d71ef7;
+  outline: 2px solid $novah_logo_light;
 }
 
-h1:focus {
+:focus[tabIndex="-1"] {
   outline: none;
 }
 
