@@ -7,7 +7,7 @@ name : { name : String | r } -> String
 name person = person.name
 
 // nested record access
-city : { address : { city : String } | a } -> String
+city : { address : { city : String } | r } -> String
 city = _.address.city</code></pre><p class="visually-hidden">End code.</p><h2>String fields</h2><p>Novah requires every field to be a valid identifier but it's possible to use any string
 as a field.
 </p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module records

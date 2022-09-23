@@ -22,4 +22,4 @@ foo {x, y} = printfln "Point %d %d" [x, y]
 bar () =
   let [match, group1, group2] = Re.find #"(\d), (\d)" "3, 9"
   let sum = int group1 + int group2
-  printfln "the sum of %s is %s" [match, toString sum]</code></pre><p class="visually-hidden">End code.</p></main></div></body></html>
+  printfln "the sum of %s is %s" [match, show sum]</code></pre><p class="visually-hidden">End code.</p></main></div></body></html>

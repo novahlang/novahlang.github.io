@@ -92,7 +92,7 @@ p.visually-hidden End code.
 h2 Functions
 
 p.
-  Functions and values with their types can be easily defined.
+  Functions and values can be easily defined.
   All values in Novah are immutable, so there are no global mutable variables.
   All top level definitions must start with a lower case character.
 
@@ -101,12 +101,11 @@ pre.code
   code.microlight.
     module functions
 
-    // A comment
     fun1 : String -> Boolean
     fun1 str = str == "true"
 
-    val1 : Int
-    val1 = 9876543
+    val1 : Float64
+    val1 = 3.1415
 
     // Top level definitions require explicit types
     // unless they have a `noWarn` attribute
@@ -178,7 +177,7 @@ p.visually-hidden End code.
 
 h2 Regular expression patterns
 
-p Novah has support for literal regex patterns. Literal regexes won't escape characters like normal strings.
+p Novah has support for literal regex patterns. Literal regexes won't escape characters like normal strings, except for double quotes (").
 
 p.visually-hidden Begin code:
 pre.code
@@ -220,6 +219,36 @@ p See
   =" "
   a(href="/pattern-matching") pattern matching.
 
+h2 Atoms
+
+p.
+  Sometimes you need to mutate values to achieve better Java interoperability or a more idiomatic code.
+  Novah has atoms for these situations.
+
+p.
+  Atoms are synchronous atomic values to manage independent state. They can be dereferenced, changed and reset.
+  They should always hold immutable values and the swap function has to be free of side effects, as it may run multiple times.
+
+p.visually-hidden Begin code:
+pre.code
+  code.microlight.
+    module atoms
+
+    pub
+    main : Array String -> Unit
+    main _ =
+      // create and atom
+      let val = atom 10
+      // dereference an atom
+      println @val
+      // reset the value
+      val := 99
+      reset 99 val
+      // apply a function the value
+      val ::= (_ * 10)
+      swap (_ * 10) val
+p.visually-hidden End code.
+
 h2 While loop
 
 p Even though Novah support while loops, a tail recursive function is the idiomatic way to represent such constructs.
@@ -235,10 +264,10 @@ pre.code
       let fact = atom x
       let i = atom x
 
-      while (deref i) > 1 do
+      while @i > 1 do
         swap (_ - 1) i
-        swap (_ * (deref i)) fact
-      deref fact
+        swap (_ * @i) fact
+      @fact
 
     // Idiomatic version
     // Novah will optimize the tail recursion to a loop
@@ -260,13 +289,24 @@ pre.code
   code.microlight.
     module operators
 
-    (?) : Option a -> a -> a
-    (?) opt default = case opt of
+    (?!) : Option a -> a -> a
+    (?!) opt default = case opt of
       Some x -> x
       None -> default
 
     or0 : Option Int -> Int
-    or0 n = n ? 0
+    or0 n = n ?! 0
+p.visually-hidden End code.
+
+p Any function can be used as an operator by surrounding it with <code class="inline-code">`</code>, making it a backtick operator.
+
+p.visually-hidden Begin code:
+pre.code
+  code.microlight.
+    module operators
+
+    has0 : List Int -> Boolean
+    has0 list = 0 `isIn` list
 p.visually-hidden End code.
 
 h3#associativity Associativity
@@ -336,7 +376,7 @@ table(aria-labelledby="precedence")
       td [1 ... 10], 'a' .. 'z'
       td 8
     tr
-      td ` (backtick operator)
+      td `
       td (3 + 3) `shouldBe` 6
       td 9
 
@@ -354,9 +394,11 @@ pre.code
 
     zeroToTen = 1 .. 10
 
+    zeroToNine = 1 ... 9
+
     digitList = [0 ... 10]
 
-    charSet = \#{'a' .. 'z'}
+    lowerChars = \#{'a' .. 'z'}
 
     oddDigits = range 1 10 2
 
@@ -369,7 +411,7 @@ p.visually-hidden End code.
 h2#collections Collections
 
 p
-  | Novah comes with literal support for commonly used data structures like lists, sets, maps, tuples and (row-polymorphic) records.
+  | Novah comes with literal support for commonly used data structures like lists, sets, tuples and (row-polymorphic) records.
   | All Novah data structures are immutable and persistent, using
   =" "
   a(href="https://github.com/lacuna/bifurcan") bifurcan.
@@ -388,14 +430,18 @@ pre.code
     aTuple : Tuple Boolean Char
     aTuple = true ; 'z'
 
-    aMap : Map String Int
-    aMap = Map.new ["a" ; 0, "b" ; 1, "c" ; 2]
-
     typealias Point = { x : Float64, y : Float64 }
 
     pointRecord : Point
     pointRecord = {x: 1.2, y: 5.66}
+
+    // Novah also has support for persistent maps
+    // but there's no literal syntax for it
+    aMap : Map String Int
+    aMap = Map.new ["a" ; 0, "b" ; 1, "c" ; 2]
 p.visually-hidden End code.
+
+p Lists in Novah are implemented using RRB (Relaxed-Radix-Balanced) vectors so they can be used as linked lists or vectors without any performance penalty.
 
 p See
   =" "
@@ -416,7 +462,7 @@ pre.code
       let pi = Math.pi : Float64
       // compilation error: types don't match
       let piInt = Math.pi : Int
-      // annotate a parameter
+      // annotate a function parameter
       let fun (x : Int) = x + 1
 p.visually-hidden End code.
 
@@ -435,19 +481,108 @@ pre.code
     bar () = 1
 p.visually-hidden End code.
 
-p Types can also be cast to some other types with the <code class="inline-code">as</code> keyword. Casts should only be used for Java interoperability as they can cause runtime errors.
+p Types can also be cast to some other types with the <code class="inline-code">as</code> keyword. Casts should only be used for Java interoperability as they can cause runtime errors!
 
 p.visually-hidden Begin code:
 pre.code
   code.microlight.
     module casts
 
-    toStringNullable : Nullable String -> String
-    toStringNullable val =
-      if val === null then
-        "null"
-      else
-        val as String
+    pub
+    hashCode : a -> Int32
+    hashCode x = (x as Object)#hashCode()
+p.visually-hidden End code.
+
+h2 Optional values
+
+p
+ | Novah has a type for representing optional values: <code class="inline-code">Option a</code>.
+ | This type is converted to a nullable Java object (or a boxed type in case of primitives) for optimization and interoperability purposes.
+
+p.visually-hidden Begin code:
+pre.code
+  code.microlight.
+    module options
+
+    // ?: can be used to return default values from an option
+    or0 : Option Int -> Int
+    or0 x = x ?: 0
+
+    // ?? can be used to execute functions inside an option,
+    // like `Options.map`
+    thread : Option (List Int) -> Option Int
+    thread list = list ?? List.map (_ + 1) ?? List.sum
+p.visually-hidden End code.
+
+p
+ | Options can be unwrapped with the <code class="inline-code">!!</code> operator.
+ | Note that this is an unsafe operation and should be used only in tests or throw-away code!
+
+p.visually-hidden Begin code:
+pre.code
+  code.microlight.
+    module options
+
+    pub
+    main : Array String -> Unit
+    main _ =
+      // unwrap the option as the list is not empty
+      println (List.min [5, 9, 3, 6, 1, 8])!!
+      // _!! can be used as a function that unwraps an option
+      [5, 9, 3, 6, 1, 8]
+        |> List.max
+        |> _!!
+        |> println
+p.visually-hidden End code.
+
+h2 Threading functions
+
+p
+ | In object oriented language it's common to chain methods using dot syntax. Ex.: <code class="inline-code">obj.method1().method2()</code>.
+ | In Novah the idiomatic way to achieve this is the railway operator <code class="inline-code">|></code> and its friends: <code class="inline-code"><|, <<, >></code>.
+
+h3#precedence Threading operators
+
+table(aria-labelledby="threading-operators")
+  thead
+    tr
+      th(scope="col") Operator
+      th(scope="col") Name
+      th(scope="col") Example
+  tbody
+    tr
+      td |>
+      td railway
+      td "56" |> String.reverse |> int
+    tr
+      td <|
+      td reverse railway
+      td int <| String.reverse <| "56"
+    tr
+      td >>
+      td forward function composition
+      td String.split "," >> List.size
+    tr
+      td <<
+      td backward function composition
+      td List.size << String.split ","
+
+p.visually-hidden Begin code:
+pre.code
+  code.microlight.
+    module railway
+
+    throwDice : Int -> Int -> Int
+    throwDice faces modifier =
+      [1 .. faces]
+        |> List.randNth
+        |> (_ + modifier)
+
+    throwD6 : Int -> Int
+    throwD6 = throwDice 6
+
+    parseNumbers : String -> List Int
+    parseNumbers = String.split "," >> List.map int
 p.visually-hidden End code.
 
 h2 Anonymous function arguments

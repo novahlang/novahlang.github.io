@@ -112,5 +112,5 @@ pre.code
     bar () =
       let [match, group1, group2] = Re.find #"(\d), (\d)" "3, 9"
       let sum = int group1 + int group2
-      printfln "the sum of %s is %s" [match, toString sum]
+      printfln "the sum of %s is %s" [match, show sum]
 p.visually-hidden End code.

@@ -42,7 +42,27 @@ pub
 main : Array String -> Unit
 main _ =
   let fclass = ForeignClass#new(3)
-  println (setValue fclass 10)</code></pre><p class="visually-hidden">End code.</p><h2>Caveats</h2><p>Because Novah's type system doesn't understand object orientation, interoperability may require
+  println (setValue fclass 10)</code></pre><p class="visually-hidden">End code.</p><h2>Option and null</h2><p> 
+Methods in Java not always return a value, they can also return null. They can also receive null as parameters,
+if said parameters are not primitives.
+Novah has syntax to receive and pass nullable values to Java. Note that nulls in Novah are represented by the Option type.</p><p>Any non primitive parameter in a java constructor, method or field set can receive an Option of the same type.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module nullables
+
+pub
+main : Array String -> Unit
+main _ =
+  // the second and third fields will receive null
+  MyClass#new(3, None, None)
+  object#method(None)
+  object#-field <- None</code></pre><p class="visually-hidden">End code.</p><p>The #? and #-? syntax can be used to return Option types from a method or field, respectively.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module nullables
+
+pub
+main : Array String -> Unit
+main _ =
+  // opt and opt2 will be Options
+  let opt = MyClass#?method()
+  let opt2 = object#-?field
+  println opt
+  println opt2</code></pre><p class="visually-hidden">End code.</p><h2>Caveats</h2><p>Because Novah's type system doesn't understand object orientation, interoperability may require
 type casting in order for the code to compile.
 This is specially true with (co/contra)variant generic functions.
 </p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module caveats
@@ -56,4 +76,6 @@ main _ =
   // expected CharSequence, got String
   println ("fox"#contains("o"))
   // compiles
-  println ("fox"#contains("o" as CharSequence))</code></pre><p class="visually-hidden">End code.</p></main></div></body></html>
+  println ("fox"#contains("o" as CharSequence))
+  // idiomatic way using the stdlib
+  println ("o" `isIn` "fox")</code></pre><p class="visually-hidden">End code.</p></main></div></body></html>

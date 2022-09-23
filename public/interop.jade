@@ -87,6 +87,47 @@ pre.code
       println (setValue fclass 10)
 p.visually-hidden End code.
 
+h2 Option and null
+
+p 
+ | Methods in Java not always return a value, they can also return null. They can also receive null as parameters,
+ | if said parameters are not primitives.
+ | Novah has syntax to receive and pass nullable values to Java. Note that nulls in Novah are represented by the Option type.
+
+p
+ | Any non primitive parameter in a java constructor, method or field set can receive an Option of the same type.
+
+p.visually-hidden Begin code:
+pre.code
+  code.microlight.
+    module nullables
+
+    pub
+    main : Array String -> Unit
+    main _ =
+      // the second and third fields will receive null
+      MyClass#new(3, None, None)
+      object#method(None)
+      object#-field <- None
+p.visually-hidden End code.
+
+p The #? and #-? syntax can be used to return Option types from a method or field, respectively.
+
+p.visually-hidden Begin code:
+pre.code
+  code.microlight.
+    module nullables
+
+    pub
+    main : Array String -> Unit
+    main _ =
+      // opt and opt2 will be Options
+      let opt = MyClass#?method()
+      let opt2 = object#-?field
+      println opt
+      println opt2
+p.visually-hidden End code.
+
 h2 Caveats
 
 p.
@@ -109,4 +150,6 @@ pre.code
       println ("fox"#contains("o"))
       // compiles
       println ("fox"#contains("o" as CharSequence))
+      // idiomatic way using the stdlib
+      println ("o" `isIn` "fox")
 p.visually-hidden End code.
