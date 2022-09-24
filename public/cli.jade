@@ -1,0 +1,102 @@
+
+h1(tabIndex="-1") Command line and project management
+
+p Novah comes not only with a compiler but with a whole suite of commands.
+
+pre.code
+  code.
+    $ novah --help
+    Usage: novah [OPTIONS] COMMAND [ARGS]...
+
+    Options:
+      -v, --version  show the current version and exit
+      -h, --help     Show this message and exit
+
+    Commands:
+      compile  compile source files
+      deps     fetch and store all dependencies for this project
+      build    compile the project described by the `novah.json` file
+      new      create a Novah project
+      run      run the main module if one is defined
+      clear    clear the output directory
+      apidoc   generate the api documentation for the project
+      repl     start a repl for the current project
+      ide      run the Novah language server
+
+h2 Project management
+
+p.
+  To create a new project use <code class="inline-code">novah new &lt;project-name&gt; </code>.
+  A new directory will be created with the project files.
+
+h3 The novah.json file
+
+p.
+  Inside the project a `novah.json` file will be created describing your project.
+  There you can add maven or git (requires git installed) depencencies, set your source and Java paths,
+  create aliases, define main entry points and add maven repositories.
+  Ex.:
+
+pre.code
+  code.
+    {
+        "paths": ["src"],
+        "javaPaths": ["src-java"],
+        "deps": {
+            "com.fasterxml.jackson.core/jackson-databind":
+                {"mvn/version": "2.13.0"},
+            "github.com/novahlang/novah-json": {"git/version": "main"}
+        }
+        "main": "main",
+        "output": "./output",
+        "aliases": {
+            "test": {
+                "extraPaths": ["test"],
+                "main": "test.main"
+            }
+        },
+        "mvn/repos": {
+          "central": {"url": "https://mvnrepository.com/repos/central"}
+        }
+    }
+
+h3 Building the project
+
+p.
+  After the project is created you can setup it with <code class="inline-code">novah deps</code> which
+  will download any dependency and create the necessary directories and files for the project.
+  Now the project is ready to build with <code class="inline-code">novah build</code> or if
+  you want to build and run directly <code class="inline-code">novah run -b</code>
+
+h3 Running the project
+
+p.
+  With the project built you can now run it with <code class="inline-code">novah run</code> which will execute the
+  main function of the given alias (or the default alias if none is given). For example:
+  <code class="inline-code">novah run -a test</code> will run the main function of the `test` alias, which
+  should be the project's tests. You can create new aliases with additional source paths and main entry points
+  to execute other routines, tests, build steps or setups your project need.
+
+h2 REPL
+
+p.
+  Novah comes with a basic repl (read eval print loop) for playing around with the language.
+  It can be execute for a project with <code class="inline-code">novah repl</code>.
+
+pre.code
+  code.
+    Novah 0.4.0 repl.
+
+    Type :help for a list of commands.
+
+    > :help
+    :help           -> shows this help
+    :clear          -> resets the repl
+    :q, ctrl+c      -> quits the repl
+    :>              -> starts a definition (value or function).
+                       Won't stop until an empty new line is reached
+    :test &lt;suite>   -> runs the specified test suite using
+                       novah.test.runTests
+    :t, :type &lt;exp> -> shows the type of the given expression 
+    import &lt;module> -> adds an import to the repl
+    &lt;expression>    -> evaluates the expression

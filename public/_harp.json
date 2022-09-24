@@ -9,6 +9,7 @@
       {"name": "Java interoperability", "href": "/interop"},
       {"name": "Computation expressions", "href": "/computations"},
       {"name": "Instance arguments", "href": "/instance"},
+      {"name": "Command line", "href": "/cli"},
       {"name": "API docs", "href": "/apidoc"}
     ]
   }

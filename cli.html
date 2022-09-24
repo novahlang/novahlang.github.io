@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="en"><head><title>Command line | Novah language</title><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/main.css"><link rel="icon" href="/img/novah.png"><script src="/js/main.js"></script><script src="/js/microlight.js"></script></head><body><a href="#main" class="visually-hidden">Skip to main content</a><header><div class="header-content"><a href="/" aria-label="Novah homepage" class="header-title"><img src="/img/novah.svg" width="32" height="32" alt="logo" class="logo">Novah</a><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16" height="16" alt="Github">Source</a></div><button onclick="onNavToggle()" aria-haspopup="menu" aria-controls="nav" aria-expanded="false" class="nav-mobile closed"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16" class="nav-icon"><path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path></svg></button></header><div id="content"><nav id="nav"><ul class="nav-list"><li aria-current="false" role="menuitem" tabIndex="-1"><a href="/">Home</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/syntax">Syntax</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/types">Types</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/records">Records</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/pattern-matching">Pattern matching</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/interop">Java interoperability</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/computations">Computation expressions</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/instance">Instance arguments</a></li><li aria-current="page" role="menuitem" tabIndex="null" class="nav-selected"><a href="/cli">Command line</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/apidoc">API docs</a></li></ul></nav><main id="main"><h1 tabIndex="-1">Command line and project management</h1><p>Novah comes not only with a compiler but with a whole suite of commands.</p><pre class="code"><code>$ novah --help
+Usage: novah [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  -v, --version  show the current version and exit
+  -h, --help     Show this message and exit
+
+Commands:
+  compile  compile source files
+  deps     fetch and store all dependencies for this project
+  build    compile the project described by the `novah.json` file
+  new      create a Novah project
+  run      run the main module if one is defined
+  clear    clear the output directory
+  apidoc   generate the api documentation for the project
+  repl     start a repl for the current project
+  ide      run the Novah language server
+</code></pre><h2>Project management</h2><p>To create a new project use <code class="inline-code">novah new &lt;project-name&gt; </code>.
+A new directory will be created with the project files.
+</p><h3>The novah.json file</h3><p>Inside the project a `novah.json` file will be created describing your project.
+There you can add maven or git (requires git installed) depencencies, set your source and Java paths,
+create aliases, define main entry points and add maven repositories.
+Ex.:
+</p><pre class="code"><code>{
+    "paths": ["src"],
+    "javaPaths": ["src-java"],
+    "deps": {
+        "com.fasterxml.jackson.core/jackson-databind":
+            {"mvn/version": "2.13.0"},
+        "github.com/novahlang/novah-json": {"git/version": "main"}
+    }
+    "main": "main",
+    "output": "./output",
+    "aliases": {
+        "test": {
+            "extraPaths": ["test"],
+            "main": "test.main"
+        }
+    },
+    "mvn/repos": {
+      "central": {"url": "https://mvnrepository.com/repos/central"}
+    }
+}
+</code></pre><h3>Building the project</h3><p>After the project is created you can setup it with <code class="inline-code">novah deps</code> which
+will download any dependency and create the necessary directories and files for the project.
+Now the project is ready to build with <code class="inline-code">novah build</code> or if
+you want to build and run directly <code class="inline-code">novah run -b</code>
+</p><h3>Running the project</h3><p>With the project built you can now run it with <code class="inline-code">novah run</code> which will execute the
+main function of the given alias (or the default alias if none is given). For example:
+<code class="inline-code">novah run -a test</code> will run the main function of the `test` alias, which
+should be the project's tests. You can create new aliases with additional source paths and main entry points
+to execute other routines, tests, build steps or setups your project need.
+</p><h2>REPL</h2><p>Novah comes with a basic repl (read eval print loop) for playing around with the language.
+It can be execute for a project with <code class="inline-code">novah repl</code>.
+</p><pre class="code"><code>Novah 0.4.0 repl.
+
+Type :help for a list of commands.
+
+> :help
+:help           -> shows this help
+:clear          -> resets the repl
+:q, ctrl+c      -> quits the repl
+:>              -> starts a definition (value or function).
+                   Won't stop until an empty new line is reached
+:test &lt;suite>   -> runs the specified test suite using
+                   novah.test.runTests
+:t, :type &lt;exp> -> shows the type of the given expression 
+import &lt;module> -> adds an import to the repl
+&lt;expression>    -> evaluates the expression</code></pre></main></div></body></html>
