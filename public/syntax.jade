@@ -357,7 +357,7 @@ table(aria-labelledby="precedence")
       td 3
     tr
       td =, !
-      td 3 == 1, list ! index
+      td 3 == 1, string ! index
       td 4
     tr
       td >, &lt;
@@ -389,17 +389,21 @@ p.
 p.visually-hidden Begin code:
 pre.code
   code.microlight.
-    \#[noWarn]
     module ranges
 
+    zeroToTen : Range Int
     zeroToTen = 1 .. 10
 
-    zeroToNine = 1 ... 9
+    zeroToNine : Range Int
+    zeroToNine = 1 ... 10
 
+    digitList : List Int
     digitList = [0 ... 10]
 
+    lowerChars : Set Char
     lowerChars = \#{'a' .. 'z'}
 
+    oddDigits : Range Int
     oddDigits = range 1 10 2
 
     pub
@@ -430,10 +434,8 @@ pre.code
     aTuple : Tuple Boolean Char
     aTuple = true ; 'z'
 
-    typealias Point = { x : Float64, y : Float64 }
-
-    pointRecord : Point
-    pointRecord = {x: 1.2, y: 5.66}
+    pointRecord : { x : Float64, y : Float64 }
+    pointRecord = { x: 1.2, y: 5.66 }
 
     // Novah also has support for persistent maps
     // but there's no literal syntax for it
@@ -504,6 +506,12 @@ pre.code
   code.microlight.
     module options
 
+    // options can be pattern matched
+    hasValue : Option a -> Boolean
+    hasValue option = case option of
+      Some _ -> true
+      None -> false
+
     // ?: can be used to return default values from an option
     or0 : Option Int -> Int
     or0 x = x ?: 0
@@ -530,9 +538,9 @@ pre.code
       println (List.min [5, 9, 3, 6, 1, 8])!!
       // _!! can be used as a function that unwraps an option
       [5, 9, 3, 6, 1, 8]
-        |> List.max
-        |> _!!
-        |> println
+      |> List.max
+      |> _!!
+      |> println
 p.visually-hidden End code.
 
 h2 Threading functions
@@ -575,8 +583,8 @@ pre.code
     throwDice : Int -> Int -> Int
     throwDice faces modifier =
       [1 .. faces]
-        |> List.randNth
-        |> (_ + modifier)
+      |> List.randNth
+      |> (_ + modifier)
 
     throwD6 : Int -> Int
     throwD6 = throwDice 6
@@ -587,7 +595,7 @@ p.visually-hidden End code.
 
 h2 Anonymous function arguments
 
-p Novah support anonymous lambdas in some specific cases using <code class="inline-code">_</code> (underscore) as the function parameter.
+p Novah support unamed lambda arguments in some specific cases using <code class="inline-code">_</code> (underscore) as the function parameter.
 
 p.visually-hidden Begin code:
 pre.code
@@ -596,16 +604,18 @@ pre.code
 
     foreign import java.lang.Math
 
-    // increments the list by 1
+    // in operators
     plus1 : List Int -> List Int
     plus1 list = List.map (_ + 1) list
 
+    // in ifs
     ifs : Boolean -> Int
     ifs = if _ then 1 else -1
 
     ifs2 : Int -> a -> a -> a
     ifs2 num = if num == 0 then _ else _
 
+    // in cases
     cases : List a -> String
     cases = case _ of
       [] -> "empty"
@@ -619,12 +629,15 @@ pre.code
       None, Some y -> y
       None, None -> -1
 
+    // in record access
     names : List { name : String } -> List String
     names = List.map _.name
 
+    // in record construction
     person : String -> Int -> { age : Int, name : String }
     person = { name: _, age: _ }
 
+    // in native function arguments
     exps : List Float64
     exps = List.map Math#exp(_) [3.0, 5.0, 9.0]
 p.visually-hidden End code.

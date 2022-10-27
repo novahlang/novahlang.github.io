@@ -85,18 +85,17 @@ p.
 
 pre.code
   code.
-    Novah 0.4.0 repl.
+    Novah 0.4.1 repl.
 
     Type :help for a list of commands.
 
     > :help
-    :help           -> shows this help
-    :clear          -> resets the repl
-    :q, ctrl+c      -> quits the repl
-    :>              -> starts a definition (value or function).
-                       Won't stop until an empty new line is reached
-    :test &lt;suite>   -> runs the specified test suite using
-                       novah.test.runTests
-    :t, :type &lt;exp> -> shows the type of the given expression 
-    import &lt;module> -> adds an import to the repl
-    &lt;expression>    -> evaluates the expression
+    :help                -> shows this help
+    :clear               -> resets the repl
+    :q, ctrl+c           -> quits the repl
+    :>                   -> starts a multi-line expression or definition
+    :test &lt;suite>        -> runs the specified test suite using
+                            novah.test.runTests
+    :t, :type &lt;exp>      -> shows the type of the given expression 
+    import &lt;mod>         -> adds an import to the repl
+    foreign import &lt;mod> -> adds a foreign import to the repl

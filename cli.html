@@ -52,18 +52,17 @@ should be the project's tests. You can create new aliases with additional source
 to execute other routines, tests, build steps or setups your project need.
 </p><h2>REPL</h2><p>Novah comes with a basic repl (read eval print loop) for playing around with the language.
 It can be execute for a project with <code class="inline-code">novah repl</code>.
-</p><pre class="code"><code>Novah 0.4.0 repl.
+</p><pre class="code"><code>Novah 0.4.1 repl.
 
 Type :help for a list of commands.
 
 > :help
-:help           -> shows this help
-:clear          -> resets the repl
-:q, ctrl+c      -> quits the repl
-:>              -> starts a definition (value or function).
-                   Won't stop until an empty new line is reached
-:test &lt;suite>   -> runs the specified test suite using
-                   novah.test.runTests
-:t, :type &lt;exp> -> shows the type of the given expression 
-import &lt;module> -> adds an import to the repl
-&lt;expression>    -> evaluates the expression</code></pre></main></div></body></html>
+:help                -> shows this help
+:clear               -> resets the repl
+:q, ctrl+c           -> quits the repl
+:>                   -> starts a multi-line expression or definition
+:test &lt;suite>        -> runs the specified test suite using
+                        novah.test.runTests
+:t, :type &lt;exp>      -> shows the type of the given expression 
+import &lt;mod>         -> adds an import to the repl
+foreign import &lt;mod> -> adds a foreign import to the repl</code></pre></main></div></body></html>

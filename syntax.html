@@ -154,19 +154,23 @@ or0 : Option Int -> Int
 or0 n = n ?! 0</code></pre><p class="visually-hidden">End code.</p><p>Any function can be used as an operator by surrounding it with <code class="inline-code">`</code>, making it a backtick operator.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module operators
 
 has0 : List Int -> Boolean
-has0 list = 0 `isIn` list</code></pre><p class="visually-hidden">End code.</p><h3 id="associativity">Associativity</h3><table aria-labelledby="associativity"><thead><tr><th scope="col">Operator</th><th scope="col">Associativity</th></tr></thead><tbody><tr><td>&lt;|</td><td>Right</td></tr><tr><td>$ starting operators</td><td>Right</td></tr><tr><td>: starting operators</td><td>Right</td></tr><tr><td>everything else</td><td>Left</td></tr></tbody></table><h3 id="precedence">Precedence</h3><table aria-labelledby="precedence"><thead><tr><th scope="col">Operator (first character)</th><th scope="col">Example</th><th scope="col">Precedence</th></tr></thead><tbody><tr><td>;</td><td>(3 ; 5)</td><td>0</td></tr><tr><td>$</td><td>-</td><td>1</td></tr><tr><td>|</td><td>true || false</td><td>2</td></tr><tr><td>&</td><td>true && false</td><td>3</td></tr><tr><td>=, !</td><td>3 == 1, list ! index</td><td>4</td></tr><tr><td>>, &lt;</td><td>5 > 1, 3 &lt;= 7</td><td>5</td></tr><tr><td>+, -, :, ?</td><td>1 + 1, head :: tail, option ? default</td><td>6</td></tr><tr><td>*, /, %</td><td>3 * 9, 5 / 2</td><td>7</td></tr><tr><td>^, .</td><td>[1 ... 10], 'a' .. 'z'</td><td>8</td></tr><tr><td>`</td><td>(3 + 3) `shouldBe` 6</td><td>9</td></tr></tbody></table><h2>Ranges</h2><p>Ranges are just normal user-defined operators in Novah.
+has0 list = 0 `isIn` list</code></pre><p class="visually-hidden">End code.</p><h3 id="associativity">Associativity</h3><table aria-labelledby="associativity"><thead><tr><th scope="col">Operator</th><th scope="col">Associativity</th></tr></thead><tbody><tr><td>&lt;|</td><td>Right</td></tr><tr><td>$ starting operators</td><td>Right</td></tr><tr><td>: starting operators</td><td>Right</td></tr><tr><td>everything else</td><td>Left</td></tr></tbody></table><h3 id="precedence">Precedence</h3><table aria-labelledby="precedence"><thead><tr><th scope="col">Operator (first character)</th><th scope="col">Example</th><th scope="col">Precedence</th></tr></thead><tbody><tr><td>;</td><td>(3 ; 5)</td><td>0</td></tr><tr><td>$</td><td>-</td><td>1</td></tr><tr><td>|</td><td>true || false</td><td>2</td></tr><tr><td>&</td><td>true && false</td><td>3</td></tr><tr><td>=, !</td><td>3 == 1, string ! index</td><td>4</td></tr><tr><td>>, &lt;</td><td>5 > 1, 3 &lt;= 7</td><td>5</td></tr><tr><td>+, -, :, ?</td><td>1 + 1, head :: tail, option ? default</td><td>6</td></tr><tr><td>*, /, %</td><td>3 * 9, 5 / 2</td><td>7</td></tr><tr><td>^, .</td><td>[1 ... 10], 'a' .. 'z'</td><td>8</td></tr><tr><td>`</td><td>(3 + 3) `shouldBe` 6</td><td>9</td></tr></tbody></table><h2>Ranges</h2><p>Ranges are just normal user-defined operators in Novah.
 There is syntactic sugar for creating ranges of lists and sets.
-</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">#[noWarn]
-module ranges
+</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module ranges
 
+zeroToTen : Range Int
 zeroToTen = 1 .. 10
 
-zeroToNine = 1 ... 9
+zeroToNine : Range Int
+zeroToNine = 1 ... 10
 
+digitList : List Int
 digitList = [0 ... 10]
 
+lowerChars : Set Char
 lowerChars = #{'a' .. 'z'}
 
+oddDigits : Range Int
 oddDigits = range 1 10 2
 
 pub
@@ -184,10 +188,8 @@ aSet = #{'a', 'b', 'c'}
 aTuple : Tuple Boolean Char
 aTuple = true ; 'z'
 
-typealias Point = { x : Float64, y : Float64 }
-
-pointRecord : Point
-pointRecord = {x: 1.2, y: 5.66}
+pointRecord : { x : Float64, y : Float64 }
+pointRecord = { x: 1.2, y: 5.66 }
 
 // Novah also has support for persistent maps
 // but there's no literal syntax for it
@@ -215,6 +217,12 @@ hashCode : a -> Int32
 hashCode x = (x as Object)#hashCode()</code></pre><p class="visually-hidden">End code.</p><h2>Optional values</h2><p>Novah has a type for representing optional values: <code class="inline-code">Option a</code>.
 This type is converted to a nullable Java object (or a boxed type in case of primitives) for optimization and interoperability purposes.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module options
 
+// options can be pattern matched
+hasValue : Option a -> Boolean
+hasValue option = case option of
+  Some _ -> true
+  None -> false
+
 // ?: can be used to return default values from an option
 or0 : Option Int -> Int
 or0 x = x ?: 0
@@ -232,35 +240,37 @@ main _ =
   println (List.min [5, 9, 3, 6, 1, 8])!!
   // _!! can be used as a function that unwraps an option
   [5, 9, 3, 6, 1, 8]
-    |> List.max
-    |> _!!
-    |> println</code></pre><p class="visually-hidden">End code.</p><h2>Threading functions</h2><p>In object oriented language it's common to chain methods using dot syntax. Ex.: <code class="inline-code">obj.method1().method2()</code>.
+  |> List.max
+  |> _!!
+  |> println</code></pre><p class="visually-hidden">End code.</p><h2>Threading functions</h2><p>In object oriented language it's common to chain methods using dot syntax. Ex.: <code class="inline-code">obj.method1().method2()</code>.
 In Novah the idiomatic way to achieve this is the railway operator <code class="inline-code">|></code> and its friends: <code class="inline-code"><|, <<, >></code>.</p><h3 id="precedence">Threading operators</h3><table aria-labelledby="threading-operators"><thead><tr><th scope="col">Operator</th><th scope="col">Name</th><th scope="col">Example</th></tr></thead><tbody><tr><td>|></td><td>railway</td><td>"56" |> String.reverse |> int</td></tr><tr><td><|</td><td>reverse railway</td><td>int <| String.reverse <| "56"</td></tr><tr><td>>></td><td>forward function composition</td><td>String.split "," >> List.size</td></tr><tr><td><<</td><td>backward function composition</td><td>List.size << String.split ","</td></tr></tbody></table><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module railway
 
 throwDice : Int -> Int -> Int
 throwDice faces modifier =
   [1 .. faces]
-    |> List.randNth
-    |> (_ + modifier)
+  |> List.randNth
+  |> (_ + modifier)
 
 throwD6 : Int -> Int
 throwD6 = throwDice 6
 
 parseNumbers : String -> List Int
-parseNumbers = String.split "," >> List.map int</code></pre><p class="visually-hidden">End code.</p><h2>Anonymous function arguments</h2><p>Novah support anonymous lambdas in some specific cases using <code class="inline-code">_</code> (underscore) as the function parameter.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module anonymouslambdas
+parseNumbers = String.split "," >> List.map int</code></pre><p class="visually-hidden">End code.</p><h2>Anonymous function arguments</h2><p>Novah support unamed lambda arguments in some specific cases using <code class="inline-code">_</code> (underscore) as the function parameter.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module anonymouslambdas
 
 foreign import java.lang.Math
 
-// increments the list by 1
+// in operators
 plus1 : List Int -> List Int
 plus1 list = List.map (_ + 1) list
 
+// in ifs
 ifs : Boolean -> Int
 ifs = if _ then 1 else -1
 
 ifs2 : Int -> a -> a -> a
 ifs2 num = if num == 0 then _ else _
 
+// in cases
 cases : List a -> String
 cases = case _ of
   [] -> "empty"
@@ -274,12 +284,15 @@ cases2 = case _, _ of
   None, Some y -> y
   None, None -> -1
 
+// in record access
 names : List { name : String } -> List String
 names = List.map _.name
 
+// in record construction
 person : String -> Int -> { age : Int, name : String }
 person = { name: _, age: _ }
 
+// in native function arguments
 exps : List Float64
 exps = List.map Math#exp(_) [3.0, 5.0, 9.0]</code></pre><p class="visually-hidden">End code.</p><h2>Exceptions</h2><p>Novah ditches exceptions in favor of type-safe errors using the Result type, but in order
 to support some Java constructs, exceptions are also supported.

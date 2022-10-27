@@ -57,26 +57,6 @@ list =
   , zero: []
   }
 
-// define a computation expression for optional values
-pub
-option :
-  { bind : Option a -> (a -> Option b) -> Option b
-  , "return" : a -> Option a
-  , combine : Option a -> Option a -> Option a
-  , zero : Option a
-  }
-option =
-  { bind: flip Option.flatMap
-  , "return": Some
-  , combine: optCombine
-  , zero: None
-  }
-
-optCombine : Option a -> Option a -> Option a
-optCombine x y = case x of
-  Some _ -> x
-  None -> y
-
 // using the computation expression
 squares : List Int
 squares = do.list
