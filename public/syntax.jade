@@ -6,8 +6,8 @@ h2 Module definition
 p Every novah file should start with a module definition.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module my.namespace
 
     ...
@@ -22,8 +22,8 @@ p.
   Raw unqualified imports are not allowed except for core namespaces.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module my.namespace
 
     import module1 as Mod
@@ -39,8 +39,8 @@ p.
   Declarations in Novah are private by default. The <code class="inline-code">pub</code> keyword should be used to create public declarations.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module visibility
 
     // private declaration
@@ -57,8 +57,8 @@ p.
   The same is true for declared types, except the <code class="inline-code">pub+</code> keyword can be used to also expose the constructors.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module visibility
 
     // private type
@@ -79,8 +79,8 @@ p.
   Any namespace containing a public function called <code class="inline-code">main</code> with type <code class="inline-code">Array String -> Unit</code> will be compiled into a runnable jvm class.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module entrypoint
 
     pub
@@ -97,8 +97,8 @@ p.
   All top level definitions must start with a lower case character.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module functions
 
     fun1 : String -> Boolean
@@ -122,8 +122,8 @@ p.
   Both types and constructors must start with an upper case character.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module types
 
     // Types can be parameterized
@@ -144,8 +144,8 @@ p.
   <code class="inline-code">Int</code> is a typealias to <code class="inline-code">Int32</code>.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module types2
 
     typealias MyBoolean = Boolean
@@ -162,8 +162,8 @@ h2 Strings
 p Strings can be created with double quotes like in Java or with triple quotes for unescaped, multi-line strings.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     \#[noWarn]
     module strings
 
@@ -180,11 +180,12 @@ h2 Regular expression patterns
 p Novah has support for literal regex patterns. Literal regexes won't escape characters like normal strings, except for double quotes (").
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module regexes
 
     \#[noWarn]
+    foo : Unit -> Unit
     foo () =
       let [_, num] = Re.find #"(\d+)" "12345"
       println (int num)
@@ -195,8 +196,8 @@ h2 Conditional expressions
 p Novah has two conditional expressions: <code class="inline-code">if</code> and <code class="inline-code">case</code>.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module conditionals
 
     // Both the then and else cases must have the same type
@@ -230,8 +231,8 @@ p.
   They should always hold immutable values and the swap function has to be free of side effects, as it may run multiple times.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module atoms
 
     pub
@@ -254,8 +255,8 @@ h2 While loop
 p Even though Novah support while loops, a tail recursive function is the idiomatic way to represent such constructs.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module loops
 
     // Not idiomatic
@@ -278,6 +279,11 @@ pre.code
         1 -> acc
         n -> fact (n - 1) (acc * n)
       fact x 1
+    
+    // Another way to calculate a factorial
+    factorial : Int32 -> Int32
+    factorial x =
+      List.product [1 .. x]
 p.visually-hidden End code.
 
 h2 Operators
@@ -285,8 +291,8 @@ h2 Operators
 p It's possible to define new operators in Novah.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module operators
 
     (?!) : Option a -> a -> a
@@ -301,12 +307,12 @@ p.visually-hidden End code.
 p Any function can be used as an operator by surrounding it with <code class="inline-code">`</code>, making it a backtick operator.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module operators
 
-    has0 : List Int -> Boolean
-    has0 list = 0 `isIn` list
+    sayNumber : Int -> String
+    sayNumber x = "the number is: %d" `format` [x]
 p.visually-hidden End code.
 
 h3#associativity Associativity
@@ -387,22 +393,25 @@ p.
   There is syntactic sugar for creating ranges of lists and sets.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module ranges
 
+    // Closed range [x y]
     zeroToTen : Range Int
     zeroToTen = 1 .. 10
 
+    // Open range [x y)
     zeroToNine : Range Int
     zeroToNine = 1 ... 10
 
     digitList : List Int
-    digitList = [0 ... 10]
+    digitList = [0 .. 9]
 
     lowerChars : Set Char
     lowerChars = \#{'a' .. 'z'}
 
+    // A step can be given to the range function
     oddDigits : Range Int
     oddDigits = range 1 10 2
 
@@ -421,8 +430,8 @@ p
   a(href="https://github.com/lacuna/bifurcan") bifurcan.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module collections
 
     aList : List Int
@@ -434,8 +443,8 @@ pre.code
     aTuple : Tuple Boolean Char
     aTuple = true ; 'z'
 
-    pointRecord : { x : Float64, y : Float64 }
-    pointRecord = { x: 1.2, y: 5.66 }
+    aRecord : { x : Float64, y : Float64 }
+    aRecord = { x: 1.2, y: 5.66 }
 
     // Novah also has support for persistent maps
     // but there's no literal syntax for it
@@ -454,8 +463,8 @@ h2 Type annotations and casts
 p Novah requires almost no type annotations but values can still be annotated with a type.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module annotations
 
     foo : Unit -> Int
@@ -466,13 +475,16 @@ pre.code
       let piInt = Math.pi : Int
       // annotate a function parameter
       let fun (x : Int) = x + 1
+      // fully annotate a let
+      let fun2 : Int -> String
+          fun2 x = show (x + 1)
 p.visually-hidden End code.
 
 p Top level values are required to be annotated for documentation purpose unless a <code class="inline-code">\#[noWarn]</code> attribute is present.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module annotations
 
     // compilation error: no type annotation
@@ -486,8 +498,8 @@ p.visually-hidden End code.
 p Types can also be cast to some other types with the <code class="inline-code">as</code> keyword. Casts should only be used for Java interoperability as they can cause runtime errors!
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module casts
 
     pub
@@ -502,8 +514,8 @@ p
  | This type is converted to a nullable Java object (or a boxed type in case of primitives) for optimization and interoperability purposes.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module options
 
     // options can be pattern matched
@@ -527,8 +539,8 @@ p
  | Note that this is an unsafe operation and should be used only in tests or throw-away code!
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module options
 
     pub
@@ -576,8 +588,8 @@ table(aria-labelledby="threading-operators")
       td List.size << String.split ","
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module railway
 
     throwDice : Int -> Int -> Int
@@ -598,8 +610,8 @@ h2 Anonymous function arguments
 p Novah support unamed lambda arguments in some specific cases using <code class="inline-code">_</code> (underscore) as the function parameter.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module anonymouslambdas
 
     foreign import java.lang.Math
@@ -645,14 +657,14 @@ p.visually-hidden End code.
 h2 Exceptions
 
 p.
-  Novah ditches exceptions in favor of type-safe errors using the Result type, but in order
-  to support some Java constructs, exceptions are also supported.
+  Novah ditches exceptions in favor of type-safe errors using the Result type, but for Java
+  interoperability purposes, exceptions are also supported.
 
 h3 Throwing exceptions
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module throwing
 
     foreign import java.lang.RuntimeException
@@ -665,8 +677,8 @@ p.visually-hidden End code.
 h3 Catching exceptions
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module catching
 
     foreign import java.lang.Exception
@@ -686,8 +698,8 @@ p.visually-hidden End code.
 h3 Using Result
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module resulterrors
 
     foreign import java.io.File

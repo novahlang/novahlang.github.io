@@ -10,8 +10,8 @@ p.
   You can rename a Java class at import time with the <code class="inline-code">as</code> keyword.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module foreigns
 
     foreign import java.io.File
@@ -23,8 +23,8 @@ h2 Methods
 p Methods, static or not, can be called using the hash (#) operator.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module methods
 
     foo : Unit -> Unit
@@ -40,8 +40,8 @@ h2 Constructors
 p Constructors are special static methods named <code class="inline-code">new</code>.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module staticmethods
 
     foreign import java.io.File
@@ -57,8 +57,8 @@ p.
   Setting a field can be done with the setter operator (<code class="inline-code">&lt;-</code>).
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module fields
 
     /*
@@ -98,8 +98,8 @@ p
  | Any non primitive parameter in a java constructor, method or field set can receive an Option of the same type.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module nullables
 
     pub
@@ -114,8 +114,8 @@ p.visually-hidden End code.
 p The #? and #-? syntax can be used to return Option types from a method or field, respectively.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module nullables
 
     pub
@@ -136,8 +136,8 @@ p.
   This is specially true with (co/contra)variant generic functions.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module caveats
 
     foreign import java.lang.CharSequence
@@ -151,5 +151,5 @@ pre.code
       // compiles
       println ("fox"#contains("o" as CharSequence))
       // idiomatic way using the stdlib
-      println ("o" `isIn` "fox")
+      println ("o" in "fox")
 p.visually-hidden End code.

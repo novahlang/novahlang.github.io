@@ -68,8 +68,8 @@ h2 Pattern guards
 p Patterns can have guards for additional filtering.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module guards
 
     foo : Int -> Int
@@ -84,8 +84,8 @@ h2 Multiple patterns
 p Case expressions can match on multiple patterns at the same time.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module multipatterns
 
     foo : Option Int -> Option Int -> Option Int
@@ -101,8 +101,8 @@ p.
   Incomplete patterns require a <code class="inline-code">noWarn</code> attribute to compile.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module destructuring
 
     foo : { x : Int, y : Int } -> Unit

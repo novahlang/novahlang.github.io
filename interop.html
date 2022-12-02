@@ -1,23 +1,23 @@
-<!DOCTYPE html><html lang="en"><head><title>Java interoperability | Novah language</title><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/main.css"><link rel="icon" href="/img/novah.png"><script src="/js/main.js"></script><script src="/js/microlight.js"></script></head><body><a href="#main" class="visually-hidden">Skip to main content</a><header><div class="header-content"><a href="/" aria-label="Novah homepage" class="header-title"><img src="/img/novah.svg" width="32" height="32" alt="logo" class="logo">Novah</a><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16" height="16" alt="Github">Source</a></div><button onclick="onNavToggle()" aria-haspopup="menu" aria-controls="nav" aria-expanded="false" class="nav-mobile closed"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16" class="nav-icon"><path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path></svg></button></header><div id="content"><nav id="nav"><ul class="nav-list"><li aria-current="false" role="menuitem" tabIndex="-1"><a href="/">Home</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/syntax">Syntax</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/types">Types</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/records">Records</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/pattern-matching">Pattern matching</a></li><li aria-current="page" role="menuitem" tabIndex="null" class="nav-selected"><a href="/interop">Java interoperability</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/computations">Computation expressions</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/instance">Instance arguments</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/cli">Command line</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/apidoc">API docs</a></li></ul></nav><main id="main"><h1 tabIndex="-1">Java Interoperability</h1><p>It's possible to import java classes and call java methods, constructors and fields from Novah.</p><h2>Foreign imports</h2><p>Java classes in Novah cannot be used fully qualified, they have to be imported first.
+<!DOCTYPE html><html lang="en"><head><title>Java interoperability | Novah language</title><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/prism.css"><link rel="icon" href="/img/novah.png"><script src="/js/main.js"></script><script src="/js/prism.js"></script></head><body><a href="#main" class="visually-hidden">Skip to main content</a><header><div class="header-content"><a href="/" aria-label="Novah homepage" class="header-title"><img src="/img/novah.svg" width="32" height="32" alt="logo" class="logo">Novah</a><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16" height="16" alt="Github">Source</a></div><button onclick="onNavToggle()" aria-haspopup="menu" aria-controls="nav" aria-expanded="false" class="nav-mobile closed"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16" class="nav-icon"><path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path></svg></button></header><div id="content"><nav id="nav"><ul class="nav-list"><li aria-current="false" role="menuitem" tabIndex="-1"><a href="/">Home</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/syntax">Syntax</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/types">Types</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/records">Records</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/pattern-matching">Pattern matching</a></li><li aria-current="page" role="menuitem" tabIndex="null" class="nav-selected"><a href="/interop">Java interoperability</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/computations">Computation expressions</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/instance">Instance arguments</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/cli">Command line</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/apidoc">API docs</a></li></ul></nav><main id="main"><h1 tabIndex="-1">Java Interoperability</h1><p>It's possible to import java classes and call java methods, constructors and fields from Novah.</p><h2>Foreign imports</h2><p>Java classes in Novah cannot be used fully qualified, they have to be imported first.
 You can rename a Java class at import time with the <code class="inline-code">as</code> keyword.
-</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module foreigns
+</p><p class="visually-hidden">Begin code:</p><pre><code class="language-novah">module foreigns
 
 foreign import java.io.File
-foreign import java.util.HashMap as JavaMap</code></pre><p class="visually-hidden">End code.</p><h2>Methods</h2><p>Methods, static or not, can be called using the hash (#) operator.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module methods
+foreign import java.util.HashMap as JavaMap</code></pre><p class="visually-hidden">End code.</p><h2>Methods</h2><p>Methods, static or not, can be called using the hash (#) operator.</p><p class="visually-hidden">Begin code:</p><pre><code class="language-novah">module methods
 
 foo : Unit -> Unit
 foo () =
   // a static method call
   println (String#valueOf('a'))
   // a non-static method call
-  println ("fox"#substring(1))</code></pre><p class="visually-hidden">End code.</p><h2>Constructors</h2><p>Constructors are special static methods named <code class="inline-code">new</code>.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module staticmethods
+  println ("fox"#substring(1))</code></pre><p class="visually-hidden">End code.</p><h2>Constructors</h2><p>Constructors are special static methods named <code class="inline-code">new</code>.</p><p class="visually-hidden">Begin code:</p><pre><code class="language-novah">module staticmethods
 
 foreign import java.io.File
 
 newFile : String -> File
 newFile name = File#new(name)</code></pre><p class="visually-hidden">End code.</p><h2>Fields</h2><p>Fields are accessed in the same way as methods except they use the hash-dash operator (<code class="inline-code">#-</code>).
 Setting a field can be done with the setter operator (<code class="inline-code">&lt;-</code>).
-</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module fields
+</p><p class="visually-hidden">Begin code:</p><pre><code class="language-novah">module fields
 
 /*
 public static class ForeignClass {
@@ -45,7 +45,7 @@ main _ =
   println (setValue fclass 10)</code></pre><p class="visually-hidden">End code.</p><h2>Option and null</h2><p> 
 Methods in Java not always return a value, they can also return null. They can also receive null as parameters,
 if said parameters are not primitives.
-Novah has syntax to receive and pass nullable values to Java. Note that nulls in Novah are represented by the Option type.</p><p>Any non primitive parameter in a java constructor, method or field set can receive an Option of the same type.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module nullables
+Novah has syntax to receive and pass nullable values to Java. Note that nulls in Novah are represented by the Option type.</p><p>Any non primitive parameter in a java constructor, method or field set can receive an Option of the same type.</p><p class="visually-hidden">Begin code:</p><pre><code class="language-novah">module nullables
 
 pub
 main : Array String -> Unit
@@ -53,7 +53,7 @@ main _ =
   // the second and third fields will receive null
   MyClass#new(3, None, None)
   object#method(None)
-  object#-field <- None</code></pre><p class="visually-hidden">End code.</p><p>The #? and #-? syntax can be used to return Option types from a method or field, respectively.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module nullables
+  object#-field <- None</code></pre><p class="visually-hidden">End code.</p><p>The #? and #-? syntax can be used to return Option types from a method or field, respectively.</p><p class="visually-hidden">Begin code:</p><pre><code class="language-novah">module nullables
 
 pub
 main : Array String -> Unit
@@ -65,7 +65,7 @@ main _ =
   println opt2</code></pre><p class="visually-hidden">End code.</p><h2>Caveats</h2><p>Because Novah's type system doesn't understand object orientation, interoperability may require
 type casting in order for the code to compile.
 This is specially true with (co/contra)variant generic functions.
-</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module caveats
+</p><p class="visually-hidden">Begin code:</p><pre><code class="language-novah">module caveats
 
 foreign import java.lang.CharSequence
 
@@ -78,4 +78,4 @@ main _ =
   // compiles
   println ("fox"#contains("o" as CharSequence))
   // idiomatic way using the stdlib
-  println ("o" `isIn` "fox")</code></pre><p class="visually-hidden">End code.</p></main></div></body></html>
+  println ("o" in "fox")</code></pre><p class="visually-hidden">End code.</p></main></div></body></html>

@@ -11,8 +11,8 @@ h2 Accessing fields
 p Fields can be accessed using dot syntax.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module records
 
     name : { name : String | r } -> String
@@ -20,7 +20,7 @@ pre.code
 
     // nested record access
     city : { address : { city : String } | r } -> String
-    city = _.address.city
+    city person = person.address.city
 p.visually-hidden End code.
 
 h2 String fields
@@ -30,8 +30,8 @@ p.
   as a field.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module records
 
     stringFields : { "Password" : String, "User Name" : String }
@@ -44,8 +44,8 @@ p.visually-hidden End code.
 h2 Adding new fields
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module records
 
     addData :
@@ -67,8 +67,8 @@ p.visually-hidden End code.
 h2 Removing fields
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module records
 
     typealias Person = { name : String, age : Int}
@@ -88,8 +88,8 @@ p.
   Updating a field can be done using the <code class="inline-code">{ .field -> function | record }</code> syntax.
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module records
 
     setName : String -> { name : String | r } -> { name : String | r }
@@ -108,8 +108,8 @@ p.visually-hidden End code.
 h2 Merging records
 
 p.visually-hidden Begin code:
-pre.code
-  code.microlight.
+pre
+  code.language-novah.
     module records
 
     typealias Person = { name : String, age : Int}

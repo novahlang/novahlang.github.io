@@ -1,22 +1,22 @@
-<!DOCTYPE html><html lang="en"><head><title>Records | Novah language</title><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/main.css"><link rel="icon" href="/img/novah.png"><script src="/js/main.js"></script><script src="/js/microlight.js"></script></head><body><a href="#main" class="visually-hidden">Skip to main content</a><header><div class="header-content"><a href="/" aria-label="Novah homepage" class="header-title"><img src="/img/novah.svg" width="32" height="32" alt="logo" class="logo">Novah</a><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16" height="16" alt="Github">Source</a></div><button onclick="onNavToggle()" aria-haspopup="menu" aria-controls="nav" aria-expanded="false" class="nav-mobile closed"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16" class="nav-icon"><path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path></svg></button></header><div id="content"><nav id="nav"><ul class="nav-list"><li aria-current="false" role="menuitem" tabIndex="-1"><a href="/">Home</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/syntax">Syntax</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/types">Types</a></li><li aria-current="page" role="menuitem" tabIndex="null" class="nav-selected"><a href="/records">Records</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/pattern-matching">Pattern matching</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/interop">Java interoperability</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/computations">Computation expressions</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/instance">Instance arguments</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/cli">Command line</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/apidoc">API docs</a></li></ul></nav><main id="main"><h1 tabIndex="-1">Records</h1><p>Records and row polymorphism are the core of Novah data structures.
+<!DOCTYPE html><html lang="en"><head><title>Records | Novah language</title><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/prism.css"><link rel="icon" href="/img/novah.png"><script src="/js/main.js"></script><script src="/js/prism.js"></script></head><body><a href="#main" class="visually-hidden">Skip to main content</a><header><div class="header-content"><a href="/" aria-label="Novah homepage" class="header-title"><img src="/img/novah.svg" width="32" height="32" alt="logo" class="logo">Novah</a><a href="//github.com/stackoverflow/novah" class="source"><img src="/img/GitHub-Mark-Light-32px.png" width="16" height="16" alt="Github">Source</a></div><button onclick="onNavToggle()" aria-haspopup="menu" aria-controls="nav" aria-expanded="false" class="nav-mobile closed"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16" class="nav-icon"><path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path></svg></button></header><div id="content"><nav id="nav"><ul class="nav-list"><li aria-current="false" role="menuitem" tabIndex="-1"><a href="/">Home</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/syntax">Syntax</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/types">Types</a></li><li aria-current="page" role="menuitem" tabIndex="null" class="nav-selected"><a href="/records">Records</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/pattern-matching">Pattern matching</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/interop">Java interoperability</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/computations">Computation expressions</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/instance">Instance arguments</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/cli">Command line</a></li><li aria-current="false" role="menuitem" tabIndex="null"><a href="/apidoc">API docs</a></li></ul></nav><main id="main"><h1 tabIndex="-1">Records</h1><p>Records and row polymorphism are the core of Novah data structures.
 Records are immutable and persistent, so functions that change records will always return a new version.
 Novah records support duplicated fields, but you can only retrieve the last value of a field.
-</p><h2>Accessing fields</h2><p>Fields can be accessed using dot syntax.</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module records
+</p><h2>Accessing fields</h2><p>Fields can be accessed using dot syntax.</p><p class="visually-hidden">Begin code:</p><pre><code class="language-novah">module records
 
 name : { name : String | r } -> String
 name person = person.name
 
 // nested record access
 city : { address : { city : String } | r } -> String
-city = _.address.city</code></pre><p class="visually-hidden">End code.</p><h2>String fields</h2><p>Novah requires every field to be a valid identifier but it's possible to use any string
+city person = person.address.city</code></pre><p class="visually-hidden">End code.</p><h2>String fields</h2><p>Novah requires every field to be a valid identifier but it's possible to use any string
 as a field.
-</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module records
+</p><p class="visually-hidden">Begin code:</p><pre><code class="language-novah">module records
 
 stringFields : { "Password" : String, "User Name" : String }
 stringFields = { "User Name": "foo", "Password": "***"}
 
 utfFields : { "∀" : String, "∉" : Boolean, "😉" : String }
-utfFields = {"😉": "wink", "∉": true, "∀": "forall"}</code></pre><p class="visually-hidden">End code.</p><h2>Adding new fields</h2><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module records
+utfFields = {"😉": "wink", "∉": true, "∀": "forall"}</code></pre><p class="visually-hidden">End code.</p><h2>Adding new fields</h2><p class="visually-hidden">Begin code:</p><pre><code class="language-novah">module records
 
 addData :
   { name : String }
@@ -31,7 +31,7 @@ addData2 = { age: 31, eyeColor: "blue" | _ }
 
 // the original name cannot be accessed until the current is removed
 duplicates : { name : String } -> { name : String, name : String }
-duplicates person = { name : "Override" | person }</code></pre><p class="visually-hidden">End code.</p><h2>Removing fields</h2><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module records
+duplicates person = { name : "Override" | person }</code></pre><p class="visually-hidden">End code.</p><h2>Removing fields</h2><p class="visually-hidden">Begin code:</p><pre><code class="language-novah">module records
 
 typealias Person = { name : String, age : Int}
 
@@ -42,7 +42,7 @@ nameless = { - name | _ }
 nothing : Person -> {}
 nothing = { - name, age | _ }</code></pre><p class="visually-hidden">End code.</p><h2>Updating and setting fields</h2><p>Setting a new value to a field can be done using the <code class="inline-code">{ .field = newValue | record }</code> syntax.
 Updating a field can be done using the <code class="inline-code">{ .field -> function | record }</code> syntax.
-</p><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module records
+</p><p class="visually-hidden">Begin code:</p><pre><code class="language-novah">module records
 
 setName : String -> { name : String | r } -> { name : String | r }
 setName newName = { .name = newName | _ }
@@ -54,7 +54,7 @@ upperName = { .name -> String.upperCase | _ }
 nested :
   { address : { city : String | r2 } | r }
   -> { address : { city : String | r2 } | r }
-nested = { .address.city = "Tokyo" | _ }</code></pre><p class="visually-hidden">End code.</p><h2>Merging records</h2><p class="visually-hidden">Begin code:</p><pre class="code"><code class="microlight">module records
+nested = { .address.city = "Tokyo" | _ }</code></pre><p class="visually-hidden">End code.</p><h2>Merging records</h2><p class="visually-hidden">Begin code:</p><pre><code class="language-novah">module records
 
 typealias Person = { name : String, age : Int}
 

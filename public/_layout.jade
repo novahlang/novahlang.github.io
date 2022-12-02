@@ -1,13 +1,14 @@
 doctype html
 html(lang="en")
   head
-    title= pageName === 'Home' ? "Novah language" : pageName + " | Novah language"
+    title= !pageName ? "Novah language" : pageName + " | Novah language"
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel="stylesheet", href="/css/main.css")
+    link(rel="stylesheet", href="/css/prism.css")
     link(rel="icon", href="/img/novah.png")
     script(src="/js/main.js")
-    script(src="/js/microlight.js")
+    script(src="/js/prism.js")
   body
     a.visually-hidden(href="#main") Skip to main content
     header
