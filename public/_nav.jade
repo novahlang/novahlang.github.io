@@ -2,5 +2,5 @@
 nav#nav
   ul.nav-list
     for page in pages
-      li(class=page.name === pageName ? "nav-selected" : "", aria-current=page.name === pageName ? "page" : "false", role="menuitem", tabIndex=page.name==="Home"?"-1":"null")
+      li(class=page.name === pageName ? "nav-selected" : "", aria-current=page.name === pageName ? "page" : "false", data-ref="menuitem", tabIndex=page.name==="Home"?"-1":"null")
         a(href="#{page.href}") #{page.name}

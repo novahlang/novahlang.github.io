@@ -47,21 +47,25 @@ function handleKeyEvents(e) {
   const nav = document.querySelector('nav');
 
   // escape on nav in mobile view
-  if (e.keyCode === 27 && nav.classList.contains('open') && window.innerWidth < MIN_WIDTH) {
+  if (e.key === 'Escape' && nav.classList.contains('open') && window.innerWidth < MIN_WIDTH) {
     closeNav();
     const button = document.querySelector('button');
     button.focus();
   }
 
   // arrow down on burger button
-  else if (e.keyCode === 40 && focused?.getAttribute('aria-controls') === 'nav') {
+  else if (e.key === 'ArrowDown' && focused?.getAttribute('aria-controls') === 'nav') {
+    e.preventDefault();
+    e.stopImmediatePropagation();
     openNav();
     const firstLink = document.querySelector('.nav-list').firstElementChild.firstElementChild;
     firstLink.focus();
   }
 
   // arrow down on nav
-  else if (e.keyCode === 40 && focused?.parentElement?.getAttribute('role') === 'menuitem') {
+  else if (e.key === 'ArrowDown' && focused?.parentElement?.getAttribute('data-ref') === 'menuitem') {
+    e.preventDefault();
+    e.stopImmediatePropagation();
     const nextLink = focused?.parentElement?.nextElementSibling?.firstElementChild;
     if (nextLink) nextLink.focus();
     else {
@@ -71,14 +75,18 @@ function handleKeyEvents(e) {
   }
 
   // arrow up on burger button
-  else if (e.keyCode === 38 && focused?.getAttribute('aria-controls') === 'nav') {
+  else if (e.key === 'ArrowUp' && focused?.getAttribute('aria-controls') === 'nav') {
+    e.preventDefault();
+    e.stopImmediatePropagation();
     openNav();
     const lastLink = document.querySelector('.nav-list').lastElementChild.firstElementChild;
     lastLink.focus();
   }
 
   // arrow up on nav
-  else if (e.keyCode === 38 && focused?.parentElement?.getAttribute('role') === 'menuitem') {
+  else if (e.key === 'ArrowUp' && focused?.parentElement?.getAttribute('data-ref') === 'menuitem') {
+    e.preventDefault();
+    e.stopImmediatePropagation();
     const prevLink = focused?.parentElement?.previousElementSibling?.firstElementChild;
     if (prevLink) prevLink.focus();
     else {
@@ -101,9 +109,9 @@ const debounce = (callback, time) => {
   debounceTimer = window.setTimeout(callback, time);
 };
 
-window.onload = forceCloseNav;
-window.onresize = () => debounce(forceCloseNav, 100);
-window.addEventListener('keyup', e => handleKeyEvents(e));
+window.addEventListener('load', forceCloseNav);
+window.addEventListener('resize', () => debounce(forceCloseNav, 100));
+window.addEventListener('keydown', e => handleKeyEvents(e));
 window.addEventListener('DOMContentLoaded', () => {
   const lastLink = document.querySelector('.nav-list').lastElementChild.firstElementChild;
   lastLink.addEventListener('focusout', handleLostFocus);
